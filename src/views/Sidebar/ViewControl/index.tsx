@@ -16,7 +16,7 @@ export default class ViewControl extends PureComponent<Props & Actions> {
 	render() {
 		const {icon, label} = this.props;
 		return (
-			<div className="view-control">
+			<div className={`view-control ${this.props.active ? "active" : ""}`}>
 				<div>
 					<span className="icon">{icon}</span>
 					<span className="label">{label}</span>
