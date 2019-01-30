@@ -1,0 +1,9 @@
+#index {
+    display: grid;
+    min-height: 100vh;
+    min-width: 100vw;
+    grid-template: "sidebar header header" 8fr
+                   "sidebar main main" 40fr
+                   "sidebar main main" 40fr
+                    / 12.5fr 80fr;
+}

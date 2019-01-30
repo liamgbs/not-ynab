@@ -1,0 +1,8 @@
+@import '../../styles/constants.scss';
+
+.header {
+    grid-area: header;
+    background: $secondary-colour;
+    color: #fff;
+
+}

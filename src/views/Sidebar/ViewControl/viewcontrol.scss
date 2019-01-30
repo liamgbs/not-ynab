@@ -1,0 +1,14 @@
+@import '../../../styles/constants.scss';
+
+.view-control {
+    cursor: pointer;
+    display: grid;
+
+    .icon, .label {
+        padding-left: 0.5em;
+    }
+    &>div {
+        margin: auto 0;
+    }
+
+}
