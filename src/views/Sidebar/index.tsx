@@ -21,7 +21,7 @@ class Sidebar extends PureComponent<Props> {
 					<ViewControl active={this.props.view === AppView.Account} icon="A" label="Accounts"/>
 				</div>
 				<div className="accounts-controls">
-				d
+				
 				</div>
 			</div>
 		)

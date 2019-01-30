@@ -1,0 +1,11 @@
+@import '../../styles/constants.scss';
+
+.budget {
+	display: grid;
+	grid-template: "header" 1fr
+					"content" 9fr;
+	height: 100%;
+	.content {
+		color: $text-colour-dark;
+	}
+}
