@@ -1,0 +1,9 @@
+@import '../../styles/constants.scss';
+
+.budget-category-group-row {
+	display: grid;
+	grid-template-columns: 3fr 1fr 1fr 1fr;
+	padding: 0.5em 0;
+	background: $tertiary-colour;
+	border-bottom: solid 1px $border-colour-dark;
+}

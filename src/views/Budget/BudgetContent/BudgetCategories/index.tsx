@@ -1,8 +1,13 @@
 import './budget-categories.scss';
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
 import { RootState } from '../../../../reducers';
 import { CategoryGroup, Category } from '../../../../types/categories';
+import BudgetCategoryRow from '../../../../components/BudgetCategoryRow';
+import BudgetCategoryGroupRow from '../../../../components/BudgetCategoryGroupRow';
+import { addCategory } from '../../../../actions/budget';
 
 interface Props {
 	categories: Category[],
@@ -10,23 +15,34 @@ interface Props {
 }
 
 interface Actions {
-
+	addCategory:(groupName:string, categoryName:string)=>void
 }
 
 class BudgetCategories extends PureComponent<Props & Actions> {
 	render() {
 		return (
 			<div className="budget-categories">
-				{this.props.groups.map(g => {
-					const groupCategories = this.props.categories.filter(c => g.groupName === c.categoryGroup)
+				<div className="budget-categories-header">
+					<div>Category</div>
+					<div>Budgeted</div>
+					<div>Activity</div>
+					<div>Available</div>
+				</div>
+				{this.props.groups.map((g, i) => {
+					const groupCategories = this.props.categories.filter(c => g.groupName === c.categoryGroup);
+					const totalBudgeted : number = groupCategories.reduce((sum, c) => sum + c.budgeted, 0);
+					const totalActivity : number = groupCategories.reduce((sum, c) => sum + c.activity, 0);
+					const totalBalance : number = groupCategories.reduce((sum, c) => sum + c.balance, 0)
+
 					return (
-						<div>
-							<div>{g.groupName}</div>
-							{groupCategories.map(gc => {
-								return (
-									<div>{gc.categoryName}</div>
-								)
-							})}
+						<div key={i}>
+							<BudgetCategoryGroupRow
+								categoryGroup={g}
+								totalBudgeted={totalBudgeted}
+								totalActivity={totalActivity}
+								totalBalance={totalBalance} 
+							/>
+							{groupCategories.map((gc, i) => <BudgetCategoryRow key={i} category={gc}/>)}
 						</div>
 					)
 				})}
@@ -43,4 +59,12 @@ const mapStateToProps = (state: RootState) => {
 	}
 }
 
-export default connect(mapStateToProps)(BudgetCategories)
+const mapDispatchToProps = (dispatch: Dispatch) => {
+	return {
+		addCategory: (groupName:string, categoryName:string) => {
+			dispatch(addCategory(groupName, categoryName));
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BudgetCategories)
