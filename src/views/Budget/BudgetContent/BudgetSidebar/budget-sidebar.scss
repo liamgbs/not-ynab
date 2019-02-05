@@ -1,3 +1,5 @@
+@import '../../../../styles/constants.scss';
+
 .budget-sidebar {
 	overflow: auto;
 	position: absolute;
@@ -5,4 +7,5 @@
 	top: 0;
 	width: 33%;
 	height: 100%;
+	background: $tertiary-colour;
 }

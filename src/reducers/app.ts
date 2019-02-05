@@ -1,7 +1,10 @@
 import { AnyAction } from "redux";
 
 export interface AppState {
-    view: AppView
+	view: AppView,
+	budget: {
+		activeMonth: string
+	}
 }
 
 export enum AppView {
@@ -11,7 +14,10 @@ export enum AppView {
 }
 
 const defaultState = {
-    view: AppView.Budget,
+	view: AppView.Budget,
+	budget: {
+		activeMonth: "Feb2019"
+	}
 }
 
 export default function (state: AppState = defaultState, action: AnyAction) {
