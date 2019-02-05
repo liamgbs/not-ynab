@@ -1,4 +1,4 @@
-import { Action } from "redux";
+import { AnyAction } from "redux";
 
 export interface AppState {
     view: AppView
@@ -14,6 +14,6 @@ const defaultState = {
     view: AppView.Budget,
 }
 
-export default function (state: AppState = defaultState, action: Action) {
+export default function (state: AppState = defaultState, action: AnyAction) {
     return state;
 }

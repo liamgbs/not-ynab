@@ -1,6 +1,6 @@
-import { Action } from "redux";
+import { AnyAction } from "redux";
 
-interface AccountsState {
+export interface AccountsState {
     budgetAccounts: any[]
 }
 
@@ -8,6 +8,6 @@ const defaultState = {
     budgetAccounts: []
 }
 
-export default function (state: AccountsState = defaultState, action: Action) {
+export default function (state: AccountsState = defaultState, action: AnyAction) {
     return state;
 }
