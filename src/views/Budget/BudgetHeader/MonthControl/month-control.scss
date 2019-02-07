@@ -1,0 +1,31 @@
+@import "../../../../styles/constants.scss";
+@import "../../../../styles/mixins.scss";
+
+.month-control {
+	@include size(100%, 100%);
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	border-right: solid 1px $border-colour-light;
+  
+	.month-name {
+		margin: auto 0;
+		font-weight: 500;
+		font-size: 1.25em;
+		padding: 0 0.5em;
+
+
+	}
+	button {
+		cursor: pointer;
+		margin: auto 0;
+		border-radius: 50%;
+		background: inherit;
+		@include size(2em, 2em);
+		border: solid 5px $primary-colour;
+		color: $primary-colour;
+		font-size: 1.25em;
+		font-weight: 1000;
+		text-align: center;
+	}
+}
