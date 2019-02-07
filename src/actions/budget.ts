@@ -1,6 +1,8 @@
 import * as types from './types';
 
-export const addCategory = (groupName:string, categoryName:string) => {
+export const addCategoryAction = (groupName:string, categoryName:string) => {
+	console.log(groupName, categoryName);
+	
 	return {
 		type: types.CREATE_CATEGORY,
 		payload: {

@@ -7,7 +7,7 @@ import { RootState } from '../../../../reducers';
 import { CategoryGroup, Category } from '../../../../types/categories';
 import BudgetCategoryRow from '../../../../components/BudgetCategoryRow';
 import BudgetCategoryGroupRow from '../../../../components/BudgetCategoryGroupRow';
-import { addCategory } from '../../../../actions/budget';
+import { addCategoryAction } from '../../../../actions/budget';
 
 interface Props {
 	categories: Category[],
@@ -37,6 +37,7 @@ class BudgetCategories extends PureComponent<Props & Actions> {
 					return (
 						<div key={i}>
 							<BudgetCategoryGroupRow
+								addCategory={this.props.addCategory}
 								categoryGroup={g}
 								totalBudgeted={totalBudgeted}
 								totalActivity={totalActivity}
@@ -62,7 +63,7 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
 		addCategory: (groupName:string, categoryName:string) => {
-			dispatch(addCategory(groupName, categoryName));
+			dispatch(addCategoryAction(groupName, categoryName));
 		}
 	}
 }
