@@ -1,6 +1,7 @@
 import './triggered-popover.scss';
 import React, { PureComponent, Fragment, ReactElement } from 'react';
 import Popover from '@material-ui/core/Popover';
+import Button from '../Button';
 
 
 interface Props {
@@ -30,9 +31,9 @@ export default class TriggeredPopover extends PureComponent<Props & Actions> {
 	render() {
 		return (
 			<Fragment>
-				<button onClick={this.handleClick.bind(this)}>
+				<span onClick={this.handleClick.bind(this)}>
 					{this.props.trigger}
-				</button>
+				</span>
 				{this.state.active ?
 					<Popover
 						open={true}
@@ -47,8 +48,8 @@ export default class TriggeredPopover extends PureComponent<Props & Actions> {
 								{this.props.children}
 							</div>
 							<div className="popup-buttons">
-								<button onClick={this.onClose.bind(this)}>Cancel</button>
-								<button onClick={this.props.okAction}>Ok</button>
+								<Button onClick={this.onClose.bind(this)}>Cancel</Button>
+								<Button filled onClick={this.props.okAction}>Ok</Button>
 							</div>
 
 							

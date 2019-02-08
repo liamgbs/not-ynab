@@ -1,0 +1,21 @@
+@import '../../styles/constants.scss';
+
+.button {
+	background: inherit;
+	cursor: pointer;
+	padding: 5px 10px;
+	border-radius: 10%;
+	border-color: $border-colour-dark;
+	&.filled {
+		background: $primary-colour;
+		color: #fff;
+		border-color: $primary-colour;
+	}
+	&.small {
+		padding: 0px 4px;
+		border-radius: 20%;
+	}
+	&.round {
+		border-radius: 50%;
+	}
+}

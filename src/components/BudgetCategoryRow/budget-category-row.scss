@@ -3,6 +3,10 @@
 .budget-category-row {
 	display: grid;
 	grid-template-columns: 3fr 1fr 1fr 1fr;
-	padding: 0.25em 0;
+	padding: 0.5em 0;
 	border-bottom: solid 1px $border-colour-dark;
+	.budget-category-row-name {
+		vertical-align: middle;
+		padding: 0.25em 1em;
+	}
 }

@@ -2,6 +2,7 @@ import './budget-category-group-row.scss';
 import React, { PureComponent } from 'react';
 import { CategoryGroup } from '../../types/categories';
 import TriggeredPopover from '../TriggeredPopover';
+import Button from '../Button';
 
 interface Props {
 	categoryGroup: CategoryGroup,
@@ -16,6 +17,7 @@ interface Actions {
 
 export default class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 	state={
+		showAddButton: false,
 		newCategoryName: ""
 	}
 	onNewNameChange(event: any) {
@@ -29,16 +31,23 @@ export default class BudgetCategoryGroupRow extends PureComponent<Props & Action
 			this.state.newCategoryName
 		)
 	}
+	onMouseEnter() {
+		this.setState({showAddButton: true})
+	}
+	onMouseLeave() {
+		this.setState({showAddButton: false})
+	}
 	render() {
 		return (
-			<div className="budget-category-group-row">
+			<div className="budget-category-group-row" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
 				<div className="budget-category-group-row-name">
 					<span>{this.props.categoryGroup.groupName}</span>
-					<span className="add-button">
-						<TriggeredPopover okAction={this.onAddCategoryClick.bind(this)} trigger={<span>+</span>}>
-							<input onChange={this.onNewNameChange.bind(this)} />
-						</TriggeredPopover>
-					</span>
+					{this.state.showAddButton ?
+						<span className="add-button">
+							<TriggeredPopover okAction={this.onAddCategoryClick.bind(this)} trigger={<Button round small>+</Button>}>
+								<input placeholder="Add category..." onChange={this.onNewNameChange.bind(this)} />
+							</TriggeredPopover>
+						</span> : null}
 				</div>
 				<div>{this.props.totalBudgeted.toFixed(2)}</div>
 				<div>{this.props.totalActivity.toFixed(2)}</div>
