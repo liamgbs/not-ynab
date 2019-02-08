@@ -52,7 +52,7 @@ class BudgetCategories extends PureComponent<Props & Actions> {
 	}
 }
 
-const mapStateToProps = (state: RootState) => {
+function mapStateToProps(state: RootState) {
 	const month = state.budget.months.find(m => { return m.monthName === state.app.budget.activeMonth })!
 	return {
 		categories: month.categories,
@@ -60,7 +60,7 @@ const mapStateToProps = (state: RootState) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+function mapDispatchToProps(dispatch: Dispatch) {
 	return {
 		addCategory: (groupName:string, categoryName:string) => {
 			dispatch(addCategoryAction(groupName, categoryName));

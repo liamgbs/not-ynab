@@ -1,10 +1,10 @@
-import * as types from './types';
+import { BudgetActionTypes } from './types';
 
-export const addCategoryAction = (groupName:string, categoryName:string) => {
+export function addCategoryAction(groupName: string, categoryName: string) {
 	console.log(groupName, categoryName);
-	
+
 	return {
-		type: types.CREATE_CATEGORY,
+		type: BudgetActionTypes.CREATE_CATEGORY,
 		payload: {
 			categoryName: categoryName,
 			groupName: groupName

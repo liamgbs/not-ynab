@@ -4,7 +4,7 @@ import ViewControl from './ViewControl';
 import './sidebar.scss';
 import { connect } from 'react-redux';
 import { RootState } from '../../reducers';
-import { AppView } from '../../reducers/app';
+import { AppView } from '../../types/app';
 
 interface Props {
 	view: AppView
@@ -28,7 +28,7 @@ class Sidebar extends PureComponent<Props> {
 	}
 }
 
-const mapStateToProps = (state: RootState) => {
+function mapStateToProps(state: RootState) {
 	return {
 		view: state.app.view
 	}

@@ -1,0 +1,15 @@
+.popup-container {
+	padding: .5em;
+	.popup-input {
+		padding-bottom: .5em;
+		& > * {
+			border-radius: 10%;
+
+			
+			
+		}
+
+	}
+	.popup-buttons {
+	}
+}

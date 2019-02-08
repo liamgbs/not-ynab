@@ -1,7 +1,6 @@
 import { AnyAction } from "redux";
-import { Month, CategoryGroup } from "../types/categories";
-
-import * as Types from '../actions/types';
+import { Month } from "../types/categories";
+import { BudgetActionTypes } from "../actions/types";
 
 export interface BudgetState {
 	months: Month[]
@@ -80,9 +79,9 @@ const defaultState : BudgetState = {
 	]
 }
 
-export default function (state: BudgetState = defaultState, action: AnyAction) {
+export default (state: BudgetState = defaultState, action: AnyAction) => {
 	switch(action.type) {
-		case Types.CREATE_CATEGORY:
+		case BudgetActionTypes.CREATE_CATEGORY:
 			return {...state, months: state.months.map(month => {
 				return {...month, categories: [...month.categories, {
 					categoryName: action.payload.categoryName,

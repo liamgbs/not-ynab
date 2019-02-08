@@ -6,4 +6,10 @@
 	padding: 0.5em 0;
 	background: $tertiary-colour;
 	border-bottom: solid 1px $border-colour-dark;
+	.budget-category-group-row-name {
+		display: inline-flex;
+		.add-button {
+			padding-left: .5em;
+		}
+	}
 }

@@ -22,7 +22,7 @@ class MonthControl extends PureComponent<Props> {
 	}
 }
 
-const mapStateToProps = (state: RootState) => {
+function mapStateToProps(state: RootState) {
 	return {
 		activeMonth: state.app.budget.activeMonth
 	}
