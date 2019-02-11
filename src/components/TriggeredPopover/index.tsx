@@ -28,6 +28,10 @@ export default class TriggeredPopover extends PureComponent<Props & Actions> {
 			active: false
 		});
 	}
+	onOk() {
+		this.props.okAction();
+		this.onClose();
+	}
 	render() {
 		return (
 			<Fragment>
@@ -49,7 +53,7 @@ export default class TriggeredPopover extends PureComponent<Props & Actions> {
 							</div>
 							<div className="popup-buttons">
 								<Button onClick={this.onClose.bind(this)}>Cancel</Button>
-								<Button filled onClick={this.props.okAction}>Ok</Button>
+								<Button filled onClick={this.onOk.bind(this)}>Ok</Button>
 							</div>
 
 							

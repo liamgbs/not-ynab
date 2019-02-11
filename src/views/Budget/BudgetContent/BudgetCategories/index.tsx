@@ -5,9 +5,9 @@ import { Dispatch } from 'redux';
 
 import { RootState } from '../../../../reducers';
 import { CategoryGroup, Category } from '../../../../types/categories';
-import BudgetCategoryRow from '../../../../components/BudgetCategoryRow';
-import BudgetCategoryGroupRow from '../../../../components/BudgetCategoryGroupRow';
+import BudgetCategoryGroupRow from './BudgetCategoryGroupRow';
 import { addCategoryAction } from '../../../../actions/budget';
+import BudgetCategoryRow from './BudgetCategoryRow';
 
 interface Props {
 	categories: Category[],
@@ -23,10 +23,10 @@ class BudgetCategories extends PureComponent<Props & Actions> {
 		return (
 			<div className="budget-categories">
 				<div className="budget-categories-header">
-					<div>Category</div>
-					<div>Budgeted</div>
-					<div>Activity</div>
-					<div>Available</div>
+					<div>CATEGORY</div>
+					<div>BUDGETED</div>
+					<div>ACTIVITY</div>
+					<div>AVAILABLE</div>
 				</div>
 				{this.props.groups.map((g, i) => {
 					const groupCategories = this.props.categories.filter(c => g.groupName === c.categoryGroup);

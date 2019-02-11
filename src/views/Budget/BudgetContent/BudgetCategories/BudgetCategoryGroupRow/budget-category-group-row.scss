@@ -1,11 +1,15 @@
-@import '../../styles/constants.scss';
+@import '../../../../../styles/constants.scss';
 
 .budget-category-group-row {
+	max-height: 1em;
 	display: grid;
 	grid-template-columns: 3fr 1fr 1fr 1fr;
 	padding: 1em 0;
 	background: $tertiary-colour;
 	border-bottom: solid 1px $border-colour-dark;
+	&>div:not(:first-child) {
+		text-align: center;
+	}
 	.budget-category-group-row-name {
 		display: inline-flex;
 		align-items: flex-start;

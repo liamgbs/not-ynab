@@ -8,4 +8,5 @@ export enum AppActionTypes {
 
 export enum BudgetActionTypes {
 	CREATE_CATEGORY = "CREATE_CATEGORY",
+	CREATE_CATEGORY_GROUP = "CREATE_CATEGORY_GROUP"
 }

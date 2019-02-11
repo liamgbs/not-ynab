@@ -90,8 +90,15 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 					activity: 0,
 					balance: 0,
 					hidden: false,
-				}]}
-			})}
+				}]};
+			})};
+		case BudgetActionTypes.CREATE_CATEGORY_GROUP:
+			return {...state, months: state.months.map(month => {
+				return {...month, categoryGroups: [...month.categoryGroups, {
+					groupName: action.payload,
+					hidden: false
+				}]};
+			})};
 	}
     return state;
 }

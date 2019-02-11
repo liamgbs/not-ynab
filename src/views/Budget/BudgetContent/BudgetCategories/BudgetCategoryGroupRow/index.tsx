@@ -1,8 +1,8 @@
 import './budget-category-group-row.scss';
 import React, { PureComponent } from 'react';
-import { CategoryGroup } from '../../types/categories';
-import TriggeredPopover from '../TriggeredPopover';
-import Button from '../Button';
+import TriggeredPopover from '../../../../../components/TriggeredPopover';
+import Button from '../../../../../components/Button';
+import { CategoryGroup } from '../../../../../types/categories';
 
 interface Props {
 	categoryGroup: CategoryGroup,

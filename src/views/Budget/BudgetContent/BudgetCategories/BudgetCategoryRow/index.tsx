@@ -1,8 +1,8 @@
 import './budget-category-row.scss';
 
 import React, { PureComponent } from 'react';
+import { Category } from '../../../../../types/categories';
 
-import { Category } from '../../types/categories';
 
 interface Props {
 	category: Category
