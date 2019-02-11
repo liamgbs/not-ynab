@@ -2,18 +2,27 @@ import './month-control.scss';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../../../reducers';
+import { Dispatch } from 'redux';
+import { Month } from '../../../../types/categories';
+import { nextMonthAction, prevMonthAction } from '../../../../actions/budget';
 
 interface Props {
-	activeMonth: string
+	activeMonth: Month,
+	activeMonthIndex: number
 }
 
-class MonthControl extends PureComponent<Props> {
+interface Actions {
+	nextMonth: () => void,
+	previousMonth: () => void
+}
+
+class MonthControl extends PureComponent<Props & Actions> {
 	render() {
 		return (
 			<div className="month-control">
-				<button>&lt;</button>
-				<div className="month-name">{this.formatMonth(this.props.activeMonth)}</div>
-				<button>&gt;</button>
+				<button disabled={this.props.activeMonthIndex < 1} onClick={this.props.previousMonth}>&lt;</button>
+				<div className="month-name">{this.formatMonth(this.props.activeMonth.monthName)}</div>
+				<button onClick={this.props.nextMonth}>&gt;</button>
 			</div>
 		)
 	}
@@ -24,8 +33,16 @@ class MonthControl extends PureComponent<Props> {
 
 function mapStateToProps(state: RootState) {
 	return {
-		activeMonth: state.app.budget.activeMonth
+		activeMonth: state.budget.months[state.budget.activeMonth],
+		activeMonthIndex: state.budget.activeMonth
 	}
 }
 
-export default connect(mapStateToProps)(MonthControl)
+function mapDispatchToProps(dispatch: Dispatch) {
+	return {
+		nextMonth: () => dispatch(nextMonthAction()),
+		previousMonth: () => dispatch(prevMonthAction())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonthControl)

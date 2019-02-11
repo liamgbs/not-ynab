@@ -5,7 +5,6 @@ import { AppView } from "../types/app";
 export interface AppState {
 	view: AppView,
 	budget: {
-		activeMonth: string,
 		activeCategory: string
 	}
 }
@@ -13,7 +12,6 @@ export interface AppState {
 const defaultState = {
 	view: AppView.Budget,
 	budget: {
-		activeMonth: "Feb2019",
 		activeCategory: "House"
 	}
 }

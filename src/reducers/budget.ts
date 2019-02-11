@@ -1,9 +1,13 @@
 import { AnyAction } from "redux";
 import { Month } from "../types/categories";
 import { BudgetActionTypes } from "../actions/types";
+import {newMonthHelper} from "./helpers";
+
+import moment from 'moment';
 
 export interface BudgetState {
-	months: Month[]
+	months: Month[],
+	activeMonth: number
 }
 
 const defaultState : BudgetState = {
@@ -76,10 +80,13 @@ const defaultState : BudgetState = {
 			ageOfMoney: 0,
 			note: "test month"
 		}
-	]
+	],
+	activeMonth: 0
 }
 
 export default (state: BudgetState = defaultState, action: AnyAction) => {
+	console.log(state.months[0].categoryGroups);
+	
 	switch(action.type) {
 		case BudgetActionTypes.CREATE_CATEGORY:
 			return {...state, months: state.months.map(month => {
@@ -99,6 +106,17 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 					hidden: false
 				}]};
 			})};
+		case BudgetActionTypes.APPEND_MONTH:
+			const lastMonth = state.months[state.months.length - 1];
+			const newMonthName = moment(lastMonth.monthName).add(1, "months").format("MMMYYYY");
+			
+			return {...state, months: [
+				...state.months, newMonthHelper(lastMonth.categories, lastMonth.categoryGroups, newMonthName)]}
+		case BudgetActionTypes.SET_NEXT_MONTH_ACTIVE:
+			return {...state, activeMonth: state.activeMonth + 1}
+		case BudgetActionTypes.SET_PREV_MONTH_ACTIVE:
+			return {...state, activeMonth: state.activeMonth - 1}
+		
 	}
     return state;
 }

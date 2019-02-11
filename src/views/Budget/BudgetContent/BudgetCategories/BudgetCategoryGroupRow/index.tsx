@@ -61,9 +61,6 @@ class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 	}
 }
 
-function mapStateToProps(state: RootState, ownProps: any) {
-}
-
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {
 		addCategory: (groupName: string, categoryName: string) => {
@@ -73,4 +70,4 @@ function mapDispatchToProps(dispatch: Dispatch) {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BudgetCategoryGroupRow)
+export default connect(null, mapDispatchToProps)(BudgetCategoryGroupRow)

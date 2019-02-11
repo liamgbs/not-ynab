@@ -48,7 +48,7 @@ class BudgetCategories extends PureComponent<Props & Actions> {
 }
 
 function mapStateToProps(state: RootState) {
-	const month = state.budget.months.find(m => { return m.monthName === state.app.budget.activeMonth })!
+	const month = state.budget.months[state.budget.activeMonth]
 	return {
 		categories: month.categories,
 		groups: month.categoryGroups
