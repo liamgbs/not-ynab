@@ -1,12 +1,9 @@
 import './budget-categories.scss';
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-
 import { RootState } from '../../../../reducers';
 import { CategoryGroup, Category } from '../../../../types/categories';
 import BudgetCategoryGroupRow from './BudgetCategoryGroupRow';
-import { addCategoryAction } from '../../../../actions/budget';
 import BudgetCategoryRow from './BudgetCategoryRow';
 
 interface Props {
@@ -15,7 +12,6 @@ interface Props {
 }
 
 interface Actions {
-	addCategory:(groupName:string, categoryName:string)=>void
 }
 
 class BudgetCategories extends PureComponent<Props & Actions> {
@@ -37,7 +33,6 @@ class BudgetCategories extends PureComponent<Props & Actions> {
 					return (
 						<div key={i}>
 							<BudgetCategoryGroupRow
-								addCategory={this.props.addCategory}
 								categoryGroup={g}
 								totalBudgeted={totalBudgeted}
 								totalActivity={totalActivity}
@@ -60,12 +55,4 @@ function mapStateToProps(state: RootState) {
 	}
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
-	return {
-		addCategory: (groupName:string, categoryName:string) => {
-			dispatch(addCategoryAction(groupName, categoryName));
-		}
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BudgetCategories)
+export default connect(mapStateToProps)(BudgetCategories)

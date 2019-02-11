@@ -3,6 +3,10 @@ import React, { PureComponent } from 'react';
 import TriggeredPopover from '../../../../../components/TriggeredPopover';
 import Button from '../../../../../components/Button';
 import { CategoryGroup } from '../../../../../types/categories';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { addCategoryAction } from '../../../../../actions/budget';
+import { RootState } from '../../../../../reducers';
 
 interface Props {
 	categoryGroup: CategoryGroup,
@@ -15,7 +19,7 @@ interface Actions {
 	addCategory: (groupName: string, categoryName: string) => void
 }
 
-export default class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
+class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 	state={
 		showAddButton: false,
 		newCategoryName: ""
@@ -56,3 +60,17 @@ export default class BudgetCategoryGroupRow extends PureComponent<Props & Action
 		)
 	}
 }
+
+function mapStateToProps(state: RootState, ownProps: any) {
+}
+
+function mapDispatchToProps(dispatch: Dispatch) {
+	return {
+		addCategory: (groupName: string, categoryName: string) => {
+			dispatch(addCategoryAction(groupName, categoryName))
+		}
+	}
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BudgetCategoryGroupRow)
