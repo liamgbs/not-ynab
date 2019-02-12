@@ -84,9 +84,7 @@ const defaultState : BudgetState = {
 	activeMonth: 0
 }
 
-export default (state: BudgetState = defaultState, action: AnyAction) => {
-	console.log(state.months[0].categoryGroups);
-	
+export default (state: BudgetState = defaultState, action: AnyAction) => {	
 	switch(action.type) {
 		case BudgetActionTypes.CREATE_CATEGORY:
 			return {...state, months: state.months.map(month => {
