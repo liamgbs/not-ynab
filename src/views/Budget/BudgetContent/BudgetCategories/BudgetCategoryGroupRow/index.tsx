@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addCategoryAction } from '../../../../../actions/budget';
 import { RootState } from '../../../../../reducers';
+import Input from '../../../../../components/Input';
 
 interface Props {
 	categoryGroup: CategoryGroup,
@@ -49,7 +50,7 @@ class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 					{this.state.showAddButton ?
 						<span className="add-button">
 							<TriggeredPopover okAction={this.onAddCategoryClick.bind(this)} trigger={<Button round small>+</Button>}>
-								<input placeholder="Add category..." onChange={this.onNewNameChange.bind(this)} />
+								<Input placeholder="Add Category..." onChange={this.onNewNameChange.bind(this)}/>
 							</TriggeredPopover>
 						</span> : null}
 				</div>

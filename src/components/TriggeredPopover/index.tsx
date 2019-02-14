@@ -48,7 +48,7 @@ export default class TriggeredPopover extends PureComponent<Props & Actions> {
 						}}
 						onClose={this.onClose.bind(this)}>
 						<div className="popup-container">
-							<div className="popup-input">
+							<div className="popup-content">
 								{this.props.children}
 							</div>
 							<div className="popup-buttons">
