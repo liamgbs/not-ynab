@@ -7,6 +7,7 @@ import { Dispatch } from 'redux';
 import TriggeredPopover from '../../../components/TriggeredPopover';
 import Button from '../../../components/Button';
 import { addCategoryGroupAction } from '../../../actions/budget';
+import Input from '../../../components/Input';
 
 interface Props {
 
@@ -32,7 +33,8 @@ class BudgetContent extends PureComponent<Props & Actions> {
 					<TriggeredPopover
 						okAction={() => this.props.addCategoryGroup(this.state.newCategoryName)}
 						trigger={<Button small >Add Category</Button>}>
-					<input placeholder="New Category Group" onChange={this.handleChange.bind(this)} />
+					
+					<Input placeholder="New Category Group" value={this.state.newCategoryName} onChange={this.handleChange.bind(this)} />
 					</TriggeredPopover>
 				</div>
 				<div className="budget-category-controls">

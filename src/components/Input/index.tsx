@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react'
 
 interface Props {
 	placeholder?: string,
+	value: string
 }
 
 interface Actions {
@@ -16,7 +17,11 @@ export default class Input extends PureComponent<Props & Actions> {
 	render() {
 		return (
 			<div className="input">
-				<input placeholder={this.props.placeholder} onChange={this.handleChange} />
+				<input
+					placeholder={this.props.placeholder}
+					onChange={this.handleChange.bind(this)}
+					value={this.props.value}
+				/>
 			</div>
 		)
 	}

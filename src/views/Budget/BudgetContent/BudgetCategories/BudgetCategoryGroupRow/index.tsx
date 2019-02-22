@@ -25,7 +25,7 @@ class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 		showAddButton: false,
 		newCategoryName: ""
 	}
-	onNewNameChange(event: any) {
+	onNewNameChange(event: React.ChangeEvent<HTMLInputElement>) {
 		this.setState({
 			newCategoryName: event.target.value
 		});
@@ -50,7 +50,7 @@ class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 					{this.state.showAddButton ?
 						<span className="add-button">
 							<TriggeredPopover okAction={this.onAddCategoryClick.bind(this)} trigger={<Button round small>+</Button>}>
-								<Input placeholder="Add Category..." onChange={this.onNewNameChange.bind(this)}/>
+								<Input value={this.state.newCategoryName} placeholder="Add Category..." onChange={this.onNewNameChange.bind(this)}/>
 							</TriggeredPopover>
 						</span> : null}
 				</div>
