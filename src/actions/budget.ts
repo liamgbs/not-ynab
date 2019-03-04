@@ -4,8 +4,8 @@ export function addCategoryAction(groupName: string, categoryName: string) {
 	return {
 		type: BudgetActionTypes.CREATE_CATEGORY,
 		payload: {
-			categoryName: categoryName,
-			groupName: groupName
+			categoryName,
+			groupName
 		}
 	}
 }
@@ -32,5 +32,15 @@ export function prevMonthAction() {
 export function appendMonthAction() {
 	return {
 		type: BudgetActionTypes.APPEND_MONTH
+	}
+}
+
+export function setMonthBudgetedAction(categoryName: string, value: Number) {
+	return {
+		type: BudgetActionTypes.SET_MONTH_BUDGETED,
+		payload: {
+			categoryName,
+			value
+		}
 	}
 }

@@ -1,5 +1,5 @@
 import './input.scss';
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 
 interface Props {
 	placeholder?: string,
@@ -16,13 +16,14 @@ export default class Input extends PureComponent<Props & Actions> {
 	}
 	render() {
 		return (
-			<div className="input">
+			<Fragment>
 				<input
+					className="input"
 					placeholder={this.props.placeholder}
 					onChange={this.handleChange.bind(this)}
 					value={this.props.value}
 				/>
-			</div>
+			</Fragment>
 		)
 	}
 }
