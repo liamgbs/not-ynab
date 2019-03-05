@@ -1,8 +1,13 @@
 .popup-container {
 	padding: .5em;
+	display: flex;
+	flex-direction: column;
 	.popup-content {
-
+		margin-bottom: 1em;
 	}
 	.popup-buttons {
+		display: flex;
+		justify-content: flex-end;
+
 	}
 }

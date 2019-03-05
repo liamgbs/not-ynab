@@ -115,10 +115,7 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 		case BudgetActionTypes.SET_PREV_MONTH_ACTIVE:
 			return {...state, activeMonth: state.activeMonth - 1}
 		case BudgetActionTypes.SET_MONTH_BUDGETED:
-			const newMonths = [...state.months];
-			const categoryIndex = newMonths[state.activeMonth].categories.findIndex(c => c.categoryName === action.payload.categoryName);
-			newMonths[state.activeMonth].categories[categoryIndex].budgeted = action.payload.value;
-			return {...state, newMonths};
+			return {...state};
 	}
-    return state;
+    return {...state};
 }

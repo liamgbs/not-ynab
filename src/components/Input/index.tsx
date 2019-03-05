@@ -4,6 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 interface Props {
 	placeholder?: string,
 	value: string
+	hoverable?: boolean
 }
 
 interface Actions {
@@ -12,19 +13,55 @@ interface Actions {
 }
 
 export default class Input extends PureComponent<Props & Actions> {
+	state={
+		hovered: false,
+		focused: false
+	}
 	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		this.props.onChange(event);
+	}
+	onFocus() {
+		this.setState({
+			focused: true
+		})
+	}
+	onBlur() {
+		this.setState({
+			focused: false
+		})
+		if (this.props.onBlur)
+			this.props.onBlur();
+	}
+	onMouseEnter() {
+		this.setState({
+			hovered: true
+		})
+	}
+	onMouseLeave() {
+		this.setState({
+			hovered: false
+		})
 	}
 	render() {
 		return (
 			<Fragment>
-				<input
-					className="input"
-					placeholder={this.props.placeholder}
-					onChange={this.handleChange.bind(this)}
-					onBlur={this.props.onBlur}
-					value={this.props.value}
-				/>
+				{!this.props.hoverable || this.props.hoverable && (this.state.focused || this.state.hovered) ? 
+					<input
+						className="input"
+						placeholder={this.props.placeholder}
+						value={this.props.value}
+						onChange={this.handleChange.bind(this)}
+						onBlur={this.onBlur.bind(this)}
+						onFocus={this.onFocus.bind(this)}
+						onMouseLeave={this.onMouseLeave.bind(this)}
+					/> :
+					<div
+						className="input-off"
+						onMouseEnter={this.onMouseEnter.bind(this)}
+					>
+						{this.props.value}
+					</div>
+				}
 			</Fragment>
 		)
 	}

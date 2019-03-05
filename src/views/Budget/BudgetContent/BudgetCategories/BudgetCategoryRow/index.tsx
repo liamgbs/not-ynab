@@ -17,24 +17,23 @@ interface Actions {
 
 class BudgetCategoryRow extends PureComponent<Props & Actions> {
 	state = {
-		budgeted: this.props.category.budgeted
+		budgeted: this.props.category.budgeted.toFixed(2)
 	}
 
 	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-		const isNumber = Number(event.target.value);
 		this.setState({
-			budgeted: isNumber === isNumber ? isNumber.toFixed(2) : event.target.value
+			budgeted: event.target.value
 		})
 	}
 	handleBlur(value: number) {
 		if (value === value) {
 			this.props.setCategoryBudgeted(this.props.category.categoryName, value);
 			this.setState({
-				budgeted: value
+				budgeted: value.toFixed(2)
 			});
 		} else {
 			this.setState({
-				budgeted: this.props.category.budgeted
+				budgeted: this.props.category.budgeted.toFixed(2)
 			})
 		}
 		
@@ -46,7 +45,8 @@ class BudgetCategoryRow extends PureComponent<Props & Actions> {
 					{this.props.category.categoryName}
 				</div>
 				<CalculatorInput
-					value={this.state.budgeted.toString()}
+					hoverable
+					value={this.state.budgeted}
 					onChange={this.handleChange.bind(this)}
 					onBlur={this.handleBlur.bind(this)}
 				/>
