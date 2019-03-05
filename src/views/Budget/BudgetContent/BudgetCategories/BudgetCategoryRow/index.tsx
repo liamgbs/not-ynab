@@ -16,8 +16,28 @@ interface Actions {
 }
 
 class BudgetCategoryRow extends PureComponent<Props & Actions> {
-	state={
+	state = {
 		budgeted: this.props.category.budgeted
+	}
+
+	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const isNumber = Number(event.target.value);
+		this.setState({
+			budgeted: isNumber === isNumber ? isNumber.toFixed(2) : event.target.value
+		})
+	}
+	handleBlur(value: number) {
+		if (value === value) {
+			this.props.setCategoryBudgeted(this.props.category.categoryName, value);
+			this.setState({
+				budgeted: value
+			});
+		} else {
+			this.setState({
+				budgeted: this.props.category.budgeted
+			})
+		}
+		
 	}
 	render() {
 		return (
@@ -25,11 +45,10 @@ class BudgetCategoryRow extends PureComponent<Props & Actions> {
 				<div className="budget-category-row-name">
 					{this.props.category.categoryName}
 				</div>
-				<CalculatorInput 
-					value={this.props.category.budgeted.toFixed(2)}
-					onChange={((value: number) => {
-						this.props.setCategoryBudgeted(this.props.category.categoryName, value)
-					})}
+				<CalculatorInput
+					value={this.state.budgeted.toString()}
+					onChange={this.handleChange.bind(this)}
+					onBlur={this.handleBlur.bind(this)}
 				/>
 				<div>{this.props.category.activity.toFixed(2)}</div>
 				<div>{this.props.category.balance.toFixed(2)}</div>
@@ -40,7 +59,7 @@ class BudgetCategoryRow extends PureComponent<Props & Actions> {
 
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {
-		setCategoryBudgeted: (categoryName: string, value: number) => {			
+		setCategoryBudgeted: (categoryName: string, value: number) => {
 			dispatch(setMonthBudgetedAction(categoryName, value));
 		}
 	}

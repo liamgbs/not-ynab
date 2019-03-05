@@ -14,7 +14,7 @@ export default class ExpressionParser {
 	}
 
 	parse(expr: string) {
-		const regex = /(\d+|-|\+|\/|\*|\(|\))/g;
+		const regex = /(\d+\.\d+|\d+|-|\+|\/|\*|\(|\))/g;
 		const tokens = expr.match(regex);
 
 		let operators: Array<string> = [];
@@ -58,34 +58,38 @@ export default class ExpressionParser {
 		const postfix = this.parse(expr);
 		const stack: Array<number> = [];
 
-		postfix.forEach((token) => {
-			const e = Number(token);
-			if (e === e)
-				return stack.push(e);
-
-			const op1 = stack.pop();
-			const op2 = stack.pop();
-
-			if (op1 === undefined || op2 === undefined)
-				throw new Error("Expression Invalid");
-
-			switch (token) {
-				case '+':
-					stack.push(op2 + op1);
-					break;
-				case '-':
-					stack.push(op2 - op1);
-					break;
-				case '/':
-					stack.push(op2 / op1);
-					break;
-				case '*':
-					stack.push(op2 * op1);
-					break;
-				default:
+		try {
+			postfix.forEach((token) => {
+				const e = Number(token);
+				if (e === e)
+					return stack.push(e);
+	
+				const op1 = stack.pop();
+				const op2 = stack.pop();
+	
+				if (op1 === undefined || op2 === undefined)
 					throw new Error("Expression Invalid");
-			}
-		});
+	
+				switch (token) {
+					case '+':
+						stack.push(op2 + op1);
+						break;
+					case '-':
+						stack.push(op2 - op1);
+						break;
+					case '/':
+						stack.push(op2 / op1);
+						break;
+					case '*':
+						stack.push(op2 * op1);
+						break;
+					default:
+						throw new Error("Expression Invalid");
+				}
+			});
+		} catch (Error) {
+			return NaN
+		}
 
 		return stack.pop();
 	};

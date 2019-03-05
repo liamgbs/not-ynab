@@ -9,19 +9,23 @@ interface Props {
 }
 
 interface Actions {
-	onChange: (value?: any) => void
+	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+	onBlur: (value?: any) => void
 }
 
-
 export default class CalculatorInput extends PureComponent<Props & Actions> {
+	onBlur() {
+		const calculatedValue = new ExpressionParser().evaluate(this.props.value);		
+		this.props.onBlur(calculatedValue)
+	}
 	render() {
-		const calculatedValue = new ExpressionParser().evaluate(this.props.value);
 		return (
 			<Fragment>
 				<Input
 					placeholder={this.props.placeholder}
-					value={calculatedValue!.toString()}
-					onChange={() => {this.props.onChange(calculatedValue)}}
+					value={this.props.value}
+					onChange={this.props.onChange}
+					onBlur={this.onBlur.bind(this)}
 				/>
 			</Fragment>
 		)

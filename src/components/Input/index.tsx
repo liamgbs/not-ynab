@@ -7,7 +7,8 @@ interface Props {
 }
 
 interface Actions {
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	onBlur?: () => void
 }
 
 export default class Input extends PureComponent<Props & Actions> {
@@ -21,6 +22,7 @@ export default class Input extends PureComponent<Props & Actions> {
 					className="input"
 					placeholder={this.props.placeholder}
 					onChange={this.handleChange.bind(this)}
+					onBlur={this.props.onBlur}
 					value={this.props.value}
 				/>
 			</Fragment>
