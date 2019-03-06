@@ -20,6 +20,12 @@ class BudgetCategoryRow extends PureComponent<Props & Actions> {
 		budgeted: this.props.category.budgeted.toFixed(2)
 	}
 
+	componentWillReceiveProps(props: Props) {
+		this.setState({
+			budgeted: props.category.budgeted.toFixed(2)
+		})
+	}
+
 	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		this.setState({
 			budgeted: event.target.value

@@ -81,7 +81,7 @@ const defaultState : BudgetState = {
 			note: "test month"
 		}
 	],
-	activeMonth: 0
+	activeMonth: 1
 }
 
 export default (state: BudgetState = defaultState, action: AnyAction) => {	
@@ -115,7 +115,21 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 		case BudgetActionTypes.SET_PREV_MONTH_ACTIVE:
 			return {...state, activeMonth: state.activeMonth - 1}
 		case BudgetActionTypes.SET_MONTH_BUDGETED:
-			return {...state};
+			const catInd = state.months[state.activeMonth].categories.findIndex(c => c.categoryName === action.payload.categoryName);
+			console.log(state.months.slice(state.activeMonth + 1));
+			
+			return {
+				...state,
+				months: [
+					...state.months.slice(0, state.activeMonth),
+						{...state.months[state.activeMonth], categories: [
+							...state.months[state.activeMonth].categories.slice(0, catInd), 
+								{...state.months[state.activeMonth].categories[catInd], budgeted: action.payload.value},
+							...state.months[state.activeMonth].categories.slice(catInd + 1), 
+						]},
+					...state.months.slice(state.activeMonth + 1)
+				]
+			};
 	}
     return {...state};
 }
