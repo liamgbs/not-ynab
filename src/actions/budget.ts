@@ -35,7 +35,7 @@ export function appendMonthAction() {
 	}
 }
 
-export function setMonthBudgetedAction(categoryName: string, value: Number) {
+export function setMonthBudgetedAction(categoryName: string, value: number) {
 	return {
 		type: BudgetActionTypes.SET_CATEGORY_BUDGETED,
 		payload: {
