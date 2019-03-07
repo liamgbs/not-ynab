@@ -1,0 +1,27 @@
+@import '../../styles/constants.scss';
+
+.value-indicator {
+	width: fit-content;
+	border-radius: 5px;
+	text-align: center;
+	padding: .75em .75em .5em;
+
+
+	.value-indicator-value {
+		font-size: 2em;
+		letter-spacing: 1px;
+		font-weight: 300;
+	}
+	.value-indicator-label {
+		font-size: .75em;
+		color: black;
+	}
+	&.positive {
+		background: $positive-colour;
+	}
+	&.negative {
+		background: $negative-colour;
+	}
+
+
+}

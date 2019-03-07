@@ -2,5 +2,10 @@
 @import "../../../../styles/mixins.scss";
 
 .month-summary {
-	
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding: .75em 0;
+	.to-be-budgeted {
+	}
 }

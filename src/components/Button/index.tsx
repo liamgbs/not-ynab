@@ -1,5 +1,6 @@
 import './button.scss';
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
 
 interface Props {
 	small?: boolean,
@@ -13,15 +14,14 @@ interface Actions {
 
 export default class Button extends PureComponent<Props & Actions> {
 	render() {
-		const className = 
-		`button
-		${this.props.filled ? "filled" : null}
-		${this.props.small ? "small" : null}
-		${this.props.round ? "round" : null}
-		`;
-
+		const CSSClasses = classNames({
+			"button": true,
+			"filled": this.props.filled,
+			"small": this.props.small,
+			"round": this.props.round
+		})
 		return (
-			<button className={className} onClick={this.props.onClick}>
+			<button className={CSSClasses} onClick={this.props.onClick}>
 				{this.props.children}
 			</button>
 		)
