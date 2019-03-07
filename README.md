@@ -14,6 +14,7 @@ To-do (In some kind of order-ish):
 
 **--Release 1-- BETA**
 
+* Schedule transactions - allow transactions for in the future.
 * Reports (net worth) - A net worth over time report. Basically how much money is in accounts over time.
 * Reports (spending) - Report how much is spent by category.
 * Polish - Clean up styles, add any side features I think of. Make it look pretty.

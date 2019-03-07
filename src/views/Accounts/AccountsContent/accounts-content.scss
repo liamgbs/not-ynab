@@ -1,19 +1,16 @@
 @import "../../../styles/constants.scss";
 @import "../../../styles/mixins.scss";
 
-.budget-content {
+.accounts-content {
 	color: $text-colour-dark;
+	//grid-area: content;
 	display: grid;
 	grid-template-rows: auto 40fr;
-	grid-area: content;
-	.budget-category-toolbar {
+	.accounts-toolbar {
 		width: 100%;
 		padding: 0.5em 0;
 
 		border-bottom: solid 1px $border-colour-dark;
 		color: $primary-colour;
-	}
-	.budget-category-controls {
-		position: relative;
 	}
 }

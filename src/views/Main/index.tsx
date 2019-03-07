@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Budget from '../Budget';
 import { RootState } from '../../reducers';
 import { AppView } from '../../types/app';
+import Accounts from '../Accounts';
 
 interface Props {
     view: AppView
@@ -20,6 +21,8 @@ class Main extends PureComponent<Props> {
             switch (this.props.view) {
                 case AppView.Budget:
                     return <Budget />
+				case AppView.Accounts:
+					return <Accounts />
             }
 
         })()}

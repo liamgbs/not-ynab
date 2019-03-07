@@ -1,0 +1,6 @@
+.accounts {
+	display: grid;
+	grid-template:  "header" 7fr
+					"content" 93fr;
+	height: 100%;
+}
