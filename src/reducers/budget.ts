@@ -3,8 +3,6 @@ import { Month } from "../types/categories";
 import { BudgetActionTypes } from "../actions/types";
 import { newMonthHelper } from "./helpers";
 
-import moment from 'moment';
-
 export interface BudgetState {
 	months: Month[],
 	activeMonth: number
@@ -124,20 +122,24 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 			return { ...state, activeMonth: state.activeMonth - 1 }
 		case BudgetActionTypes.SET_CATEGORY_BUDGETED:
 			const catInd = state.months[state.activeMonth].categories.findIndex(c => c.categoryName === action.payload.categoryName);
+			const budgetChangeDifference = action.payload.value - state.months[state.activeMonth].categories[catInd].budgeted;
 			return {
 				...state,
 				months: [
 					...state.months.slice(0, state.activeMonth),
 					...state.months.slice(state.activeMonth).map((month, i) => {
 						return {
-							...month, categories: [
+							...month,
+							toBeBudgeted: i === 0 ? month.toBeBudgeted - budgetChangeDifference : month.toBeBudgeted,
+							categories: [
 								...month.categories.slice(0, catInd),
 								{
 									...month.categories[catInd],
 									budgeted: i === 0 ? action.payload.value : month.categories[catInd].budgeted,
-									balance: month.categories[catInd].balance += action.payload.value - state.months[state.activeMonth].categories[catInd].budgeted
+									balance: month.categories[catInd].balance += budgetChangeDifference
 								},
-								...month.categories.slice(catInd + 1)]
+								...month.categories.slice(catInd + 1)
+							]
 						}
 					})
 				],

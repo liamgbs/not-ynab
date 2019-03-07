@@ -4,16 +4,10 @@ import { AppView } from "../types/app";
 
 export interface AppState {
 	view: AppView,
-	budget: {
-		activeCategory: string
-	}
 }
 
 const defaultState = {
 	view: AppView.Budget,
-	budget: {
-		activeCategory: "House"
-	}
 }
 
 export default (state: AppState = defaultState, action: AnyAction) => {

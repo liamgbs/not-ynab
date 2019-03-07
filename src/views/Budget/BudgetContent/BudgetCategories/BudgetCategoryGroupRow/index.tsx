@@ -6,7 +6,6 @@ import { CategoryGroup } from '../../../../../types/categories';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addCategoryAction } from '../../../../../actions/budget';
-import { RootState } from '../../../../../reducers';
 import Input from '../../../../../components/Input';
 
 interface Props {
