@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import { Month } from "../types/categories";
 import { BudgetActionTypes } from "../actions/types";
-import {newMonthHelper} from "./helpers";
+import { newMonthHelper } from "./helpers";
 
 import moment from 'moment';
 
@@ -10,8 +10,8 @@ export interface BudgetState {
 	activeMonth: number
 }
 
-const defaultState : BudgetState = {
-	months : [
+const defaultState: BudgetState = {
+	months: [
 		{
 			monthName: "Feb2019",
 			toBeBudgeted: 0.0,
@@ -29,17 +29,17 @@ const defaultState : BudgetState = {
 				{
 					categoryName: "Holiday",
 					categoryGroup: "Savings",
-					budgeted: 50.2,
+					budgeted: 50,
 					activity: 0,
-					balance: 50.2,
+					balance: 50,
 					hidden: false,
 				},
 				{
 					categoryName: "House",
 					categoryGroup: "Savings",
-					budgeted: 10.2,
+					budgeted: 20,
 					activity: 0,
-					balance: 10.2,
+					balance: 20,
 					hidden: false,
 				},
 			],
@@ -65,7 +65,7 @@ const defaultState : BudgetState = {
 					categoryGroup: "Savings",
 					budgeted: 0,
 					activity: 0,
-					balance: 0,
+					balance: 50,
 					hidden: false,
 				},
 				{
@@ -73,7 +73,7 @@ const defaultState : BudgetState = {
 					categoryGroup: "Savings",
 					budgeted: 0,
 					activity: 0,
-					balance: 0,
+					balance: 20,
 					hidden: false,
 				},
 			],
@@ -81,55 +81,67 @@ const defaultState : BudgetState = {
 			note: "test month"
 		}
 	],
-	activeMonth: 1
+	activeMonth: 0
 }
 
-export default (state: BudgetState = defaultState, action: AnyAction) => {	
-	switch(action.type) {
+export default (state: BudgetState = defaultState, action: AnyAction) => {
+	switch (action.type) {
 		case BudgetActionTypes.CREATE_CATEGORY:
-			return {...state, months: state.months.map(month => {
-				return {...month, categories: [...month.categories, {
-					categoryName: action.payload.categoryName,
-					categoryGroup: action.payload.groupName,
-					budgeted: 0,
-					activity: 0,
-					balance: 0,
-					hidden: false,
-				}]};
-			})};
+			return {
+				...state, months: state.months.map(month => {
+					return {
+						...month, categories: [...month.categories, {
+							categoryName: action.payload.categoryName,
+							categoryGroup: action.payload.groupName,
+							budgeted: 0,
+							activity: 0,
+							balance: 0,
+							hidden: false,
+						}]
+					};
+				})
+			};
 		case BudgetActionTypes.CREATE_CATEGORY_GROUP:
-			return {...state, months: state.months.map(month => {
-				return {...month, categoryGroups: [...month.categoryGroups, {
-					groupName: action.payload,
-					hidden: false
-				}]};
-			})};
+			return {
+				...state, months: state.months.map(month => {
+					return {
+						...month, categoryGroups: [...month.categoryGroups, {
+							groupName: action.payload,
+							hidden: false
+						}]
+					};
+				})
+			};
 		case BudgetActionTypes.APPEND_MONTH:
 			const lastMonth = state.months[state.months.length - 1];
-			const newMonthName = moment(lastMonth.monthName).add(1, "months").format("MMMYYYY");
-			
-			return {...state, months: [
-				...state.months, newMonthHelper(lastMonth.categories, lastMonth.categoryGroups, newMonthName)]}
+			return {
+				...state, months: [
+					...state.months, newMonthHelper(lastMonth)]
+			}
 		case BudgetActionTypes.SET_NEXT_MONTH_ACTIVE:
-			return {...state, activeMonth: state.activeMonth + 1}
+			return { ...state, activeMonth: state.activeMonth + 1 }
 		case BudgetActionTypes.SET_PREV_MONTH_ACTIVE:
-			return {...state, activeMonth: state.activeMonth - 1}
-		case BudgetActionTypes.SET_MONTH_BUDGETED:
+			return { ...state, activeMonth: state.activeMonth - 1 }
+		case BudgetActionTypes.SET_CATEGORY_BUDGETED:
 			const catInd = state.months[state.activeMonth].categories.findIndex(c => c.categoryName === action.payload.categoryName);
-			console.log(state.months.slice(state.activeMonth + 1));
-			
 			return {
 				...state,
 				months: [
 					...state.months.slice(0, state.activeMonth),
-						{...state.months[state.activeMonth], categories: [
-							...state.months[state.activeMonth].categories.slice(0, catInd), 
-								{...state.months[state.activeMonth].categories[catInd], budgeted: action.payload.value},
-							...state.months[state.activeMonth].categories.slice(catInd + 1), 
-						]},
-					...state.months.slice(state.activeMonth + 1)
-				]
+					...state.months.slice(state.activeMonth).map((month, i) => {
+						return {
+							...month, categories: [
+								...month.categories.slice(0, catInd),
+								{
+									...month.categories[catInd],
+									budgeted: i === 0 ? action.payload.value : month.categories[catInd].budgeted,
+									balance: month.categories[catInd].balance += action.payload.value - state.months[state.activeMonth].categories[catInd].budgeted
+								},
+								...month.categories.slice(catInd + 1)]
+						}
+					})
+				],
 			};
 	}
-    return {...state};
+	return { ...state };
 }

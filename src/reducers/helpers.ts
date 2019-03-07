@@ -1,17 +1,16 @@
-import { Category, CategoryGroup, Month } from "../types/categories";
+import { Month } from "../types/categories";
+import moment from 'moment';
 
-export function newMonthHelper(categories: Category[], categoryGroups: CategoryGroup[], newMonthName: string) : Month {
+export function newMonthHelper(lastMonth: Month) : Month {
 	return {
-		monthName: newMonthName,
-		categoryGroups: categoryGroups,
+		monthName: moment(lastMonth.monthName).add(1, "months").format("MMMYYYY"),
+		categoryGroups: [...lastMonth.categoryGroups],
 		ageOfMoney : 0,
 		toBeBudgeted: 0,
-		categories: categories.map(cat => {
+		categories: lastMonth.categories.map(cat => {
 			return {
 				...cat,
 				budgeted: 0,
-				activity: 0,
-				balance: 0,
 			}
 		})
 	};
