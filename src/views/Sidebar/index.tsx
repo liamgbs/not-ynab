@@ -36,7 +36,7 @@ class Sidebar extends PureComponent<Props & Actions> {
 						onClick={() => this.props.changeView(AppView.Accounts)}
 						active={this.props.view === AppView.Accounts}
 						icon="A"
-						label="Accounts"/>
+						label="All Accounts"/>
 				</div>
 				<div className="accounts-controls">
 				

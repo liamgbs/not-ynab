@@ -5,18 +5,6 @@ export interface Account {
 	closed: boolean,
 	balance: number,
 	deleted: boolean,
-	transactions: Transaction[]
-}
-
-export interface Transaction {
-	accountName: string,
-	payeeName: string,
-	categoryName: string,
-	id: string,
-	date: string,
-	amount: number,
-	approved: boolean,
-	deleted: boolean,
 }
 
 export interface Payee {
