@@ -12,14 +12,19 @@ To-do (In some kind of order-ish):
 * Auth - Implement an authentication system for logging in.
 * Testing - speaks for itself.
 
-**--Release 1-- BETA**
+**--Release 1-- ALPHA**
 
-* Schedule transactions - allow transactions for in the future.
+* Schedule transactions - Allow transactions for in the future.
+* Credit Cards - Have a credit card category and group be created when adding a new credit card account and have transactions redirect budgeted money there.
+* Goals - Different type of goals to make monthly budeting easier.
+
+**--Release 2-- BETA**
+
+* Split Transactions - Ability to pay into or take money from multiple transactions at once.
 * Reports (net worth) - A net worth over time report. Basically how much money is in accounts over time.
 * Reports (spending) - Report how much is spent by category.
-* Polish - Clean up styles, add any side features I think of. Make it look pretty.
 
-**--Release 2-- 1.0**
+**--Release 3 -- 1.0**
 
 * Mobile App - Need to make it usable on the go which will involve a mobile app.
 
