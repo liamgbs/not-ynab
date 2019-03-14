@@ -1,5 +1,13 @@
+@import '../../../../styles/constants.scss';
+
 .accounts-transactions {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	.accounts-transactions-header {
+		text-align: center;
+		padding: 1em 0.5em;
+		display: grid;
+		grid-template-columns: $account-table-widths;
+	}
 }

@@ -44,6 +44,21 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 				],
 				newTransaction: false
 			}
+		case TransactionActionTypes.EDIT_TRANSACTION:
+			return {
+				...state,
+				transactions: [
+					...state.transactions.map(trans => {
+						if (trans.id !== payload.id) {
+							return {...trans}
+						}
+						return {
+							...trans,
+							// TODO: new transaction information
+						}
+					})
+				]
+			}
 		case TransactionActionTypes.TRIGGER_NEW_TRANSACTION:
 			return {
 				...state,

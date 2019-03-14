@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setMonthBudgetedAction } from '../../../../../actions/budget';
 import CalculatorInput from '../../../../../components/CalculatorInput';
 import { Dispatch } from 'redux';
+import ValueIndicator from '../../../../../components/ValueIndicator';
 
 interface Props {
 	category: Category
@@ -52,12 +53,13 @@ class BudgetCategoryRow extends PureComponent<Props & Actions> {
 				</div>
 				<CalculatorInput
 					hoverable
+					name="budgeted"
 					value={this.state.budgeted}
 					onChange={this.handleChange.bind(this)}
 					onBlur={this.handleBlur.bind(this)}
 				/>
 				<div>{this.props.category.activity.toFixed(2)}</div>
-				<div>{this.props.category.balance.toFixed(2)}</div>
+				<div><ValueIndicator value={this.props.category.balance} /></div>
 			</div>
 		)
 	}

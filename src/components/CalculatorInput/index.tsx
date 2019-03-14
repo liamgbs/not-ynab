@@ -5,7 +5,8 @@ import ExpressionParser from '../../utils/ExpressionEvaluator';
 
 interface Props {
 	placeholder?: string,
-	value: string
+	value: string,
+	name: string,
 	hoverable?: boolean
 }
 
@@ -24,6 +25,7 @@ export default class CalculatorInput extends PureComponent<Props & Actions> {
 			<Fragment>
 				<Input
 					placeholder={this.props.placeholder}
+					name={this.props.name}
 					value={this.props.value}
 					onChange={this.props.onChange}
 					onBlur={this.onBlur.bind(this)}

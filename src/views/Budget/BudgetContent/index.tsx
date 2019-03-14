@@ -34,7 +34,11 @@ class BudgetContent extends PureComponent<Props & Actions> {
 						okAction={() => this.props.addCategoryGroup(this.state.newCategoryName)}
 						trigger={<Button small >Add Category</Button>}>
 					
-					<Input placeholder="New Category Group" value={this.state.newCategoryName} onChange={this.handleChange.bind(this)} />
+						<Input
+							name="new-category"
+							placeholder="New Category Group"
+							value={this.state.newCategoryName}
+							onChange={this.handleChange.bind(this)} />
 					</TriggeredPopover>
 				</div>
 				<div className="budget-category-controls">

@@ -2,9 +2,9 @@
 
 .accounts-transaction {
 	display: grid;
-	grid-template-columns: 1fr 1.5fr 2fr 1fr 1fr 1fr;
+	grid-template-columns: $account-table-widths;
 	padding: .5em;
-	border-bottom: 1px solid $border-colour-dark;
+	border-top: 1px solid $border-colour-dark;
 	font-size: $font-small;
 	text-align: center;
 }

@@ -49,7 +49,11 @@ class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 					{this.state.showAddButton ?
 						<span className="add-button">
 							<TriggeredPopover okAction={this.onAddCategoryClick.bind(this)} trigger={<Button round small>+</Button>}>
-								<Input value={this.state.newCategoryName} placeholder="Add Category..." onChange={this.onNewNameChange.bind(this)}/>
+								<Input
+									name="new-category"
+									value={this.state.newCategoryName}
+									placeholder="Add Category..."
+									onChange={this.onNewNameChange.bind(this)}/>
 							</TriggeredPopover>
 						</span> : null}
 				</div>

@@ -4,6 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 interface Props {
 	placeholder?: string,
 	value: string
+	name: string,
 	hoverable?: boolean
 }
 
@@ -49,6 +50,7 @@ export default class Input extends PureComponent<Props & Actions> {
 					<input
 						className="input"
 						placeholder={this.props.placeholder}
+						name={this.props.name}
 						value={this.props.value}
 						onChange={this.handleChange.bind(this)}
 						onBlur={this.onBlur.bind(this)}
