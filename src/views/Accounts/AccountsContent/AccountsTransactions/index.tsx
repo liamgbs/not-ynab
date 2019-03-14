@@ -33,7 +33,8 @@ class AccountsTransactions extends PureComponent<Props> {
 					payeeName: "No one",
 					categoryName: "To Be Budgeted",
 					date: moment().format("DD-MM-YYYY"),
-					amount: 0,
+					inflow: 0,
+					outflow: 0,
 					approved: false,
 					deleted: false
 				}} /> : null}
@@ -42,7 +43,7 @@ class AccountsTransactions extends PureComponent<Props> {
 					return trans.accountName === activeAccount.accountName
 							||
 						   activeAccount.accountName === "All Accounts" ? 
-						<AccountTransaction transaction={trans} /> : null
+						<AccountTransaction key={trans.id} transaction={trans} /> : null
 				})}
 			</div>
 		)

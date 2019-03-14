@@ -15,7 +15,8 @@ const defaultState: TransactionsState = {
 			payeeName: "doesnt exist",
 			categoryName: "Holiday",
 			date: "27/11/2018",
-			amount: 20.00,
+			inflow: 20.00,
+			outflow: 0,
 			approved: true,
 			deleted: false
 		}

@@ -1,12 +1,15 @@
 import './accounts-transaction.scss';
 
-import React, { PureComponent, ChangeEvent } from 'react';
+import React, { PureComponent, ChangeEvent, RefObject } from 'react';
 import { connect } from 'react-redux';
-import { Transaction } from '../../../../../types/transactions';
 import { Dispatch } from 'redux';
+import classNames from 'classnames';
+
+import { Transaction } from '../../../../../types/transactions';
 import Input from '../../../../../components/Input';
 import Button from '../../../../../components/Button';
 import { cancelNewTransactionAction } from '../../../../../actions/transactions';
+import { min } from 'moment';
 
 interface Props {
 	transaction: Transaction
@@ -20,6 +23,7 @@ interface Actions {
 }
 
 class AccountsTransaction extends PureComponent<Props & Actions> {
+	wrapperRef: any
 	state = {
 		editing: !!this.props.new,
 		transaction: { ...this.props.transaction }
@@ -39,8 +43,6 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 
 	}
 	render() {
-		console.log(this.state);
-
 		if (this.state.editing) {
 			return this.renderEditing();
 		} else {
@@ -50,7 +52,7 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 	renderStatic() {
 		const { transaction } = this.state;
 		return (
-			<div className="accounts-transaction">
+			<div onClick={this.onClick.bind(this)} className="accounts-transaction">
 				<div className="transaction-account">
 					{transaction.accountName}
 				</div>
@@ -63,20 +65,55 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 				<div className="transaction-category">
 					{transaction.categoryName}
 				</div>
-				<div className="transaction-outflow">
-					{transaction.amount}
-				</div>
 				<div className="transaction-inflow">
-					{transaction.amount /*TODO: properly calculate inflow and outflow, or in necessary change transaction to have these */}
+					{transaction.inflow}
+				</div>
+				<div className="transaction-outflow">
+					{transaction.outflow}
 				</div>
 			</div>
 		)
+	}
+	componentDidMount() {
+		document.addEventListener('mousedown', this.handleClickOutside.bind(this));
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('mousedown', this.handleClickOutside.bind(this));
+	}
+
+	setWrapperRef(node : RefObject<HTMLDivElement>) {
+		this.wrapperRef = node;
+	}
+
+	onClick() {
+		if (!this.state.editing) {
+			this.setState({
+				editing: true
+			})
+		}
+	}
+
+	handleClickOutside(event: Event) {
+		if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+			this.onCancel();
+		}
+	}
+
+	onCancel() {
+		if (this.props.new) {
+			return this.props.cancelNewTransaction();
+		}
+
+		this.setState({
+			editing: false
+		})
 	}
 
 	renderEditing() {
 		const { transaction } = this.state;
 		return (
-			<div className="accounts-transaction">
+			<div ref={this.setWrapperRef.bind(this)} className="accounts-transaction">
 				<div className="transaction-account">
 					<Input
 						name="accountName"
@@ -101,19 +138,19 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 						value={transaction.categoryName}
 						onChange={this.handleChange.bind(this)} />
 				</div>
-				<div className="transaction-category">
+				<div className="transaction-inflow">
 					<Input
 						name="amount"
-						value={transaction.amount.toString()}
+						value={transaction.inflow.toString()}
 						onChange={this.handleChange.bind(this)} />
 				</div>
-				<div className="transaction-category">
+				<div className="transaction-outflow">
 					<Input
 						name="amount"
-						value={transaction.amount.toString()}
+						value={transaction.outflow.toString()}
 						onChange={this.handleChange.bind(this)} />
 				</div>
-				<Button onClick={this.props.cancelNewTransaction}>Cancel</Button>
+				<Button onClick={this.onCancel.bind(this)}>Cancel</Button>
 				<Button>Save</Button>
 			</div>
 		)

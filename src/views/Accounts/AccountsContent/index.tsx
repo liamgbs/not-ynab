@@ -34,6 +34,9 @@ class AccountsContent extends PureComponent<Props & Actions> {
 }
 
 function mapStateToProps(state: RootState) {
+	return {
+		
+	}
 
 }
 

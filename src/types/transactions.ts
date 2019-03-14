@@ -4,7 +4,8 @@ export interface Transaction {
 	payeeName: string,
 	categoryName: string,
 	date: string,
-	amount: number,
+	inflow: number,
+	outflow: number,
 	approved: boolean,
 	deleted: boolean,
 }
