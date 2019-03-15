@@ -14,7 +14,7 @@ export default class ExpressionParser {
 	}
 
 	parse(expr: string) {
-		const regex = /(\d+\.\d+|\d+|-|\+|\/|\*|\(|\))/g;
+		const regex = /(-?\d+\.\d+|-?\d+|-|\+|\/|\*|\(|\))/g;
 		const tokens = expr.match(regex);
 
 		let operators: Array<string> = [];

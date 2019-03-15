@@ -7,6 +7,8 @@ import { RootState } from '../../reducers';
 import { AppView } from '../../types/app';
 import { Dispatch } from 'redux';
 import { changeViewAction } from '../../actions/app';
+import AccountPicker from './AccountPicker';
+import Button from '../../components/Button';
 
 interface Props {
 	view: AppView
@@ -38,8 +40,9 @@ class Sidebar extends PureComponent<Props & Actions> {
 						icon="A"
 						label="All Accounts"/>
 				</div>
-				<div className="accounts-controls">
-				
+				<AccountPicker />
+				<div className="add-account-button">
+					<Button filled small>Add Account</Button>
 				</div>
 			</div>
 		)

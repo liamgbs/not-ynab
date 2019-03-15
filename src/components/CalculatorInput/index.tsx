@@ -17,7 +17,9 @@ interface Actions {
 
 export default class CalculatorInput extends PureComponent<Props & Actions> {
 	onBlur() {
-		const calculatedValue = new ExpressionParser().evaluate(this.props.value);		
+		const calculatedValue = new ExpressionParser().evaluate(this.props.value);
+		console.log(calculatedValue);
+				
 		this.props.onBlur(calculatedValue)
 	}
 	render() {

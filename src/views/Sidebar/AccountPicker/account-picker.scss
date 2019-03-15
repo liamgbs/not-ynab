@@ -1,0 +1,31 @@
+@import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
+
+.account-picker {
+	border-top: solid $border-colour-light 1px;
+	border-bottom: solid $border-colour-light 1px;
+	padding: 1em 0;
+	font-size: 0.875em;
+
+	.account-picker-header {
+		padding: 0 .5em
+	}
+	.account-picker-accounts {
+		padding-top: 1em;
+		display: flex;
+		flex-direction: column;
+		.account-picker-account {
+			display: grid;
+			grid-template-columns: 4fr 1fr;
+			padding: 0.5em 1.5em;
+			@include active-select();
+			
+			span:last-child {
+				text-align: right;
+			}
+		}
+
+	}
+
+
+}

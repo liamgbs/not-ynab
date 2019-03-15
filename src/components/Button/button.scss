@@ -7,15 +7,16 @@
 	border-radius: 10%;
 	border-color: $border-colour-dark;
 	&.filled {
-		background: $primary-colour;
+		background: lighten($primary-colour, 10);
 		color: #fff;
-		border-color: $primary-colour;
+		border-color: lighten($primary-colour, 5);
+
 	}
 	&.small {
-		padding: 0px 4px;
-		border-radius: 20%;
+		padding: 2px 5px;
+		border-radius: 10px;
 	}
 	&.round {
-		border-radius: 50%;
+		border-radius: 1000px;
 	}
 }

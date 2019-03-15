@@ -6,6 +6,8 @@
 	flex-direction: row;
 	justify-content: space-evenly;
 	padding: .75em 0;
+	border-right: solid 1px $border-colour-light;
+
 	.to-be-budgeted {
 	}
 }

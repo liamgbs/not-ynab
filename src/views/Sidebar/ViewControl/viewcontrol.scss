@@ -1,14 +1,9 @@
 @import '../../../styles/constants.scss';
+@import '../../../styles/mixins.scss';
 
 .view-control {
-    cursor: pointer;
     display: grid;
-    &.active {
-        background: lighten($secondary-colour, 10);
-    }
-    &:hover {
-        background: lighten($secondary-colour, 15);
-    }
+	@include active-select();
 
     .icon, .label {
         padding-left: 0.5em;

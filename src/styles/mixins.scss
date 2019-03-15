@@ -1,4 +1,14 @@
 @mixin size($w, $h) {
-    width: $w;
-    height: $h;
+	width: $w;
+	height: $h;
+}
+
+@mixin active-select() {
+	&.active {
+        background: $menu-active-colour-dark;
+    }
+    &:hover {
+		background: $menu-selected-colour-dark;
+		cursor: pointer;
+    }
 }
