@@ -16,7 +16,7 @@ const defaultState = {
 			type: AccountType.Current,
 			onBudget: true,
 			closed: false,
-			balance: 200,
+			balance: 500,
 			deleted: false,
 		},
 		{
@@ -25,6 +25,14 @@ const defaultState = {
 			onBudget: true,
 			closed: false,
 			balance: 200,
+			deleted: false,
+		},
+		{
+			accountName: "Test Account 2",
+			type: AccountType.Current,
+			onBudget: true,
+			closed: false,
+			balance: 300,
 			deleted: false,
 		}
 	],

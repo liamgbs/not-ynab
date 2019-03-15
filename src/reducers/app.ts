@@ -12,7 +12,7 @@ const defaultState = {
 
 export default (state: AppState = defaultState, action: AnyAction) => {
 	switch (action.type) {
-		case AppActionTypes.CHANGE_VIEW:			
+		case AppActionTypes.CHANGE_VIEW:
 			return {...state, view: action.payload}
 	}
     return state;

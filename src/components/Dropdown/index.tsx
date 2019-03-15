@@ -1,25 +1,27 @@
 import './drop-down.scss';
-import React, { PureComponent, ChangeEvent } from 'react'
+import React, { PureComponent } from 'react'
 
 interface Props {
 	options: string[],
 	value: string,
+	name?: string
 }
 
 interface Actions {
 	onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-export default class Drowdown extends PureComponent<Props & Actions> {
+export default class Dropdown extends PureComponent<Props & Actions> {
 	render() {
-		const { options } = this.props;
-
+		const { options, value, name } = this.props;				
 		return (
-			<select onChange={this.props.onChange} className="drop-down">
+			<select name={name} value={value} onChange={this.props.onChange} className="drop-down">
 				{options.map(option => {
-					<option value={option.toLowerCase()} key={option}>
-						{option}
-					</option>
+					return (
+						<option value={option} key={option}>
+							{option}
+						</option>
+					)
 				})}
 			</select>
 		)

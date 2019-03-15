@@ -27,3 +27,7 @@ export enum TransactionActionTypes {
 	CANCEL_NEW_TRANSACTION = "CANCEL_NEW_TRANSACTION",
 	EDIT_TRANSACTION = "EDIT_TRANSACTION",
 }
+
+export enum PayeesActionTypes {
+	ADD_PAYEE,
+}

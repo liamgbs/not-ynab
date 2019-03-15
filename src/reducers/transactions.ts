@@ -12,7 +12,7 @@ const defaultState: TransactionsState = {
 		{
 			id: "12345",
 			accountName: "Test Account",
-			payeeName: "doesnt exist",
+			payeeName: "Jane",
 			categoryName: "Holiday",
 			date: "27/11/2018",
 			inflow: 20.00,
