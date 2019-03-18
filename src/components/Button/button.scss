@@ -4,7 +4,7 @@
 	background: inherit;
 	cursor: pointer;
 	padding: 5px 10px;
-	border-radius: 10%;
+	border-radius: 5px;
 	border-color: $border-colour-dark;
 	&.filled {
 		background: lighten($primary-colour, 10);

@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { Month } from "../types/categories";
 import { BudgetActionTypes } from "../actions/types";
 import { newMonthHelper } from "./helpers";
+import moment from 'moment';
 
 export interface BudgetState {
 	months: Month[],
@@ -11,7 +12,7 @@ export interface BudgetState {
 const defaultState: BudgetState = {
 	months: [
 		{
-			monthName: "Feb2019",
+			monthName: "Mar2019",
 			toBeBudgeted: 0.0,
 			categoryGroups: [
 				{
@@ -45,7 +46,7 @@ const defaultState: BudgetState = {
 			note: "test month"
 		},
 		{
-			monthName: "Mar2019",
+			monthName: "Apr2019",
 			toBeBudgeted: 0.0,
 			categoryGroups: [
 				{
@@ -145,6 +146,35 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 					})
 				],
 			};
+		case BudgetActionTypes.ADD_TO_ACTIVITY:
+			const _month = moment(payload.date, "DD/MM/YYYY").format("MMMYYYY");
+			console.log(_month);
+			console.log(payload);
+			
+			
+			return {
+				...state,
+				months: [...state.months.map(month => {
+					if (month.monthName !== _month) {
+						return { ...month }
+					}
+
+					return {
+						...month,
+						toBeBudgeted: payload.categoryName === "To Be Budgeted" ? month.toBeBudgeted + payload.value : month.toBeBudgeted,
+						categories: [...month.categories.map(cat => {
+							if (cat.categoryName !== payload.categoryName) {
+								return { ...cat }
+							}
+							return {
+								...cat,
+								activity: cat.activity + payload.value,
+								balance: cat.balance + payload.value
+							}
+						})]
+					}
+				})]
+			}
 	}
 	return { ...state };
 }

@@ -1,5 +1,14 @@
+@import '../../styles/constants.scss';
 input {
 	box-shadow: none;
 	height: 100%;
 	width: 100%;
+	outline: solid $border-colour-dark 2px;
+	padding: 4px 2px;
+	border: none;
+	
+	&:focus {
+		outline: solid $border-colour-light 2px;
+		padding: 4px 2px;
+	}
 }

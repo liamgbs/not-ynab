@@ -47,6 +47,21 @@ export default function (state: AccountsState = defaultState, action: AnyAction)
 					newAccountHelper(payload.accountName, payload.accountType, payload.startingBalance)
 				]
 			}
+		case AccountActionTypes.ADD_TO_BALANCE:
+			return {
+				...state,
+				accounts: [
+					...state.accounts.map(account => {
+						if (payload.accountName === account.accountName) {
+							return {
+								...account,
+								balance: account.balance + payload.amount
+							}
+						}
+						return { ...account }
+					})
+				]
+			}
 	}
 
 	return state;

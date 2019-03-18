@@ -23,3 +23,13 @@ export function setActiveAccountAction(accountIndex: number) {
 		}
 	}
 }
+
+export function addToBalanceAction(accountName: string, amount: number) {
+	return {
+		type: AccountActionTypes.ADD_TO_BALANCE,
+		payload: {
+			accountName,
+			amount
+		}
+	}
+}

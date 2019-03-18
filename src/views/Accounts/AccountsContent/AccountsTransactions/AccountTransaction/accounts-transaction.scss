@@ -4,6 +4,8 @@
 .accounts-transaction {
 	display: grid;
 	grid-template-columns: $account-table-widths;
+	grid-gap: 1%;
+
 	padding: .5em;
 	border-top: 1px solid $border-colour-dark;
 	font-size: $font-small;
