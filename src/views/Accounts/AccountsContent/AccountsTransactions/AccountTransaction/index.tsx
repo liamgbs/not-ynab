@@ -41,8 +41,6 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 		})
 	}
 	handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-		console.log(event.target.name);
-
 		this.setState({
 			transaction: {
 				...this.state.transaction,

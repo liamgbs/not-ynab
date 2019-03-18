@@ -5,6 +5,7 @@ import classNames from 'classnames';
 interface Props {
 	value: number,
 	label?: string
+	large?: boolean
 }
 
 export default class ValueIndicator extends PureComponent<Props> {
@@ -12,7 +13,8 @@ export default class ValueIndicator extends PureComponent<Props> {
 		const CSSClasses = classNames({
 			"value-indicator": true,
 			"positive": this.props.value >= 0,
-			"negative": this.props.value < 0
+			"negative": this.props.value < 0,
+			"large": !!this.props.large
 		});
 		return (
 			<div className={CSSClasses}>

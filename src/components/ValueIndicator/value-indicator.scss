@@ -21,4 +21,7 @@
 	&.negative {
 		background: $negative-colour;
 	}
+	&.large > .value-indicator-value {
+		font-size: $font-large
+	}
 }

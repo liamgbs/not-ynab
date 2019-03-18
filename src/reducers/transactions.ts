@@ -28,8 +28,6 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 	const { payload } = action;
 	switch (action.type) {
 		case TransactionActionTypes.ADD_TRANSACTION:
-			console.log(payload);
-
 			return {
 				...state,
 				transactions: [

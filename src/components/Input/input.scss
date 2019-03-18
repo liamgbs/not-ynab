@@ -6,7 +6,7 @@ input {
 	outline: solid $border-colour-dark 2px;
 	padding: 4px 2px;
 	border: none;
-	
+	font-family: inherit;
 	&:focus {
 		outline: solid $border-colour-light 2px;
 		padding: 4px 2px;

@@ -14,6 +14,7 @@ class MonthSummary extends PureComponent<Props> {
 			<div className="month-summary">
 				<div className="to-be-budgeted">
 					<ValueIndicator
+						large
 						value={this.props.toBeBudgeted}
 						label="To Be Budgeted"
 					/>

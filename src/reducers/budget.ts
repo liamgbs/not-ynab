@@ -148,10 +148,6 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 			};
 		case BudgetActionTypes.ADD_TO_ACTIVITY:
 			const _month = moment(payload.date, "DD/MM/YYYY").format("MMMYYYY");
-			console.log(_month);
-			console.log(payload);
-			
-			
 			return {
 				...state,
 				months: [...state.months.map(month => {
