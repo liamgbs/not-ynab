@@ -9,6 +9,7 @@ import { Dispatch } from 'redux';
 import { changeViewAction } from '../../actions/app';
 import AccountPicker from './AccountPicker';
 import Button from '../../components/Button';
+import { setActiveAccountAction } from '../../actions/accounts';
 
 interface Props {
 	view: AppView
@@ -16,6 +17,8 @@ interface Props {
 
 interface Actions {
 	changeView: (view: AppView) => void
+	setActiveAccount: (accountIndex: number) => void
+
 }
 
 class Sidebar extends PureComponent<Props & Actions> {
@@ -35,7 +38,10 @@ class Sidebar extends PureComponent<Props & Actions> {
 						icon="R"
 						label="Reports"/>
 					<ViewControl
-						onClick={() => this.props.changeView(AppView.Accounts)}
+						onClick={() => {
+							this.props.changeView(AppView.Accounts);
+							this.props.setActiveAccount(-1);
+						}}
 						active={this.props.view === AppView.Accounts}
 						icon="A"
 						label="All Accounts"/>
@@ -57,7 +63,8 @@ function mapStateToProps(state: RootState) {
 
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {
-		changeView: (view: AppView) => dispatch(changeViewAction(view))
+		changeView: (view: AppView) => dispatch(changeViewAction(view)),
+		setActiveAccount: (accountIndex: number) => dispatch(setActiveAccountAction(accountIndex))
 	}
 }
 

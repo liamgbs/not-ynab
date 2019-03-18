@@ -3,12 +3,18 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
 import { RootState } from '../../../reducers';
 import { Account } from '../../../types/accounts';
+import { Dispatch } from 'redux';
+import { setActiveAccountAction } from '../../../actions/accounts';
 
 interface Props {
 	accounts: Account[]
 }
 
-class AccountPicker extends PureComponent<Props> {
+interface Actions {
+	setActiveAccount: (accountIndex: number) => void
+}
+
+class AccountPicker extends PureComponent<Props & Actions> {
 	render() {
 		const { accounts } = this.props;
 
@@ -18,9 +24,9 @@ class AccountPicker extends PureComponent<Props> {
 					BUDGET
 				</div>
 				<div className="account-picker-accounts">
-					{accounts.filter(account => account.onBudget).map(account => {
+					{accounts.filter(account => account.onBudget).map((account, i) => {
 						return (
-							<div key={account.accountName} className="account-picker-account">
+							<div onClick={() => this.props.setActiveAccount(i)} key={account.accountName} className="account-picker-account">
 								<span>{account.accountName}</span>
 								<span>{account.balance}</span>
 							</div>
@@ -39,4 +45,10 @@ function mapStateToProps(state: RootState) {
 	}
 }
 
-export default connect(mapStateToProps)(AccountPicker)
+function mapDispatchToProps(dispatch: Dispatch) {
+	return {
+		setActiveAccount: (accountIndex: number) => dispatch(setActiveAccountAction(accountIndex))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountPicker)

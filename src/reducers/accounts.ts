@@ -12,14 +12,6 @@ export interface AccountsState {
 const defaultState = {
 	accounts: [
 		{
-			accountName: "All Accounts",
-			type: AccountType.Current,
-			onBudget: true,
-			closed: false,
-			balance: 500,
-			deleted: false,
-		},
-		{
 			accountName: "Test Account",
 			type: AccountType.Current,
 			onBudget: true,
@@ -36,12 +28,17 @@ const defaultState = {
 			deleted: false,
 		}
 	],
-	activeAccount: 0
+	activeAccount: -1
 }
 
 export default function (state: AccountsState = defaultState, action: AnyAction) {
 	const { payload } = action;
 	switch (action.type) {
+		case AccountActionTypes.SET_ACTIVE_ACCOUNT:
+			return {
+				...state,
+				activeAccount: payload.accountIndex
+			}
 		case AccountActionTypes.CREATE_ACCOUNT:
 			return {
 				...state,

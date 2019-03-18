@@ -18,6 +18,7 @@ export enum BudgetActionTypes {
 }
 
 export enum AccountActionTypes {
+	SET_ACTIVE_ACCOUNT,
 	CREATE_ACCOUNT = "CREATE_ACCOUNT",
 }
 

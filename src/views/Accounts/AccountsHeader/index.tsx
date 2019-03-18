@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
 import { RootState } from '../../../reducers';
 import { Account } from '../../../types/accounts';
+import { getAllAccounts } from '../../../utils/helpers';
 
 interface Props {
 	account: Account,
@@ -25,7 +26,7 @@ class AccountsHeader extends PureComponent<Props> {
 
 function mapStateToProps(state: RootState) {
 	return {
-		account: state.accounts.accounts[state.accounts.activeAccount],
+		account: state.accounts.activeAccount === -1 ? getAllAccounts(state.accounts.accounts) : state.accounts.accounts[state.accounts.activeAccount],
 	}
 }
 

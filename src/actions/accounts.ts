@@ -14,3 +14,12 @@ export function addAccountAction(
 		}
 	}
 }
+
+export function setActiveAccountAction(accountIndex: number) {
+	return {
+		type: AccountActionTypes.SET_ACTIVE_ACCOUNT,
+		payload: {
+			accountIndex
+		}
+	}
+}

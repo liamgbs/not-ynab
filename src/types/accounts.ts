@@ -13,6 +13,7 @@ export interface Payee {
 }
 
 export enum AccountType {
+	All,
 	Current,
 }
 

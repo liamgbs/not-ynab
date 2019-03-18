@@ -7,6 +7,7 @@ import AccountTransaction from './AccountTransaction';
 import { Account } from '../../../../types/accounts';
 
 import moment from 'moment';
+import { getAllAccounts } from '../../../../utils/helpers';
 
 interface Props {
 	activeAccount: Account,
@@ -52,7 +53,7 @@ class AccountsTransactions extends PureComponent<Props> {
 
 function mapStateToProps(state: RootState) {
 	return {
-		activeAccount: state.accounts.accounts[state.accounts.activeAccount],
+		activeAccount: state.accounts.activeAccount === -1 ? getAllAccounts(state.accounts.accounts) : state.accounts.accounts[state.accounts.activeAccount],
 		newTransaction: state.transactions.newTransaction,
 		transactions: state.transactions.transactions
 	}
