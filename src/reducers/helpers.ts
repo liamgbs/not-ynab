@@ -1,7 +1,6 @@
 import { Month } from "../types/categories";
 import moment from 'moment';
 import { Account, AccountType } from "../types/accounts";
-import { Transaction } from "../types/transactions";
 
 export function newMonthHelper(lastMonth: Month) : Month {
 	return {

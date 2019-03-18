@@ -1,19 +1,20 @@
 import { TransactionActionTypes } from "./types";
+import { Transaction } from "../types/transactions";
 
-export function addTransactionAction(
-	accountName: string,
-	payeeName: string,
-	categoryName: string,
-	date: string,
-	amount: number) {
+export function addTransactionAction(transaction : Transaction) {
 	return {
 		type: TransactionActionTypes.ADD_TRANSACTION,
 		payload: {
-			accountName,
-			payeeName,
-			categoryName,
-			date,
-			amount
+			...transaction
+		}
+	}
+}
+
+export function saveEditedTransactionAction(transaction: Transaction) {
+	return {
+		type: TransactionActionTypes.EDIT_TRANSACTION,
+		payload: {
+			...transaction
 		}
 	}
 }

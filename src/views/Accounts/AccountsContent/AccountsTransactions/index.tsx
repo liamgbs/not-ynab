@@ -28,12 +28,12 @@ class AccountsTransactions extends PureComponent<Props> {
 					<div>INFLOW</div>
 					<div>OUTFLOW</div>
 				</div>
-				{newTransaction ? <AccountTransaction new transaction={{
+				{newTransaction ? <AccountTransaction new transaction={{ // TODO: make new transaction fields hold exisiting values
 					id: "123456",
 					accountName: activeAccount.accountName,
 					payeeName: "No one",
 					categoryName: "To Be Budgeted",
-					date: moment().format("DD-MM-YYYY"),
+					date: moment().format("DD/MM/YYYY"),
 					inflow: 0,
 					outflow: 0,
 					approved: false,

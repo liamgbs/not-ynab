@@ -9,7 +9,7 @@ import { Transaction } from '../../../../../types/transactions';
 import Input from '../../../../../components/Input';
 import Dropdown from '../../../../../components/Dropdown';
 import Button from '../../../../../components/Button';
-import { cancelNewTransactionAction } from '../../../../../actions/transactions';
+import { cancelNewTransactionAction, addTransactionAction, saveEditedTransactionAction } from '../../../../../actions/transactions';
 import { min } from 'moment';
 import { RootState } from '../../../../../reducers';
 import { Account, Payee } from '../../../../../types/accounts';
@@ -24,8 +24,8 @@ interface Props {
 }
 
 interface Actions {
-	saveEditedTransaction: () => void,
-	addNewTransaction: () => void,
+	saveEditedTransaction: (transaction: Transaction) => void,
+	addNewTransaction: (transaction: Transaction) => void,
 	cancelNewTransaction: () => void
 }
 
@@ -35,14 +35,14 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 		editing: !!this.props.new,
 		transaction: { ...this.props.transaction }
 	};
-	// componentWillReceiveProps(props: Props) {
-	// 	this.setState({
-	// 		transaction: {...props.transaction}
-	// 	})
-	// }
+	componentWillReceiveProps(props: Props) {
+		this.setState({
+			transaction: { ...props.transaction }
+		})
+	}
 	handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
 		console.log(event.target.name);
-		
+
 		this.setState({
 			transaction: {
 				...this.state.transaction,
@@ -50,13 +50,6 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 			}
 		})
 
-	}
-	render() {
-		if (this.state.editing) {
-			return this.renderEditing();
-		} else {
-			return this.renderStatic();
-		}
 	}
 	renderStatic() {
 		const { transaction } = this.state;
@@ -91,7 +84,7 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 		document.removeEventListener('mousedown', this.handleClickOutside.bind(this));
 	}
 
-	setWrapperRef(node : HTMLDivElement) {
+	setWrapperRef(node: HTMLDivElement) {
 		this.wrapperRef = node;
 	}
 
@@ -116,10 +109,19 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 
 		this.setState({
 			editing: false,
-			transaction: {...this.props.transaction}
+			transaction: { ...this.props.transaction }
 		})
 	}
 
+	onSave() {
+		if (this.props.new) {
+			this.props.addNewTransaction(this.state.transaction)
+		} else {
+			this.props.saveEditedTransaction(this.state.transaction)
+		}
+
+		this.onCancel();
+	}
 
 	renderEditing() {
 		const { transaction } = this.state;
@@ -130,10 +132,10 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 						name="accountName"
 						value={transaction.accountName}
 						onChange={this.handleChange.bind(this)}
-						options={this.props.accounts.slice(1).map(acc => acc.accountName)} />
+						options={this.props.accounts.map(acc => acc.accountName)} />
 				</div>
 				<div className="transaction-date">
-					<Input // TODO: make these into dropdowns and datepickers etc.
+					<Input // TODO: date picker
 						name="date"
 						value={transaction.date}
 						onChange={this.handleChange.bind(this)} />
@@ -143,14 +145,14 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 						name="payeeName"
 						value={transaction.payeeName}
 						onChange={this.handleChange.bind(this)}
-						options={this.props.payees.filter(payee=> !payee.deleted).map(payee => payee.payeeName)} />
+						options={this.props.payees.filter(payee => !payee.deleted).map(payee => payee.payeeName)} />
 				</div>
 				<div className="transaction-category">
 					<Dropdown
 						name="categoryName"
 						value={transaction.categoryName}
 						onChange={this.handleChange.bind(this)}
-						options={this.props.categories.map(cat => cat.categoryName)}/>
+						options={this.props.categories.map(cat => cat.categoryName).concat(["To Be Budgeted"])} />
 				</div>
 				<div className="transaction-inflow">
 					<Input
@@ -165,16 +167,23 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 						onChange={this.handleChange.bind(this)} />
 				</div>
 				<Button onClick={this.onCancel.bind(this)}>Cancel</Button>
-				<Button>Save</Button>
+				<Button onClick={this.onSave.bind(this)}>Save</Button>
 			</div>
 		)
+	}
+	render() {
+		if (this.state.editing) {
+			return this.renderEditing();
+		} else {
+			return this.renderStatic();
+		}
 	}
 }
 
 function mapPropsToDispatch(dispatch: Dispatch) {
 	return {
-		saveEditedTransaction: () => { },
-		addNewTransaction: () => { },
+		addNewTransaction: (transaction: Transaction) => dispatch(addTransactionAction(transaction)),
+		saveEditedTransaction: (transaction: Transaction) => dispatch(saveEditedTransactionAction(transaction)),
 		cancelNewTransaction: () => dispatch(cancelNewTransactionAction())
 	}
 }

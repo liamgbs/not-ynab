@@ -28,17 +28,20 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 	const { payload } = action;
 	switch (action.type) {
 		case TransactionActionTypes.ADD_TRANSACTION:
+			console.log(payload);
+			
 			return {
 				...state,
 				transactions: [
 					...state.transactions,
 					{
-						id: "12345",
+						id: Math.random().toString(),
 						accountName: payload.accountName,
 						payeeName: payload.payeeName,
 						categoryName: payload.categoryName,
 						date: payload.date,
-						amount: payload.amount,
+						inflow: payload.inflow,
+						outflow: payload.outflow,
 						approved: true,
 						deleted: false
 					}
@@ -46,16 +49,25 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 				newTransaction: false
 			}
 		case TransactionActionTypes.EDIT_TRANSACTION:
+			console.log(payload.id, "dsads");
+			
 			return {
 				...state,
 				transactions: [
 					...state.transactions.map(trans => {
+						console.log(trans.id);
+						
 						if (trans.id !== payload.id) {
 							return {...trans}
 						}
 						return {
 							...trans,
-							// TODO: new transaction information
+							accountName: payload.accountName,
+							payeeName: payload.payeeName,
+							categoryName: payload.categoryName,
+							date: payload.date,
+							inflow: payload.inflow,
+							outflow: payload.outflow
 						}
 					})
 				]
