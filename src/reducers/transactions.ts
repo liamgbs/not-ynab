@@ -44,7 +44,7 @@ const defaultState: TransactionsState = {
 			deleted: false
 		}
 	],
-	selectedTransactions: ["13579"],
+	selectedTransactions: [],
 	newTransaction: false
 }
 

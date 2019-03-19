@@ -44,7 +44,7 @@ class Sidebar extends PureComponent<Props & Actions> {
 						}}
 						active={this.props.view === AppView.Accounts}
 						icon="A"
-						label="All Accounts"/>
+						label="Accounts"/>
 				</div>
 				<AccountPicker />
 				<div className="add-account-button">

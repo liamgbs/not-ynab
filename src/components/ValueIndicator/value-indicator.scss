@@ -9,7 +9,7 @@
 
 	.value-indicator-value {
 		letter-spacing: 1px;
-		font-weight: 300;
+		color: $tertiary-colour;
 	}
 	.value-indicator-label {
 		font-size: .75em;
@@ -21,7 +21,11 @@
 	&.negative {
 		background: $negative-colour;
 	}
+	&.large {
+		padding: .5em 1em;
+	}
 	&.large > .value-indicator-value {
-		font-size: $font-large
+		font-size: $font-large;
+		font-weight: 300;
 	}
 }

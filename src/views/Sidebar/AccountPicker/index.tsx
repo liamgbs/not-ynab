@@ -7,9 +7,12 @@ import { Dispatch } from 'redux';
 import { setActiveAccountAction } from '../../../actions/accounts';
 import { AppView } from '../../../types/app';
 import { changeViewAction } from '../../../actions/app';
+import classNames from 'classnames';
 
 interface Props {
-	accounts: Account[]
+	accounts: Account[],
+	activeAccount: number,
+	view: AppView
 }
 
 interface Actions {
@@ -23,7 +26,7 @@ class AccountPicker extends PureComponent<Props & Actions> {
 		this.props.setAppView(AppView.Accounts);
 	}
 	render() {
-		const { accounts } = this.props;
+		const { accounts, activeAccount, view } = this.props;
 
 		return (
 			<div className="account-picker">
@@ -32,8 +35,12 @@ class AccountPicker extends PureComponent<Props & Actions> {
 				</div>
 				<div className="account-picker-accounts">
 					{accounts.filter(account => account.onBudget).map((account, i) => {
+						const CSSClasses = classNames({
+							"account-picker-account": true,
+							"active": activeAccount === i && view === AppView.Accounts
+						})
 						return (
-							<div onClick={this.setAccount.bind(this, i)} key={account.accountName} className="account-picker-account">
+							<div onClick={this.setAccount.bind(this, i)} key={account.accountName} className={CSSClasses}>
 								<span>{account.accountName}</span>
 								<span>{account.balance}</span>
 							</div>
@@ -48,7 +55,9 @@ class AccountPicker extends PureComponent<Props & Actions> {
 
 function mapStateToProps(state: RootState) {
 	return {
-		accounts: state.accounts.accounts
+		accounts: state.accounts.accounts,
+		activeAccount: state.accounts.activeAccount,
+		view: state.app.view
 	}
 }
 
