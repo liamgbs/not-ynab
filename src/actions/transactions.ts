@@ -31,3 +31,21 @@ export function cancelNewTransactionAction() {
 		type: TransactionActionTypes.CANCEL_NEW_TRANSACTION
 	}
 }
+
+export function selectTransactionAction(transactionID: string) {
+	return {
+		type: TransactionActionTypes.SELECT_TRANSACTION,
+		payload: {
+			transactionID
+		}
+	}
+}
+
+export function unselectTransactionAction(transactionID: string) {
+	return {
+		type: TransactionActionTypes.UNSELECT_TRANSACTION,
+		payload: {
+			transactionID
+		}
+	}
+}

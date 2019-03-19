@@ -4,6 +4,7 @@ import { TransactionActionTypes } from "../actions/types";
 
 export interface TransactionsState {
 	transactions: Transaction[],
+	selectedTransactions: string[],
 	newTransaction: boolean
 }
 
@@ -19,8 +20,31 @@ const defaultState: TransactionsState = {
 			outflow: 0,
 			approved: true,
 			deleted: false
+		},
+		{
+			id: "54321",
+			accountName: "Test Account",
+			payeeName: "Jane",
+			categoryName: "Holiday",
+			date: "27/02/2019",
+			inflow: 200.00,
+			outflow: 0,
+			approved: true,
+			deleted: false
+		},
+		{
+			id: "13579",
+			accountName: "Test Account 2",
+			payeeName: "Bob",
+			categoryName: "Holiday",
+			date: "28/02/2019",
+			inflow: 25.00,
+			outflow: 10,
+			approved: true,
+			deleted: false
 		}
 	],
+	selectedTransactions: ["13579"],
 	newTransaction: false
 }
 
@@ -76,6 +100,21 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 			return {
 				...state,
 				newTransaction: false
+			}
+		case TransactionActionTypes.SELECT_TRANSACTION:
+			return {
+				...state,
+				selectedTransactions: [
+					...state.selectedTransactions,
+					payload.transactionID
+				]
+			}
+		case TransactionActionTypes.UNSELECT_TRANSACTION:
+			return {
+				...state,
+				selectedTransactions: [
+					...state.selectedTransactions.filter(st => st !== payload.transactionID)
+				]
 			}
 	}
 

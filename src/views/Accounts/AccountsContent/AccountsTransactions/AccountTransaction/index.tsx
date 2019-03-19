@@ -1,16 +1,16 @@
 import './accounts-transaction.scss';
 
-import React, { PureComponent, ChangeEvent, RefObject, MouseEvent } from 'react';
+import React, { PureComponent, ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+
 import classNames from 'classnames';
 
 import { Transaction } from '../../../../../types/transactions';
 import Input from '../../../../../components/Input';
 import Dropdown from '../../../../../components/Dropdown';
 import Button from '../../../../../components/Button';
-import { cancelNewTransactionAction, addTransactionAction, saveEditedTransactionAction } from '../../../../../actions/transactions';
-import { min } from 'moment';
+import { cancelNewTransactionAction, addTransactionAction, saveEditedTransactionAction, selectTransactionAction, unselectTransactionAction } from '../../../../../actions/transactions';
 import { RootState } from '../../../../../reducers';
 import { Account, Payee } from '../../../../../types/accounts';
 import { Category } from '../../../../../types/categories';
@@ -20,25 +20,30 @@ interface Props {
 	new?: boolean,
 	accounts: Account[],
 	categories: Category[],
-	payees: Payee[]
+	payees: Payee[],
+	selected?: boolean
 }
 
 interface Actions {
 	saveEditedTransaction: (transaction: Transaction) => void,
 	addNewTransaction: (transaction: Transaction) => void,
-	cancelNewTransaction: () => void
+	cancelNewTransaction: () => void,
+	selectTransaction: (transactionID: string) => void,
+	unselectTransaction: (transactionID: string) => void,
 }
 
 class AccountsTransaction extends PureComponent<Props & Actions> {
 	wrapperRef: HTMLDivElement | undefined
 	state = {
 		editing: !!this.props.new,
+		selected: this.props.new || !!this.props.selected,
 		transaction: { ...this.props.transaction }
 	};
 	componentWillReceiveProps(props: Props) {
 		this.setState({
-			transaction: { ...props.transaction }
-		})
+			transaction: { ...props.transaction },
+			selected: !!props.selected
+		});
 	}
 	handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
 		this.setState({
@@ -46,13 +51,17 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 				...this.state.transaction,
 				[event.target.name]: event.target.value
 			}
-		})
+		});
 
 	}
 	renderStatic() {
-		const { transaction } = this.state;
+		const { transaction, selected } = this.state;
+		const CSSClasses = classNames({
+			"accounts-transaction": true,
+			"selected": !!selected
+		})
 		return (
-			<div onClick={this.onClick.bind(this)} className="accounts-transaction">
+			<div onClick={this.onClick.bind(this)} onDoubleClick={this.onDoubleClick.bind(this)} className={CSSClasses}>
 				<div className="transaction-account">
 					{transaction.accountName}
 				</div>
@@ -86,12 +95,24 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 		this.wrapperRef = node;
 	}
 
-	onClick() {
+	onDoubleClick() {
 		if (!this.state.editing) {
 			this.setState({
 				editing: true
 			})
 		}
+	}
+
+	onClick() {
+		if(this.state.selected) {
+			this.props.unselectTransaction(this.state.transaction.id)
+		} else {
+			this.props.selectTransaction(this.state.transaction.id)
+		}
+
+		this.setState({
+			selected: !this.state.selected
+		})
 	}
 
 	handleClickOutside(event: Event | any) {
@@ -178,11 +199,13 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 	}
 }
 
-function mapPropsToDispatch(dispatch: Dispatch) {
+function mapDispatchToProps(dispatch: Dispatch) {
 	return {
 		addNewTransaction: (transaction: Transaction) => dispatch(addTransactionAction(transaction)),
 		saveEditedTransaction: (transaction: Transaction) => dispatch(saveEditedTransactionAction(transaction)),
-		cancelNewTransaction: () => dispatch(cancelNewTransactionAction())
+		cancelNewTransaction: () => dispatch(cancelNewTransactionAction()),
+		selectTransaction: (transactionID: string) => dispatch(selectTransactionAction(transactionID)),
+		unselectTransaction: (transactionID: string) => dispatch(unselectTransactionAction(transactionID)),
 	}
 }
 
@@ -194,4 +217,4 @@ function mapStateToProps(state: RootState) {
 	}
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch)(AccountsTransaction);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountsTransaction);
