@@ -1,6 +1,6 @@
 .budget {
 	display: grid;
-	grid-template: "header" 1fr
+	grid-template: "header" auto
 					"content" 9fr;
 	height: 100%;
 }
