@@ -10,6 +10,8 @@ import { changeViewAction } from '../../actions/app';
 import AccountPicker from './AccountPicker';
 import Button from '../../components/Button';
 import { setActiveAccountAction } from '../../actions/accounts';
+import TriggeredModal from '../../components/TriggeredModal';
+import Modal from '../../components/Modal';
 
 interface Props {
 	view: AppView
@@ -48,7 +50,10 @@ class Sidebar extends PureComponent<Props & Actions> {
 				</div>
 				<AccountPicker />
 				<div className="add-account-button">
-					<Button filled small>Add Account</Button>
+					<TriggeredModal
+						trigger={<Button filled small>Add Account</Button>}>
+
+					</TriggeredModal>
 				</div>
 			</div>
 		)

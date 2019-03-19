@@ -1,0 +1,8 @@
+@import '../../styles/constants.scss';
+
+.modal-inner {
+	position: absolute;
+	margin: auto;
+	padding: 1em;
+	background: $tertiary-colour;
+}
