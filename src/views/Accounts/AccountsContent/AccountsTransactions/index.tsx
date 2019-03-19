@@ -42,7 +42,7 @@ class AccountsTransactions extends PureComponent<Props> {
 				}} /> : null}
 
 				{transactions.map(trans => {
-					if (trans.accountName === activeAccount.accountName || activeAccount.accountName === "All Accounts") {
+					if (!trans.deleted && (trans.accountName === activeAccount.accountName || activeAccount.accountName === "All Accounts")) {
 						return (
 							<AccountTransaction
 								selected={selectedTransactions.includes(trans.id)}

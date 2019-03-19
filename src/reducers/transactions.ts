@@ -116,6 +116,25 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 					...state.selectedTransactions.filter(st => st !== payload.transactionID)
 				]
 			}
+		case TransactionActionTypes.CLEAR_SELECTED:
+			return {
+				...state,
+				selectedTransactions: []
+			}
+		case TransactionActionTypes.DELETE_TRANSACTION:
+			return {
+				...state,
+				transactions: [...state.transactions.map(trans => {
+					if (state.selectedTransactions.includes(trans.id)) {
+						return {
+							...trans,
+							deleted: true
+						}
+					}
+					return { ...trans }
+				})],
+				selectedTransactions: []
+			}
 	}
 
 	return state;

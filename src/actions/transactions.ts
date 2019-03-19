@@ -49,3 +49,16 @@ export function unselectTransactionAction(transactionID: string) {
 		}
 	}
 }
+
+export function clearSelectedAction() {
+	return {
+		type: TransactionActionTypes.CLEAR_SELECTED
+	}
+}
+
+export function deleteTransactionAction() {
+	return {
+		type: TransactionActionTypes.DELETE_TRANSACTION
+		// No payload as transaction ids to delelet are already in state as selectedTransactions
+	}
+}

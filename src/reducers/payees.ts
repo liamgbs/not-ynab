@@ -34,7 +34,7 @@ export default (state: PayeesState = defaultState, action: AnyAction) => {
 			return {
 				...state,
 				payees: [
-					...state.payees.slice(),
+					...state.payees,
 					{ payeeName: payload.payeeName, deleted: false}
 				]
 			}
