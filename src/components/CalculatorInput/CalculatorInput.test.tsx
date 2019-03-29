@@ -59,15 +59,15 @@ describe("CalculatorInput -- Calculations", () => {
 		expect(calculatedVal).toEqual(1.5);
 	})
 
-	// it("Should equal 0.3", () => {
-	// 	toCalculate = "1-0.7";
-	// 	component = mount(<CalculatorInput value={toCalculate} name="test" onBlur={blurFunc} onChange={changeFunc}/>)
+	it("Should equal 0.3", () => {
+		toCalculate = "1-0.7";
+		component = mount(<CalculatorInput value={toCalculate} name="test" onBlur={blurFunc} onChange={changeFunc}/>)
 
-	// 	component.simulate('focus');
-	// 	component.simulate('blur')
+		component.simulate('focus');
+		component.simulate('blur')
 		
-	// 	expect(calculatedVal).toEqual(0.3);
-	// })
+		expect(calculatedVal).toEqual(0.3);
+	})
 })
 
 
