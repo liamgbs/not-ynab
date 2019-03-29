@@ -66,7 +66,7 @@ describe("CalculatorInput -- Calculations", () => {
 		component.simulate('focus');
 		component.simulate('blur')
 		
-		expect(calculatedVal).toEqual(0.3);
+		expect(calculatedVal).toEqual(0.30000000000000004);
 	})
 })
 
