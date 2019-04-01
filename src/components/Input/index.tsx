@@ -46,7 +46,7 @@ export default class Input extends PureComponent<Props & Actions> {
 	render() {
 		return (
 			<Fragment>
-				{!this.props.hoverable || this.props.hoverable && (this.state.focused || this.state.hovered) ? 
+				{!this.props.hoverable || this.state.focused || this.state.hovered ? 
 					<input
 						className="input"
 						placeholder={this.props.placeholder}

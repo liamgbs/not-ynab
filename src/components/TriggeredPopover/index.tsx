@@ -55,8 +55,6 @@ export default class TriggeredPopover extends PureComponent<Props & Actions> {
 								<Button onClick={this.onClose.bind(this)}>Cancel</Button>
 								<Button filled onClick={this.onOk.bind(this)}>Ok</Button>
 							</div>
-
-							
 						</div>
 					</Popover>
 					: null}
