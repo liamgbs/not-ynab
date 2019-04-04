@@ -9,7 +9,7 @@ export interface AccountsState {
 	activeAccount: number
 }
 
-const defaultState = {
+export const defaultState = {
 	accounts: [
 		{
 			accountName: "Test Account",
