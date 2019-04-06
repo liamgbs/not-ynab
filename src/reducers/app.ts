@@ -6,7 +6,7 @@ export interface AppState {
 	view: AppView,
 }
 
-const defaultState = {
+export const defaultState = {
 	view: AppView.Accounts,
 }
 
