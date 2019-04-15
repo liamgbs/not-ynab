@@ -13,7 +13,9 @@ export function addCategoryAction(groupName: string, categoryName: string) {
 export function addCategoryGroupAction(groupName: string) {
 	return {
 		type: BudgetActionTypes.CREATE_CATEGORY_GROUP,
-		payload: groupName
+		payload: {
+			groupName
+		}
 	}
 }
 

@@ -9,7 +9,7 @@ export interface BudgetState {
 	activeMonth: number
 }
 
-const defaultState: BudgetState = {
+export const defaultState: BudgetState = {
 	months: [
 		{
 			monthName: "Mar2019",
@@ -106,7 +106,7 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 				...state, months: state.months.map(month => {
 					return {
 						...month, categoryGroups: [...month.categoryGroups, {
-							groupName: payload,
+							groupName: payload.groupName,
 							hidden: false
 						}]
 					};

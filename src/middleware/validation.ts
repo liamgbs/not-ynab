@@ -14,12 +14,12 @@ const validationMiddleware: Middleware = (store) => (next) => (action) => {
 				
 		case BudgetActionTypes.CREATE_CATEGORY:
 			return state.budget.months[0].categories.findIndex(cat => 
-				cat.categoryName.toLowerCase() === action.payload.categoryName.toLowerCase()) > -1 
+				cat.categoryName.toLowerCase() === action.payload.categoryName.categoryName.toLowerCase()) > -1 
 					? next(errorAction())
 					: next(action);
 		case BudgetActionTypes.CREATE_CATEGORY_GROUP:
 			return state.budget.months[0].categoryGroups.findIndex(cg => 
-				cg.groupName.toLowerCase() === action.payload.toLowerCase()) > -1
+				cg.groupName.toLowerCase() === action.payload.groupName.toLowerCase()) > -1
 					? next(errorAction())
 					: next(action)
 			
