@@ -4,7 +4,8 @@ import React, { PureComponent } from 'react'
 interface Props {
 	options: string[],
 	value: string,
-	name?: string
+	name?: string,
+	label?: string
 }
 
 interface Actions {
@@ -13,17 +14,21 @@ interface Actions {
 
 export default class Dropdown extends PureComponent<Props & Actions> {
 	render() {
-		const { options, value, name } = this.props;				
+		const { options, value, name, label } = this.props;
 		return (
-			<select name={name} value={value} onChange={this.props.onChange} className="drop-down">
-				{options.map(option => {
-					return (
-						<option value={option} key={option}>
-							{option}
-						</option>
-					)
-				})}
-			</select>
+			<>
+				{label ?
+					<span className="drop-down-label">{label}</span> : null}
+				<select name={name} value={value} onChange={this.props.onChange} className="drop-down">
+					{options.map(option => {
+						return (
+							<option value={option} key={option}>
+								{option}
+							</option>
+						)
+					})}
+				</select>
+			</>
 		)
 	}
 }

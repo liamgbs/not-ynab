@@ -1,11 +1,12 @@
 import './input.scss';
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 
 interface Props {
 	placeholder?: string,
 	value: string
 	name: string,
 	hoverable?: boolean
+	label?: string
 }
 
 interface Actions {
@@ -45,18 +46,23 @@ export default class Input extends PureComponent<Props & Actions> {
 	}
 	render() {
 		return (
-			<Fragment>
+			<>
 				{!this.props.hoverable || this.state.focused || this.state.hovered ? 
-					<input
-						className="input"
-						placeholder={this.props.placeholder}
-						name={this.props.name}
-						value={this.props.value}
-						onChange={this.handleChange.bind(this)}
-						onBlur={this.onBlur.bind(this)}
-						onFocus={this.onFocus.bind(this)}
-						onMouseLeave={this.onMouseLeave.bind(this)}
-					/> :
+					<>
+						{this.props.label ?
+							<span className="input-label">{this.props.label}</span> : null}
+					
+						<input
+							className="input"
+							placeholder={this.props.placeholder}
+							name={this.props.name}
+							value={this.props.value}
+							onChange={this.handleChange.bind(this)}
+							onBlur={this.onBlur.bind(this)}
+							onFocus={this.onFocus.bind(this)}
+							onMouseLeave={this.onMouseLeave.bind(this)}
+						/>
+					</> :
 					<div
 						className="input-off"
 						onMouseEnter={this.onMouseEnter.bind(this)}
@@ -64,7 +70,7 @@ export default class Input extends PureComponent<Props & Actions> {
 						{this.props.value}
 					</div>
 				}
-			</Fragment>
+			</>
 		)
 	}
 }

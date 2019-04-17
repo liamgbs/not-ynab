@@ -26,6 +26,13 @@ describe("Input", () => {
 		expect(component.state("focused")).toBe(false);
 	})
 
+	it("should show a label", () => {
+		component = shallow(<Input value={""} name="test" label="hello test" hoverable={false} onChange={changeFunc}/>)
+
+		expect(component.find(".input-label").text()).toEqual("hello test")
+
+	})
+
 	it("Should render correctly based on state", () => {
 
 		component = shallow(<Input value={""} name="test" hoverable={false} onChange={changeFunc}/>)
