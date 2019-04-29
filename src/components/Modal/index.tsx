@@ -21,7 +21,7 @@ export default class Modal extends PureComponent<Props & Actions> {
 		const { sizeAdjustment } = this.state;
 		return (
 			<div className="modal">
-				<div onClick={this.onClose.bind(this)} className="modal-backdrop">
+				<div className="modal-backdrop">
 					<div style={sizeAdjustment} className="modal-container">
 						{this.props.children}
 					</div>
@@ -39,7 +39,7 @@ export default class Modal extends PureComponent<Props & Actions> {
 
 	componentDidMount() {
 		const modalContainer = document.getElementsByClassName("modal-container")[0];
-		const width = modalContainer.clientWidth
+		const width = modalContainer.clientWidth;
 		const height = modalContainer.clientHeight;
 
 		this.setState({

@@ -217,4 +217,9 @@ describe("Expression Evaluator -- evaluate", () => {
 		result = evaluator.evaluate("+-*");
 		expect(result).toEqual(NaN);
 	})
+
+	it("Should return NaN", () => {
+		result = evaluator.evaluate(NaN as any);
+		expect(result).toEqual(NaN);
+	})
 })

@@ -12,6 +12,7 @@ import Button from '../../components/Button';
 import { setActiveAccountAction } from '../../actions/accounts';
 import TriggeredModal from '../../components/TriggeredModal';
 import Modal from '../../components/Modal';
+import NewAccountForm from '../../forms/NewAccountForm';
 
 interface Props {
 	view: AppView
@@ -52,7 +53,7 @@ class Sidebar extends PureComponent<Props & Actions> {
 				<div className="add-account-button">
 					<TriggeredModal
 						trigger={<Button filled small>Add Account</Button>}>
-
+						<NewAccountForm />
 					</TriggeredModal>
 				</div>
 			</div>

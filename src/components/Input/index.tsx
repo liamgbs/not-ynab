@@ -50,7 +50,7 @@ export default class Input extends PureComponent<Props & Actions> {
 				{!this.props.hoverable || this.state.focused || this.state.hovered ? 
 					<>
 						{this.props.label ?
-							<span className="input-label">{this.props.label}</span> : null}
+							<div className="input-label">{this.props.label}</div> : null}
 					
 						<input
 							className="input"

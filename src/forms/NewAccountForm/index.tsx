@@ -7,43 +7,64 @@ import Button from '../../components/Button';
 import Dropdown from '../../components/Dropdown';
 import { AccountType } from '../../types/accounts';
 import { getAllAccountTypes } from '../../utils/helpers';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { addAccountAction } from '../../actions/accounts';
 
 interface Props {
 
 }
 
 interface Actions {
-	onSubmit: () => void
+	addAccount: (accountName: string, accountType: AccountType, startBalance: number) => void
 }
 
-export function NewAccountForm(props:Props & Actions) {
+function NewAccountForm(props:Props & Actions) {
 	const [accountName, setAccountName] = useState<string>("");
 	const [startBalance, setStartBalance] = useState<string>("0.0");
 	const [accountType, setAccountType] = useState<string>(AccountType.Current as string)
 
 
 	return (
-		<form className="new-account-form">
-			<Input
+		<div className="new-account-form">
+
+			<div className="new-account-form-item">
+				<Input
 				name="accountName"
 				label="Account Name"
 				value={accountName}
 				onChange={e => setAccountName(e.target.value)}/>
+			</div>
 
-			<Dropdown
-				value={accountType}
-				label="Account Type"
-				options={getAllAccountTypes()}
-				onChange={e => setAccountType(e.target.value)}/>
+			<div className="new-account-form-item">
+				<Dropdown
+					value={accountType}
+					label="Account Type"
+					options={getAllAccountTypes()}
+					onChange={e => setAccountType(e.target.value)}/>
+			</div>
 
-			<CalculatorInput
-				name="startBalance"
-				label="Starting Balance"
-				value={startBalance}
-				onBlur={setStartBalance}
-				onChange={e => setStartBalance(e.target.value)} />
+			<div className="new-account-form-item">
+				<CalculatorInput
+					name="startBalance"
+					label="Starting Balance"
+					value={startBalance}
+					onBlur={setStartBalance}
+					onChange={e => setStartBalance(e.target.value)} />
+			</div>
 
-			<Button onClick={props.onSubmit}>Add Account</Button>
-		</form>
+			<Button filled onClick={() => props.addAccount(accountName, accountType as AccountType, Number(startBalance))}>
+				Add Account
+			</Button>
+		</div>
 	)
 }
+
+function mapDispatchToProps(dispatch: Dispatch) {
+	return {
+		addAccount: (accountName: string, accountType: AccountType, startBalance: number) =>
+			dispatch(addAccountAction(accountName, accountType, startBalance))
+	}
+}
+
+export default connect(null, mapDispatchToProps)(NewAccountForm)

@@ -46,6 +46,8 @@ export default class ExpressionParser implements IExpressionParser {
 	}
 
 	public tokenise(expr: string) : Array<string>{
+		if (!expr) return []
+		
 		const tokens : Array<IToken> = [];
 		let buffer : Array<string> = [];
 
@@ -55,6 +57,7 @@ export default class ExpressionParser implements IExpressionParser {
 				buffer = [];
 			}
 		}
+		
 
 		expr.split("").forEach((ch, i) => {
 			if (this.isDigit(ch)){
@@ -133,7 +136,7 @@ export default class ExpressionParser implements IExpressionParser {
 	public evaluate(expr: string) : number {
 		const postfix = this.parse(expr);
 
-		if (!postfix.length) return NaN;
+		if (!postfix || !postfix.length) return NaN;
 		
 		const stack: Array<number> = [];
 

@@ -18,7 +18,7 @@ export default class Dropdown extends PureComponent<Props & Actions> {
 		return (
 			<>
 				{label ?
-					<span className="drop-down-label">{label}</span> : null}
+					<div className="drop-down-label">{label}</div> : null}
 				<select name={name} value={value} onChange={this.props.onChange} className="drop-down">
 					{options.map(option => {
 						return (

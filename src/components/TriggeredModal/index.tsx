@@ -16,13 +16,13 @@ export default class TriggeredModal extends PureComponent<Props & Actions> {
 	state = {
 		active: false,
 	}
-	handleClick(event: React.MouseEvent<HTMLElement>) {
+	handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		this.setState({
 			active: !this.state.active,
 			anchor: event.currentTarget
 		});
 	}
-	onClose() {
+	onClose = () => {		
 		this.setState({
 			active: false
 		});
@@ -31,7 +31,7 @@ export default class TriggeredModal extends PureComponent<Props & Actions> {
 			this.props.cancelAction();
 
 	}
-	onOk() {
+	onOk = () => {
 		if (this.props.okAction) {
 			this.props.okAction();
 		}
@@ -40,17 +40,16 @@ export default class TriggeredModal extends PureComponent<Props & Actions> {
 	render() {
 		return (
 			<Fragment>
-				<span onClick={this.handleClick.bind(this)}>
+				<span onClick={this.handleClick}>
 					{this.props.trigger}
 				</span>
 				{this.state.active ?
 					<Modal
-						okAction={this.onOk.bind(this)} 
-						onClose={this.onClose.bind(this)}>
+						okAction={this.onOk}
+						onClose={this.onClose}>
 						{this.props.children}
 					</Modal>
 					: null}
-
 			</Fragment>
 		)
 	}
