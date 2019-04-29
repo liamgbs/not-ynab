@@ -16,7 +16,7 @@ export const defaultState = {
 			type: AccountType.Current,
 			onBudget: true,
 			closed: false,
-			balance: 200,
+			balance: 220,
 			deleted: false,
 		},
 		{

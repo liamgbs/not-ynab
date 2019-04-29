@@ -28,17 +28,17 @@ export const defaultState: BudgetState = {
 				{
 					categoryName: "Holiday",
 					categoryGroup: "Savings",
-					budgeted: 50,
+					budgeted: 0,
 					activity: 0,
-					balance: 50,
+					balance: 0,
 					hidden: false,
 				},
 				{
 					categoryName: "House",
 					categoryGroup: "Savings",
-					budgeted: 20,
+					budgeted: 0,
 					activity: 0,
-					balance: 20,
+					balance: 0,
 					hidden: false,
 				},
 			],
@@ -47,7 +47,7 @@ export const defaultState: BudgetState = {
 		},
 		{
 			monthName: "Apr2019",
-			toBeBudgeted: 0.0,
+			toBeBudgeted: 0,
 			categoryGroups: [
 				{
 					groupName: "Recreation",
@@ -63,8 +63,8 @@ export const defaultState: BudgetState = {
 					categoryName: "Holiday",
 					categoryGroup: "Savings",
 					budgeted: 0,
-					activity: 0,
-					balance: 50,
+					activity: 520,
+					balance: 520,
 					hidden: false,
 				},
 				{
@@ -72,7 +72,7 @@ export const defaultState: BudgetState = {
 					categoryGroup: "Savings",
 					budgeted: 0,
 					activity: 0,
-					balance: 20,
+					balance: 0,
 					hidden: false,
 				},
 			],
@@ -80,7 +80,7 @@ export const defaultState: BudgetState = {
 			note: "test month"
 		}
 	],
-	activeMonth: 0
+	activeMonth: 1
 }
 
 export default (state: BudgetState = defaultState, action: AnyAction) => {
