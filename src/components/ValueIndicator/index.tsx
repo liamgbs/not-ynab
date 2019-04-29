@@ -1,5 +1,5 @@
 import './value-indicator.scss'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import classNames from 'classnames';
 
 interface Props {
@@ -8,27 +8,27 @@ interface Props {
 	large?: boolean
 }
 
-export default class ValueIndicator extends PureComponent<Props> {
-	render() {
+const ValueIndicator : React.FC<Props> = (props) => {
 		const CSSClasses = classNames({
 			"value-indicator": true,
-			"positive": this.props.value >= 0,
-			"negative": this.props.value < 0,
-			"large": !!this.props.large
+			"positive": props.value >= 0,
+			"negative": props.value < 0,
+			"large": !!props.large
 		});
 		return (
 			<div className={CSSClasses}>
 				<div className="value-indicator-value">
-					{this.props.value.toFixed(2)}
+					{props.value.toFixed(2)}
 				</div>
-				{this.props.label
+				{props.label
 					?
 					<div className="value-indicator-label">
-						{this.props.label}
+						{props.label}
 					</div>
 					: null
 				}
 			</div>
 		)
-	}
 }
+
+export default ValueIndicator

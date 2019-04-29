@@ -1,10 +1,10 @@
 import './triggered-modal.scss';
-import React, { PureComponent, Fragment, ReactElement } from 'react';
+import React, { PureComponent } from 'react';
 import Button from '../Button';
 import Modal from '../Modal';
 
 interface Props {
-	trigger: ReactElement<any>,
+	trigger: React.ReactElement<any>,
 }
 
 interface Actions {
@@ -39,7 +39,7 @@ export default class TriggeredModal extends PureComponent<Props & Actions> {
 	}
 	render() {
 		return (
-			<Fragment>
+			<>
 				<span onClick={this.handleClick}>
 					{this.props.trigger}
 				</span>
@@ -50,7 +50,7 @@ export default class TriggeredModal extends PureComponent<Props & Actions> {
 						{this.props.children}
 					</Modal>
 					: null}
-			</Fragment>
+			</>
 		)
 	}
 }

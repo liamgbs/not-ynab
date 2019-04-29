@@ -16,18 +16,24 @@ interface Props {
 }
 
 interface Actions {
-	addAccount: (accountName: string, accountType: AccountType, startBalance: number) => void
+	addAccount: (accountName: string, accountType: AccountType, startBalance: number) => void,
+	closeModal?: () => void
 }
 
 function NewAccountForm(props:Props & Actions) {
 	const [accountName, setAccountName] = useState<string>("");
 	const [startBalance, setStartBalance] = useState<string>("0.0");
 	const [accountType, setAccountType] = useState<string>(AccountType.Current as string)
+	
+	const onSubmit = () => {
+		props.addAccount(accountName, accountType as AccountType, Number(startBalance));
 
+		if (props.closeModal) props.closeModal();
+	}
+	
 
 	return (
 		<div className="new-account-form">
-
 			<div className="new-account-form-item">
 				<Input
 				name="accountName"
@@ -53,7 +59,7 @@ function NewAccountForm(props:Props & Actions) {
 					onChange={e => setStartBalance(e.target.value)} />
 			</div>
 
-			<Button filled onClick={() => props.addAccount(accountName, accountType as AccountType, Number(startBalance))}>
+			<Button filled onClick={onSubmit}>
 				Add Account
 			</Button>
 		</div>

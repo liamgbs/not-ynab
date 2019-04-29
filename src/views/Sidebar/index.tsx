@@ -21,7 +21,7 @@ interface Props {
 interface Actions {
 	changeView: (view: AppView) => void
 	setActiveAccount: (accountIndex: number) => void
-
+	
 }
 
 class Sidebar extends PureComponent<Props & Actions> {
