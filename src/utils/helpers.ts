@@ -1,4 +1,5 @@
 import { Account, AccountType } from "../types/accounts";
+import moment from 'moment';
 
 export function getAllAccounts(accounts : Account[]) : Account {
 	const reduceHelper : Account = {
@@ -27,4 +28,8 @@ export function getAllAccountTypes() {
 		types.push(t)
 	}
 	return types;
+}
+
+export function getMonth(date: string, format: string = "mm/dd/yyyy") {
+	return moment(date, format).format("MMMYYYY");
 }

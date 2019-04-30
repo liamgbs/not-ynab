@@ -10,6 +10,7 @@ import ValueIndicator from '../../../../../components/ValueIndicator';
 
 interface Props {
 	category: Category
+	activity: number
 }
 
 interface Actions {
@@ -58,7 +59,7 @@ class BudgetCategoryRow extends PureComponent<Props & Actions> {
 					onChange={this.handleChange.bind(this)}
 					onBlur={this.handleBlur.bind(this)}
 				/>
-				<div>{this.props.category.activity.toFixed(2)}</div>
+				<div>{this.props.activity && this.props.activity.toFixed(2) || 0.0.toFixed(2)}</div>
 				<div><ValueIndicator value={this.props.category.balance} /></div>
 			</div>
 		)

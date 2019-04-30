@@ -16,11 +16,10 @@ export interface Category {
 	categoryName: string,
 	categoryGroup: string,
 	budgeted: number,
-	activity: number,
 	balance: number,
 	hidden: boolean,
 	note?: string,
-	goal?: Goal,
+	goal?: Goal
 }
 
 export interface Goal {

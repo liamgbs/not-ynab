@@ -29,7 +29,6 @@ export const defaultState: BudgetState = {
 					categoryName: "Holiday",
 					categoryGroup: "Savings",
 					budgeted: 0,
-					activity: 0,
 					balance: 0,
 					hidden: false,
 				},
@@ -37,7 +36,6 @@ export const defaultState: BudgetState = {
 					categoryName: "House",
 					categoryGroup: "Savings",
 					budgeted: 0,
-					activity: 0,
 					balance: 0,
 					hidden: false,
 				},
@@ -63,7 +61,6 @@ export const defaultState: BudgetState = {
 					categoryName: "Holiday",
 					categoryGroup: "Savings",
 					budgeted: 0,
-					activity: 520,
 					balance: 520,
 					hidden: false,
 				},
@@ -71,7 +68,6 @@ export const defaultState: BudgetState = {
 					categoryName: "House",
 					categoryGroup: "Savings",
 					budgeted: 0,
-					activity: 0,
 					balance: 0,
 					hidden: false,
 				},
@@ -146,31 +142,6 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 					})
 				],
 			};
-		case BudgetActionTypes.ADD_TO_ACTIVITY:
-			const _month = moment(payload.date, "DD/MM/YYYY").format("MMMYYYY");
-			return {
-				...state,
-				months: [...state.months.map(month => {
-					if (month.monthName !== _month) {
-						return { ...month }
-					}
-
-					return {
-						...month,
-						toBeBudgeted: payload.categoryName === "To Be Budgeted" ? month.toBeBudgeted + payload.value : month.toBeBudgeted,
-						categories: [...month.categories.map(cat => {
-							if (cat.categoryName !== payload.categoryName) {
-								return { ...cat }
-							}
-							return {
-								...cat,
-								activity: cat.activity + payload.value,
-								balance: cat.balance + payload.value
-							}
-						})]
-					}
-				})]
-			}
 	}
 	return { ...state };
 }

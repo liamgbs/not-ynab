@@ -46,14 +46,3 @@ export function setMonthBudgetedAction(categoryName: string, value: number) {
 		}
 	}
 }
-
-export function addToActivityAction(categoryName: string, date: string, value: number) {
-	return {
-		type: BudgetActionTypes.ADD_TO_ACTIVITY,
-		payload: {
-			categoryName,
-			date,
-			value
-		}
-	}
-}
