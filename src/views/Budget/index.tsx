@@ -1,14 +1,15 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './budget.scss';
 import BudgetHeader from './BudgetHeader';
 import BudgetContent from './BudgetContent';
-export default class Budget extends PureComponent {
-	render() {
-		return (
-			<div className="budget">
-				<BudgetHeader />
-				<BudgetContent />
-			</div>
-		)
-	}
+
+const Budget: React.FC<{}> = () => {
+	return (
+		<div className="budget">
+			<BudgetHeader />
+			<BudgetContent />
+		</div>
+	)
 }
+
+export default Budget;

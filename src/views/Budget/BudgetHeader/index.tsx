@@ -1,16 +1,16 @@
 import './budget-header.scss';
-import React, { PureComponent } from 'react'
+import React from 'react'
 import MonthControl from './MonthControl';
 import MonthSummary from './MonthSummary';
 
-export default class BudgetHeader extends PureComponent {
-	render() {
-		return (
-			<div className="budget-header">
-				<MonthControl />
-				<MonthSummary />
-				<div className="age-of-money">40 years</div>
-			</div>
-		)
-	}
+const BudgetHeader: React.FC<{}> = () => {
+	return (
+		<div className="budget-header">
+			<MonthControl />
+			<MonthSummary />
+			<div className="age-of-money">40 years</div>
+		</div>
+	)
 }
+
+export default BudgetHeader;

@@ -1,15 +1,15 @@
 import './accounts.scss';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import AccountsHeader from './AccountsHeader';
 import AccountsContent from './AccountsContent';
 
-export default class Accounts extends PureComponent {
-	render() {
-		return (
-			<div className="accounts">
-				<AccountsHeader />
-				<AccountsContent />
-			</div>
-		)
-	}
+const Accounts: React.FC<{}> = () => {
+	return (
+		<div className="accounts">
+			<AccountsHeader />
+			<AccountsContent />
+		</div>
+	)
 }
+
+export default Accounts;

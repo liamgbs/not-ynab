@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
 import './main.scss';
 import { connect } from 'react-redux';
@@ -8,33 +8,28 @@ import { AppView } from '../../types/app';
 import Accounts from '../Accounts';
 
 interface Props {
-    view: AppView
+	view: AppView
 }
 
-
-class Main extends PureComponent<Props> {
-  render() {
-    return (
-      <div className="main">
-        {(() => {
-
-            switch (this.props.view) {
-                case AppView.Budget:
-                    return <Budget />
-				case AppView.Accounts:
-					return <Accounts />
-            }
-
-        })()}
-      </div>
-    )
-  }
+const Main: React.FC<Props> = (props) => {
+	return (
+		<div className="main">
+			{(() => {
+				switch (props.view) {
+					case AppView.Budget:
+						return <Budget />
+					case AppView.Accounts:
+						return <Accounts />
+				}
+			})()}
+		</div>
+	)
 }
 
 function mapStateToProps(state: RootState) {
-    return {
-        view: state.app.view
-    }
+	return {
+		view: state.app.view
+	}
 }
 
-export default connect(mapStateToProps) (Main);
+export default connect(mapStateToProps)(Main);

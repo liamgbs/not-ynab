@@ -1,9 +1,8 @@
 import './accounts-content.scss';
-import React, { PureComponent } from 'react'
+import React from 'react'
 
 import Button from '../../../components/Button';
 import AccountsTransactions from './AccountsTransactions';
-import { RootState } from '../../../reducers';
 import { Dispatch } from 'redux';
 import { triggerNewTransactionAction, deleteTransactionAction } from '../../../actions/transactions';
 import { connect } from 'react-redux';
@@ -17,40 +16,33 @@ interface Actions {
 	deleteTransaction: () => void
 }
 
-class AccountsContent extends PureComponent<Props & Actions> {
-  render() {
+const AccountsContent: React.FC<Props & Actions> = (props) => {
 	return (
-	  <div className="accounts-content">
-		<div className="accounts-toolbar">
-			<Button
-				small
-				onClick={this.props.triggerNewTransaction}>
-			Add Transaction</Button>
+		<div className="accounts-content">
+			<div className="accounts-toolbar">
+				<Button
+					small
+					onClick={props.triggerNewTransaction}>
+					Add Transaction
+				</Button>
 
-			<Button
-				small
-				onClick={this.props.deleteTransaction}>Delete</Button>
+				<Button
+					small
+					onClick={props.deleteTransaction}>Delete</Button>
+			</div>
+
+			<AccountsTransactions />
 		</div>
-
-		<AccountsTransactions />
-	  </div>
 	)
-  }
 }
 
-function mapStateToProps(state: RootState) {
-	return {
-		
-	}
 
-}
 
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {
 		triggerNewTransaction: () => dispatch(triggerNewTransactionAction()),
 		deleteTransaction: () => dispatch(deleteTransactionAction())
-
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountsContent);
+export default connect(null, mapDispatchToProps)(AccountsContent);
