@@ -15,7 +15,7 @@ const defaultState: TransactionsState = {
 			accountName: "Test Account",
 			payeeName: "Jane",
 			categoryName: "Holiday",
-			date: "27/04/2018",
+			date: "27/04/2019",
 			inflow: 20.00,
 			outflow: 0,
 			approved: true,

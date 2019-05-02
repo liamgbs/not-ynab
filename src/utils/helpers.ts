@@ -30,6 +30,6 @@ export function getAllAccountTypes() {
 	return types;
 }
 
-export function getMonth(date: string, format: string = "mm/dd/yyyy") {
+export function getMonth(date: string, format: string = "DD/MM/YYYY") {
 	return moment(date, format).format("MMMYYYY");
 }

@@ -2,7 +2,7 @@ import { Middleware } from "redux";
 import { RootState } from "../reducers";
 import { BudgetActionTypes } from "../actions/types";
 import { appendMonthAction } from "../actions/budget";
-import { errorAction, doNothingAction } from "../actions/app";
+import { errorAction } from "../actions/app";
 
 const validationMiddleware: Middleware = (store) => (next) => (action) => {	
 	const state : RootState = store.getState();

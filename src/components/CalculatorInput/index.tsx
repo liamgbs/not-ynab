@@ -1,5 +1,5 @@
 import './calculator-input.scss';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Input from '../Input';
 import ExpressionParser from '../../utils/ExpressionEvaluator';
 
@@ -16,25 +16,22 @@ interface Actions {
 	onBlur: (value?: any) => void
 }
 
-export default class CalculatorInput extends PureComponent<Props & Actions> {
-	onBlur = () => {
-		const calculatedValue = new ExpressionParser().evaluate(this.props.value);
-				
-		this.props.onBlur(calculatedValue)
+const CalculatorInput: React.FC<Props & Actions> = (props) => {
+	const onBlur = () => {
+		const calculatedValue = new ExpressionParser().evaluate(props.value);
+		props.onBlur(calculatedValue)
 	}
-	render() {
-		return (
-			<>
-				<Input
-					placeholder={this.props.placeholder}
-					label={this.props.label}
-					name={this.props.name}
-					value={this.props.value}
-					onChange={this.props.onChange}
-					onBlur={this.onBlur}
-					hoverable={this.props.hoverable}
-				/>
-			</>
-		)
-	}
+	return (
+		<Input
+			placeholder={props.placeholder}
+			label={props.label}
+			name={props.name}
+			value={props.value}
+			onChange={props.onChange}
+			onBlur={onBlur}
+			hoverable={props.hoverable}
+		/>
+	)
 }
+
+export default CalculatorInput;

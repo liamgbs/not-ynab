@@ -12,7 +12,7 @@ interface Actions {
 	onClick?: () => void
 }
 
-const Button: React.FunctionComponent<Props & Actions> = (props) => {
+const Button: React.FC<Props & Actions> = (props) => {
 	const CSSClasses = classNames({
 		"button": true,
 		"filled": props.filled,

@@ -20,7 +20,7 @@ interface Actions {
 	closeModal?: () => void
 }
 
-function NewAccountForm(props:Props & Actions) {
+const NewAccountForm: React.FC<Props & Actions> = (props) => {
 	const [accountName, setAccountName] = useState<string>("");
 	const [startBalance, setStartBalance] = useState<string>("0.0");
 	const [accountType, setAccountType] = useState<string>(AccountType.Current as string)

@@ -1,8 +1,7 @@
 import './triggered-popover.scss';
-import React, { PureComponent, Fragment, ReactElement } from 'react';
+import React, { useState, ReactElement } from 'react';
 import Popover from '@material-ui/core/Popover';
 import Button from '../Button';
-
 
 interface Props {
 	trigger: ReactElement<any>,
@@ -12,54 +11,51 @@ interface Actions {
 	okAction: () => void,
 }
 
-export default class TriggeredPopover extends PureComponent<Props & Actions> {
-	state = {
-		active: false,
-		anchor: null
+const TriggeredPopover: React.FC<Props & Actions> = (props) => {
+	const [active, setActive] = useState<boolean>(false)
+	const [anchor, setAnchor] = useState<EventTarget | null>(null)
+
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		setActive(!active);
+		setAnchor(event.currentTarget)
 	}
-	handleClick(event: React.MouseEvent<HTMLElement>) {
-		this.setState({
-			active: !this.state.active,
-			anchor: event.currentTarget
-		});
+
+	const onOk = () => {
+		props.okAction();
+		setActive(false)
 	}
-	onClose() {
-		this.setState({
-			active: false
-		});
+
+	const onClose = () => {
+		setActive(false);
 	}
-	onOk() {
-		this.props.okAction();
-		this.onClose();
-	}
-	render() {
 		return (
-			<Fragment>
-				<span onClick={this.handleClick.bind(this)}>
-					{this.props.trigger}
+			<>
+				<span onClick={handleClick}>
+					{props.trigger}
 				</span>
-				{this.state.active ?
+				{active ?
 					<Popover
 						open={true}
-						anchorEl={this.state.anchor}
+						anchorEl={anchor as HTMLElement}
 						anchorOrigin={{
 							vertical: 'top',
 							horizontal: 'right',
 						}}
-						onClose={this.onClose.bind(this)}>
+						onClose={onClose}>
 						<div className="popup-container">
 							<div className="popup-content">
-								{this.props.children}
+								{props.children}
 							</div>
 							<div className="popup-buttons">
-								<Button onClick={this.onClose.bind(this)}>Cancel</Button>
-								<Button filled onClick={this.onOk.bind(this)}>Ok</Button>
+								<Button onClick={onClose}>Cancel</Button>
+								<Button filled onClick={onOk}>Ok</Button>
 							</div>
 						</div>
 					</Popover>
 					: null}
 
-			</Fragment>
+			</>
 		)
-	}
 }
+
+export default TriggeredPopover;

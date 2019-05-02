@@ -12,7 +12,7 @@ export interface BudgetState {
 export const defaultState: BudgetState = {
 	months: [
 		{
-			monthName: "Mar2019",
+			monthName: "Apr2019",
 			toBeBudgeted: 0.0,
 			categoryGroups: [
 				{
@@ -44,7 +44,7 @@ export const defaultState: BudgetState = {
 			note: "test month"
 		},
 		{
-			monthName: "Apr2019",
+			monthName: "May2019",
 			toBeBudgeted: 0,
 			categoryGroups: [
 				{
@@ -90,7 +90,6 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 							categoryName: payload.categoryName,
 							categoryGroup: payload.groupName,
 							budgeted: 0,
-							activity: 0,
 							balance: 0,
 							hidden: false,
 						}]

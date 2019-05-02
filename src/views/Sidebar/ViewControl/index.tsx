@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import classNames from 'classnames';
 
 import './viewcontrol.scss';
@@ -13,19 +13,19 @@ interface Actions {
 	onClick: () => void;
 }
 
-export default class ViewControl extends PureComponent<Props & Actions> {
-	render() {
-		const CSSClasses = classNames({
-			"view-control": true,
-			"active": !!this.props.active
-		})
-		return (
-			<div onClick={this.props.onClick} className={CSSClasses}>
-				<div>
-					<span className="icon">{this.props.icon}</span>
-					<span className="label">{this.props.label}</span>
-				</div>
+const ViewControl: React.FC<Props & Actions> = (props) => {
+	const CSSClasses = classNames({
+		"view-control": true,
+		"active": !!props.active
+	})
+	return (
+		<div onClick={props.onClick} className={CSSClasses}>
+			<div>
+				<span className="icon">{props.icon}</span>
+				<span className="label">{props.label}</span>
 			</div>
-		)
-	}
+		</div>
+	)
 }
+
+export default ViewControl;

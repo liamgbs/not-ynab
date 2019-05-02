@@ -1,6 +1,6 @@
 import './budget-category-row.scss';
 
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Category } from '../../../../../types/categories';
 import { connect } from 'react-redux';
 import { setMonthBudgetedAction } from '../../../../../actions/budget';
@@ -17,53 +17,42 @@ interface Actions {
 	setCategoryBudgeted: (categoryName: string, value: number) => void
 }
 
-class BudgetCategoryRow extends PureComponent<Props & Actions> {
-	state = {
-		budgeted: this.props.category.budgeted.toFixed(2)
-	}
+const BudgetCategoryRow: React.FC<Props & Actions> = (props) => {
+	const [budgeted, setBudgeted] = useState<string>(props.category.budgeted.toFixed(2))
+	const [activity, setActivity] = useState<number>(props.activity)
 
-	componentWillReceiveProps(props: Props) {
-		this.setState({
-			budgeted: props.category.budgeted.toFixed(2)
-		});
-	}
-
-	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-		this.setState({
-			budgeted: event.target.value
-		});
-	}
-	handleBlur(value: number) {
+	const handleBlur = (value: number) => {
 		if (value === value) {
-			this.props.setCategoryBudgeted(this.props.category.categoryName, value);
-			this.setState({
-				budgeted: value.toFixed(2)
-			});
+			props.setCategoryBudgeted(props.category.categoryName, value);
+			setBudgeted(value.toFixed(2))
 		} else {
-			this.setState({
-				budgeted: this.props.category.budgeted.toFixed(2)
-			});
+			setBudgeted(0.0.toFixed(2));
 		}
-		
 	}
-	render() {
-		return (
-			<div className="budget-category-row">
-				<div className="budget-category-row-name">
-					{this.props.category.categoryName}
-				</div>
-				<CalculatorInput
-					hoverable
-					name="budgeted"
-					value={this.state.budgeted}
-					onChange={this.handleChange.bind(this)}
-					onBlur={this.handleBlur.bind(this)}
-				/>
-				<div>{this.props.activity && this.props.activity.toFixed(2) || 0.0.toFixed(2)}</div>
-				<div><ValueIndicator value={this.props.category.balance} /></div>
+
+
+	useEffect(() => {
+		setBudgeted(props.category.budgeted.toFixed(2))
+		setActivity(props.activity || 0)
+	}, [props])
+
+	return (
+		<div className="budget-category-row">
+			<div className="budget-category-row-name">
+				{props.category.categoryName}
 			</div>
-		)
-	}
+			<CalculatorInput
+				hoverable
+				name="budgeted"
+				value={budgeted}
+				onChange={(event) => setBudgeted(event.target.value)}
+				onBlur={handleBlur}
+			/>
+			<div>{props.activity && props.activity.toFixed(2) || 0.0.toFixed(2)}</div>
+			<div><ValueIndicator value={props.category.balance + activity} /></div>
+		</div>
+	)
+
 }
 
 function mapDispatchToProps(dispatch: Dispatch) {

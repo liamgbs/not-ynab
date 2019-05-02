@@ -42,7 +42,6 @@ const hasCategoriesState: BudgetState = {
 					categoryName: "test category",
 					categoryGroup: "test group",
 					budgeted: 0,
-					activity: 0,
 					balance: 0,
 					hidden: false,
 				}
@@ -59,7 +58,6 @@ const hasCategoriesState: BudgetState = {
 					categoryName: "test category",
 					categoryGroup: "test group",
 					budgeted: 0,
-					activity: 0,
 					balance: 0,
 					hidden: false,
 				}

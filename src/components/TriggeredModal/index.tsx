@@ -1,6 +1,5 @@
 import './triggered-modal.scss';
-import React, { PureComponent } from 'react';
-import Button from '../Button';
+import React, { useState } from 'react';
 import Modal from '../Modal';
 
 interface Props {
@@ -12,45 +11,32 @@ interface Actions {
 	cancelAction?: () => void
 }
 
-export default class TriggeredModal extends PureComponent<Props & Actions> {
-	state = {
-		active: false,
-	}
-	handleClick = (event: React.MouseEvent<HTMLElement>) => {
-		this.setState({
-			active: !this.state.active,
-			anchor: event.currentTarget
-		});
-	}
-	onClose = () => {		
-		this.setState({
-			active: false
-		});
+const TriggeredModal: React.FC<Props & Actions> = (props) => {
+	const [active, setActive] = useState<boolean>(false);
 
-		if (this.props.cancelAction)
-			this.props.cancelAction();
+	const onClose = () => {
+		if (props.cancelAction) props.cancelAction();
+		setActive(false);
 
 	}
-	onOk = () => {
-		if (this.props.okAction) {
-			this.props.okAction();
-		}
-		this.onClose();
+	const onOk = () => {
+		if (props.okAction) props.okAction();
+		setActive(false);
 	}
-	render() {
-		return (
-			<>
-				<span onClick={this.handleClick}>
-					{this.props.trigger}
-				</span>
-				{this.state.active ?
-					<Modal
-						okAction={this.onOk}
-						onClose={this.onClose}>
-						{this.props.children}
-					</Modal>
-					: null}
-			</>
-		)
-	}
+	return (
+		<>
+			<span onClick={() => setActive(!active)}>
+				{props.trigger}
+			</span>
+			{active ?
+				<Modal
+					okAction={onOk}
+					onClose={onClose}>
+					{props.children}
+				</Modal>
+				: null}
+		</>
+	)
 }
+
+export default TriggeredModal;

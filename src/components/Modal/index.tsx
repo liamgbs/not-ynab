@@ -16,10 +16,6 @@ const Modal: React.FC<Props & Actions> = (props) => {
 		marginLeft: "0px"
 	})
 
-	const onClose = () => {
-		props.onClose();
-	}
-
 	const onOk = () => {
 		props.okAction();
 	}
@@ -43,7 +39,7 @@ const Modal: React.FC<Props & Actions> = (props) => {
 		<div className="modal">
 			<div className="modal-backdrop">
 				<div style={sizeAdjustment} className="modal-container">
-					{React.cloneElement(props.children as any, { closeModal: onClose })}
+					{React.cloneElement(props.children as any, { closeModal: props.onClose })}
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,7 @@ import { Account, AccountType } from "../types/accounts";
 export function newMonthHelper(lastMonth: Month | undefined) : Month {
 	if (lastMonth) {
 		return {
-			monthName: moment(lastMonth.monthName).add(1, "months").format("MMMYYYY"),
+			monthName: moment(lastMonth.monthName, "MMMYYYY").add(1, "months").format("MMMYYYY"),
 			categoryGroups: [...lastMonth.categoryGroups],
 			ageOfMoney : 0,
 			toBeBudgeted: 0,

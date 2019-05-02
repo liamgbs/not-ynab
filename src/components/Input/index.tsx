@@ -1,5 +1,5 @@
 import './input.scss';
-import React, { PureComponent } from 'react'
+import React, { useState } from 'react'
 
 interface Props {
 	placeholder?: string,
@@ -14,63 +14,47 @@ interface Actions {
 	onBlur?: () => void
 }
 
-export default class Input extends PureComponent<Props & Actions> {
-	state={
-		hovered: false,
-		focused: false
+const Input: React.FC<Props & Actions> = (props) => {
+	const [hovered, setHovered] = useState<boolean>(false);
+	const [focused, setFocused] = useState<boolean>(false);
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		props.onChange(event);
 	}
-	handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-		this.props.onChange(event);
+
+	const onBlur = () => {
+		setFocused(false);
+		if (props.onBlur) props.onBlur();
 	}
-	onFocus() {
-		this.setState({
-			focused: true
-		})
-	}
-	onBlur() {
-		this.setState({
-			focused: false
-		})
-		if (this.props.onBlur)
-			this.props.onBlur();
-	}
-	onMouseEnter() {
-		this.setState({
-			hovered: true
-		})
-	}
-	onMouseLeave() {
-		this.setState({
-			hovered: false
-		})
-	}
-	render() {
-		return (
-			<>
-				{!this.props.hoverable || this.state.focused || this.state.hovered ? 
-					<>
-						{this.props.label ?
-							<div className="input-label">{this.props.label}</div> : null}
-					
-						<input
-							className="input"
-							placeholder={this.props.placeholder}
-							name={this.props.name}
-							value={this.props.value}
-							onChange={this.handleChange.bind(this)}
-							onBlur={this.onBlur.bind(this)}
-							onFocus={this.onFocus.bind(this)}
-							onMouseLeave={this.onMouseLeave.bind(this)}
-						/>
-					</> :
-					<div
-						className="input-off"
-						onMouseEnter={this.onMouseEnter.bind(this)}
-					>
-						{this.props.value}
-					</div>
-				}
-			</>
-		)
-	}
+
+	return (
+		<>
+			{!props.hoverable || focused || hovered ?
+				<>
+					{props.label ?
+						<div className="input-label">{props.label}</div> : null}
+
+					<input
+						className="input"
+						placeholder={props.placeholder}
+						name={props.name}
+						value={props.value}
+						onChange={handleChange}
+						onBlur={onBlur}
+						onFocus={() => setFocused(true)}
+						onMouseLeave={() => setHovered(false)}
+					/>
+				</> :
+				<div
+					className="input-off"
+					onMouseEnter={() => setHovered(true)}
+				>
+					{props.value}
+				</div>
+			}
+		</>
+	)
+
 }
+
+export default Input;
