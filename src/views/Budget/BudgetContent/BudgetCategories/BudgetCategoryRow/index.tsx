@@ -10,7 +10,6 @@ import ValueIndicator from '../../../../../components/ValueIndicator';
 
 interface Props {
 	category: Category
-	activity: number
 }
 
 interface Actions {
@@ -19,7 +18,6 @@ interface Actions {
 
 const BudgetCategoryRow: React.FC<Props & Actions> = (props) => {
 	const [budgeted, setBudgeted] = useState<string>(props.category.budgeted.toFixed(2))
-	const [activity, setActivity] = useState<number>(props.activity)
 
 	const handleBlur = (value: number) => {
 		if (value === value) {
@@ -33,7 +31,6 @@ const BudgetCategoryRow: React.FC<Props & Actions> = (props) => {
 
 	useEffect(() => {
 		setBudgeted(props.category.budgeted.toFixed(2))
-		setActivity(props.activity || 0)
 	}, [props])
 
 	return (
@@ -48,8 +45,8 @@ const BudgetCategoryRow: React.FC<Props & Actions> = (props) => {
 				onChange={(event) => setBudgeted(event.target.value)}
 				onBlur={handleBlur}
 			/>
-			<div>{props.activity && props.activity.toFixed(2) || 0.0.toFixed(2)}</div>
-			<div><ValueIndicator value={props.category.balance + activity} /></div>
+			<div>{props.category.activity.toFixed(2) || 0.0.toFixed(2)}</div>
+			<div><ValueIndicator value={props.category.balance} /></div>
 		</div>
 	)
 

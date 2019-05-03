@@ -3,6 +3,7 @@ import { TransactionActionTypes, AccountActionTypes } from "../actions/types";
 import { addToBalanceAction } from "../actions/accounts";
 import { RootState } from "../reducers";
 import { clearSelectedAction } from "../actions/transactions";
+import { addToActivityAction } from "../actions/budget";
 
 const coreMiddleware: Middleware = (store) => (next) => (action) => {
 	const { payload } = action;
@@ -11,13 +12,15 @@ const coreMiddleware: Middleware = (store) => (next) => (action) => {
 		// TRANSACTIONS
 		case TransactionActionTypes.ADD_TRANSACTION:
 			store.dispatch(addToBalanceAction(payload.accountName, payload.inflow - payload.outflow))
+			store.dispatch(addToActivityAction(payload.categoryName, payload.date, payload.inflow - payload.outflow))
 			return next(action);
 
 		case TransactionActionTypes.DELETE_TRANSACTION:
-			state.transactions.selectedTransactions.forEach(st => {
-				const toDelete = state.transactions.transactions.find(t => t.id === st);
+			state.transactions.selectedTransactions.forEach(transactionID => {
+				const toDelete = state.transactions.transactions.find(t => t.id === transactionID);
 				if (toDelete) {
 					store.dispatch(addToBalanceAction(toDelete.accountName, -(toDelete.inflow - toDelete.outflow)))
+					store.dispatch(addToActivityAction(toDelete.categoryName, toDelete.date, -(toDelete.inflow - toDelete.outflow)))
 				}
 			})
 			return next(action);
@@ -30,6 +33,7 @@ const coreMiddleware: Middleware = (store) => (next) => (action) => {
 			const toEdit = state.transactions.transactions.find(t => t.id === payload.id);
 			if (toEdit) {
 				store.dispatch(addToBalanceAction(payload.accountName, (payload.inflow - toEdit.inflow) - (payload.outflow - toEdit.outflow)))
+				store.dispatch(addToActivityAction(payload.categoryName, payload.date, (payload.inflow - toEdit.inflow) - (payload.outflow - toEdit.outflow)))
 			}
 			return next(action);
 

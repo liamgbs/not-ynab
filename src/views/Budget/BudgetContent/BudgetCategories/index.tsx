@@ -19,11 +19,7 @@ interface Actions {
 }
 
 const BudgetCategories: React.FC<Props & Actions> = (props) => {
-	const activity = props.transactions.reduce((acc: any, cur: any) => ({
-		...acc,
-		[cur.categoryName]: (acc[cur.categoryName] || 0) + cur.inflow - cur.outflow
-	}), {})
-	
+
 	return (
 		<div className="budget-categories">
 			<div className="budget-categories-header">
@@ -35,7 +31,7 @@ const BudgetCategories: React.FC<Props & Actions> = (props) => {
 			{props.groups.map((g, i) => {
 				const groupCategories = props.categories.filter(c => g.groupName === c.categoryGroup);
 				const totalBudgeted: number = groupCategories.reduce((sum, c) => sum + c.budgeted, 0);
-				const totalActivity: number = groupCategories.reduce((sum, c) => sum + (activity[c.categoryName] || 0), 0);
+				const totalActivity: number = groupCategories.reduce((sum, c) => sum + c.activity, 0);
 				const totalBalance: number = groupCategories.reduce((sum, c) => sum + c.balance, 0)
 
 				return (
@@ -46,7 +42,7 @@ const BudgetCategories: React.FC<Props & Actions> = (props) => {
 							totalActivity={totalActivity}
 							totalBalance={totalBalance}
 						/>
-						{groupCategories.map((gc, i) => <BudgetCategoryRow activity={activity[gc.categoryName]} key={i} category={gc} />)}
+						{groupCategories.map((gc, i) => <BudgetCategoryRow key={i} category={gc} />)}
 					</div>
 				)
 			})}
@@ -55,7 +51,7 @@ const BudgetCategories: React.FC<Props & Actions> = (props) => {
 }
 
 function mapStateToProps(state: RootState) {
-	const month = state.budget.months[state.budget.activeMonth]	
+	const month = state.budget.months[state.budget.activeMonth]
 
 	return {
 		categories: month.categories,
