@@ -13,6 +13,7 @@ export function newMonthHelper(lastMonth: Month | undefined) : Month {
 				return {
 					...cat,
 					budgeted: 0,
+					activity: 0
 				}
 			})
 		};
