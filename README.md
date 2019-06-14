@@ -26,9 +26,10 @@ To-do (In some kind of order-ish):
 
 **--Release 3 -- 1.0**
 
+* Animations and general UI polish
 * Mobile App - Need to make it usable on the go which will involve a mobile app.
 * Forecast view - A view which allows mimicing the budget, but isn't affected by transactions. Useful to loosely budget for the future.
 
 Waaaaaaaaaay in the future if I can be bothered:
 
-* dunno yet
+* A website for the app, maybe more that actual app to app.not-ynab.co.uk
