@@ -12,8 +12,7 @@ interface Actions {
 	onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-const Dropdown: React.FC<Props & Actions> = (props) => {
-	const { options, value, name, label } = props;
+const Dropdown: React.FC<Props & Actions> = ({ options, value, name, label, ...props }) => {
 	return (
 		<>
 			{label ?

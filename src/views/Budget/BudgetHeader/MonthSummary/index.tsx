@@ -8,13 +8,13 @@ interface Props {
 	toBeBudgeted: number
 }
 
-const MonthSummary: React.FC<Props> = (props) => {
+const MonthSummary: React.FC<Props> = ({toBeBudgeted, ...props}) => {
 	return (
 		<div className="month-summary">
 			<div className="to-be-budgeted">
 				<ValueIndicator
 					large
-					value={props.toBeBudgeted}
+					value={toBeBudgeted}
 					label="To Be Budgeted"
 				/>
 			</div>

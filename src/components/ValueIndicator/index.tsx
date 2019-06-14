@@ -8,25 +8,21 @@ interface Props {
 	large?: boolean
 }
 
-const ValueIndicator : React.FC<Props> = (props) => {
-		const CSSClasses = classNames({
-			"value-indicator": true,
-			"positive": props.value >= 0,
-			"negative": props.value < 0,
-			"large": !!props.large
-		});
+const ValueIndicator : React.FC<Props> = ({value, label, large, ...props}) => {
+
 		return (
-			<div className={CSSClasses}>
+			<div className={classNames({
+				"value-indicator": true,
+				"positive": value >= 0,
+				"negative": value < 0,
+				"large": large
+			})}>
 				<div className="value-indicator-value">
-					{props.value.toFixed(2)}
+					{value.toFixed(2)}
 				</div>
-				{props.label
-					?
-					<div className="value-indicator-label">
-						{props.label}
-					</div>
-					: null
-				}
+				{label
+					? <div className="value-indicator-label">{label}</div>
+					: null}
 			</div>
 		)
 }

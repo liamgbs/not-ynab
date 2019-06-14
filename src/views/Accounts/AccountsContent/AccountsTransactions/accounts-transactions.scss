@@ -4,7 +4,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	.accounts-transactions-header {
+	&-header {
 		text-align: center;
 		padding: 1em 0.5em;
 		display: grid;

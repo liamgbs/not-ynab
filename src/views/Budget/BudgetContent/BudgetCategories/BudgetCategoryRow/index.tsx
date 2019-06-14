@@ -29,9 +29,7 @@ const BudgetCategoryRow: React.FC<Props & Actions> = (props) => {
 	}
 
 
-	useEffect(() => {
-		setBudgeted(props.category.budgeted.toFixed(2))
-	}, [props])
+	useEffect(() => setBudgeted(props.category.budgeted.toFixed(2)), [props])
 
 	return (
 		<div className="budget-category-row">

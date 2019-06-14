@@ -8,7 +8,7 @@
 	top: 0;
 	width: 67%;
 	height: 100%;
-	.budget-categories-header {
+	&-header {
 		&>div:not(:first-child) {
 			text-align: center;
 		}

@@ -11,7 +11,7 @@ interface Actions {
 	okAction: () => void,
 }
 
-const TriggeredPopover: React.FC<Props & Actions> = (props) => {
+const TriggeredPopover: React.FC<Props & Actions> = ({trigger, ...props}) => {
 	const [active, setActive] = useState<boolean>(false)
 	const [anchor, setAnchor] = useState<EventTarget | null>(null)
 
@@ -31,7 +31,7 @@ const TriggeredPopover: React.FC<Props & Actions> = (props) => {
 		return (
 			<>
 				<span onClick={handleClick}>
-					{props.trigger}
+					{trigger}
 				</span>
 				{active ?
 					<Popover
@@ -42,7 +42,7 @@ const TriggeredPopover: React.FC<Props & Actions> = (props) => {
 							horizontal: 'right',
 						}}
 						onClose={onClose}>
-						<div className="popup-container">
+						<div className="popup">
 							<div className="popup-content">
 								{props.children}
 							</div>

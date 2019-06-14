@@ -14,7 +14,7 @@ interface Actions {
 	onBlur?: () => void
 }
 
-const Input: React.FC<Props & Actions> = (props) => {
+const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, ...props}) => {
 	const [hovered, setHovered] = useState<boolean>(false);
 	const [focused, setFocused] = useState<boolean>(false);
 
@@ -29,16 +29,16 @@ const Input: React.FC<Props & Actions> = (props) => {
 
 	return (
 		<>
-			{!props.hoverable || focused || hovered ?
+			{!hoverable || focused || hovered ?
 				<>
-					{props.label ?
-						<div className="input-label">{props.label}</div> : null}
+					{label ?
+						<div className="input-label">{label}</div> : null}
 
 					<input
 						className="input"
-						placeholder={props.placeholder}
-						name={props.name}
-						value={props.value}
+						placeholder={placeholder}
+						name={name}
+						value={value}
 						onChange={handleChange}
 						onBlur={onBlur}
 						onFocus={() => setFocused(true)}
@@ -49,7 +49,7 @@ const Input: React.FC<Props & Actions> = (props) => {
 					className="input-off"
 					onMouseEnter={() => setHovered(true)}
 				>
-					{props.value}
+					{value}
 				</div>
 			}
 		</>

@@ -16,19 +16,18 @@ interface Actions {
 	previousMonth: () => void
 }
 
-class MonthControl extends PureComponent<Props & Actions> {
-	render() {
-		return (
-			<div className="month-control">
-				<button disabled={this.props.activeMonthIndex < 1} onClick={this.props.previousMonth}>&lt;</button>
-				<div className="month-name">{this.formatMonth(this.props.activeMonth.monthName)}</div>
-				<button onClick={this.props.nextMonth}>&gt;</button>
-			</div>
-		)
+const MonthControl: React.FC<Props & Actions> = ({activeMonth, activeMonthIndex, ...props}) => {
+	const formatMonth = (month: string) => {
+		return month.length === 8 ? month : (month.slice(0, 3) + " " + month.slice(3)).toUpperCase();
 	}
-	formatMonth(month: string) {
-		return (month.slice(0, 3) + " " + month.slice(3)).toUpperCase();
-	}
+
+	return (
+		<div className="month-control">
+			<button disabled={activeMonthIndex < 1} onClick={props.previousMonth}>&lt;</button>
+			<div className="month-name">{formatMonth(activeMonth.monthName)}</div>
+			<button onClick={props.nextMonth}>&gt;</button>
+		</div>
+	)
 }
 
 function mapStateToProps(state: RootState) {

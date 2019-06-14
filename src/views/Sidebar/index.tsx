@@ -22,19 +22,19 @@ interface Actions {
 	setActiveAccount: (accountIndex: number) => void
 }
 
-const Sidebar: React.FC<Props & Actions> = (props) => {
+const Sidebar: React.FC<Props & Actions> = ({view, ...props}) => {
 	return (
 		<div className="sidebar">
 			<div className="name">Liam</div>
 			<div className="view-controls">
 				<ViewControl
 					onClick={() => props.changeView(AppView.Budget)}
-					active={props.view === AppView.Budget}
+					active={view === AppView.Budget}
 					icon="B"
 					label="Budget"/>
 				<ViewControl
 					onClick={() => props.changeView(AppView.Reports)}
-					active={props.view === AppView.Reports}
+					active={view === AppView.Reports}
 					icon="R"
 					label="Reports"/>
 				<ViewControl
@@ -42,7 +42,7 @@ const Sidebar: React.FC<Props & Actions> = (props) => {
 						props.changeView(AppView.Accounts);
 						props.setActiveAccount(-1);
 					}}
-					active={props.view === AppView.Accounts}
+					active={view === AppView.Accounts}
 					icon="A"
 					label="Accounts"/>
 			</div>

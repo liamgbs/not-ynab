@@ -11,14 +11,12 @@ import { Transaction } from '../../../../types/transactions';
 interface Props {
 	categories: Category[],
 	groups: CategoryGroup[],
-	activeMonth: number,
-	transactions: Transaction[]
 }
 
 interface Actions {
 }
 
-const BudgetCategories: React.FC<Props & Actions> = (props) => {
+const BudgetCategories: React.FC<Props & Actions> = ({categories, groups, ...props}) => {
 
 	return (
 		<div className="budget-categories">
@@ -28,8 +26,8 @@ const BudgetCategories: React.FC<Props & Actions> = (props) => {
 				<div>ACTIVITY</div>
 				<div>AVAILABLE</div>
 			</div>
-			{props.groups.map((g, i) => {
-				const groupCategories = props.categories.filter(c => g.groupName === c.categoryGroup);
+			{groups.map((g, i) => {
+				const groupCategories = categories.filter(c => g.groupName === c.categoryGroup);
 				const totalBudgeted: number = groupCategories.reduce((sum, c) => sum + c.budgeted, 0);
 				const totalActivity: number = groupCategories.reduce((sum, c) => sum + c.activity, 0);
 				const totalBalance: number = groupCategories.reduce((sum, c) => sum + c.balance, 0)
@@ -56,8 +54,6 @@ function mapStateToProps(state: RootState) {
 	return {
 		categories: month.categories,
 		groups: month.categoryGroups,
-		transactions: state.transactions.transactions.filter(t => getMonth(t.date) === month.monthName),
-		activeMonth: state.budget.activeMonth
 	}
 }
 

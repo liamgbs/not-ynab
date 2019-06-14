@@ -20,37 +20,35 @@ interface Actions {
 	setAppView: (view: AppView) => void,
 }
 
-class AccountPicker extends PureComponent<Props & Actions> {
-	setAccount(accountIndex: number) {
-		this.props.setActiveAccount(accountIndex);
-		this.props.setAppView(AppView.Accounts);
+const AccountPicker: React.FC<Props & Actions> = ({accounts, activeAccount, view, ...props}) => {
+	const setAccount = (accountIndex: number) => {
+		props.setActiveAccount(accountIndex);
+		props.setAppView(AppView.Accounts);
 	}
-	render() {
-		const { accounts, activeAccount, view } = this.props;
 
-		return (
-			<div className="account-picker">
-				<div className="account-picker-header">
-					BUDGET
-				</div>
-				<div className="account-picker-accounts">
-					{accounts.filter(account => account.onBudget).map((account, i) => {
-						const CSSClasses = classNames({
-							"account-picker-account": true,
-							"active": activeAccount === i && view === AppView.Accounts
-						})
-						return (
-							<div onClick={this.setAccount.bind(this, i)} key={account.accountName} className={CSSClasses}>
+	return (
+		<div className="account-picker">
+			<div className="account-picker-header">
+				BUDGET
+			</div>
+			<div className="account-picker-accounts">
+				{accounts.filter(account => account.onBudget).map((account, i) => (
+						<div
+							onClick={() => setAccount(i)}
+							key={account.accountName}
+							className={classNames({
+								"account-picker-account": true,
+								"active": activeAccount === i && view === AppView.Accounts
+							})}>
 								<span>{account.accountName}</span>
 								<span>{account.balance}</span>
-							</div>
-						)})
-					}
-					
-				</div>
+						</div>
+					))
+				}
+				
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 function mapStateToProps(state: RootState) {

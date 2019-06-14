@@ -10,7 +10,6 @@ describe("ValueIndicator -- correct css classes for value", () => {
 		expect(component.find(".value-indicator").hasClass("positive")).toBe(true);
 		expect(component.find(".value-indicator").hasClass("negative")).toBe(false);
 
-
 		component = shallow(<ValueIndicator value={0}/>)
 		expect(component.find(".value-indicator").hasClass("positive")).toBe(true);
 		expect(component.find(".value-indicator").hasClass("negative")).toBe(false);

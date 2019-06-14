@@ -7,11 +7,11 @@
 	padding: .25em;
 
 
-	.value-indicator-value {
+	&-value {
 		letter-spacing: 1px;
 		color: $tertiary-colour;
 	}
-	.value-indicator-label {
+	&-label {
 		font-size: .75em;
 		color: black;
 	}

@@ -16,20 +16,20 @@ interface Actions {
 	onBlur: (value?: any) => void
 }
 
-const CalculatorInput: React.FC<Props & Actions> = (props) => {
+const CalculatorInput: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, ...props}) => {
 	const onBlur = () => {
-		const calculatedValue = new ExpressionParser().evaluate(props.value);
+		const calculatedValue = new ExpressionParser().evaluate(value);
 		props.onBlur(calculatedValue)
 	}
 	return (
 		<Input
-			placeholder={props.placeholder}
-			label={props.label}
-			name={props.name}
-			value={props.value}
+			placeholder={placeholder}
+			label={label}
+			name={name}
+			value={value}
 			onChange={props.onChange}
 			onBlur={onBlur}
-			hoverable={props.hoverable}
+			hoverable={hoverable}
 		/>
 	)
 }

@@ -11,7 +11,7 @@ interface Actions {
 	cancelAction?: () => void
 }
 
-const TriggeredModal: React.FC<Props & Actions> = (props) => {
+const TriggeredModal: React.FC<Props & Actions> = ({trigger, ...props}) => {
 	const [active, setActive] = useState<boolean>(false);
 
 	const onClose = () => {
@@ -26,7 +26,7 @@ const TriggeredModal: React.FC<Props & Actions> = (props) => {
 	return (
 		<>
 			<span onClick={() => setActive(!active)}>
-				{props.trigger}
+				{trigger}
 			</span>
 			{active ?
 				<Modal

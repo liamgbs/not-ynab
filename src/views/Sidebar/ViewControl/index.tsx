@@ -13,16 +13,16 @@ interface Actions {
 	onClick: () => void;
 }
 
-const ViewControl: React.FC<Props & Actions> = (props) => {
+const ViewControl: React.FC<Props & Actions> = ({icon, label, active, ...props}) => {
 	const CSSClasses = classNames({
 		"view-control": true,
-		"active": !!props.active
+		"active": active
 	})
 	return (
 		<div onClick={props.onClick} className={CSSClasses}>
 			<div>
-				<span className="icon">{props.icon}</span>
-				<span className="label">{props.label}</span>
+				<span className="icon">{icon}</span>
+				<span className="label">{label}</span>
 			</div>
 		</div>
 	)
