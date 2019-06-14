@@ -28,7 +28,7 @@ const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, 
 	}
 
 	return (
-		<>
+		<div className="input-wrapper">
 			{!hoverable || focused || hovered ?
 				<>
 					{label ?
@@ -52,7 +52,7 @@ const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, 
 					{value}
 				</div>
 			}
-		</>
+		</div>
 	)
 
 }
