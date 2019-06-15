@@ -8,8 +8,6 @@ interface HelperProps {
 	label?: string
 }
 
-
-
 const Helper: React.FC<HelperProps> = ({hoverable, label}) => {
 	const [value, setValue] = useState("20")
 

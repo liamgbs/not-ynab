@@ -15,13 +15,13 @@ const TriggeredModal: React.FC<Props & Actions> = ({trigger, ...props}) => {
 	const [active, setActive] = useState<boolean>(false);
 
 	const onClose = () => {
-		if (props.cancelAction) props.cancelAction();
 		setActive(false);
+		if (props.cancelAction) props.cancelAction();
 
 	}
 	const onOk = () => {
-		if (props.okAction) props.okAction();
 		setActive(false);
+		if (props.okAction) props.okAction();
 	}
 	return (
 		<>

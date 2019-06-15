@@ -4,6 +4,7 @@ import { addToBalanceAction } from "../actions/accounts";
 import { RootState } from "../reducers";
 import { clearSelectedAction } from "../actions/transactions";
 import { addToActivityAction } from "../actions/budget";
+import { Transaction } from "../types/transactions";
 
 const coreMiddleware: Middleware = (store) => (next) => (action) => {
 	const { payload } = action;
@@ -30,11 +31,21 @@ const coreMiddleware: Middleware = (store) => (next) => (action) => {
 			return next(action)
 		// TRANSACTIONS
 		case TransactionActionTypes.EDIT_TRANSACTION:
-			const toEdit = state.transactions.transactions.find(t => t.id === payload.id);
+			const toEdit : Transaction | undefined  = state.transactions.transactions.find(t => t.id === payload.id);
+
 			if (toEdit) {
-				store.dispatch(addToBalanceAction(payload.accountName, (payload.inflow - toEdit.inflow) - (payload.outflow - toEdit.outflow)))
-				store.dispatch(addToActivityAction(payload.categoryName, payload.date, (payload.inflow - toEdit.inflow) - (payload.outflow - toEdit.outflow)))
+				if (toEdit.date !== payload.date) {
+					store.dispatch(addToActivityAction(toEdit.categoryName, toEdit.date, -(toEdit.inflow - toEdit.outflow)))
+					store.dispatch(addToActivityAction(payload.categoryName, payload.date, (toEdit.inflow - toEdit.outflow)))
+
+					
+				}
+				else {
+					store.dispatch(addToBalanceAction(payload.accountName, (payload.inflow - toEdit.inflow) - (payload.outflow - toEdit.outflow)))
+					store.dispatch(addToActivityAction(payload.categoryName, payload.date, (payload.inflow - toEdit.inflow) - (payload.outflow - toEdit.outflow)))
+				}
 			}
+
 			return next(action);
 
 

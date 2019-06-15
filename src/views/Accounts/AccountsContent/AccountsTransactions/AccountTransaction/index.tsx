@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import classNames from 'classnames';
-
+import DatePicker from 'react-datepicker';
 import { Transaction } from '../../../../../types/transactions';
 import Input from '../../../../../components/Input';
 import Dropdown from '../../../../../components/Dropdown';
@@ -14,7 +14,8 @@ import { cancelNewTransactionAction, addTransactionAction, saveEditedTransaction
 import { RootState } from '../../../../../reducers';
 import { Account, Payee } from '../../../../../types/accounts';
 import { Category } from '../../../../../types/categories';
-
+import '../../../../../../node_modules/react-datepicker/src/stylesheets/datepicker.scss'
+import moment from 'moment'
 interface Props {
 	transaction: Transaction
 	new?: boolean,
@@ -142,6 +143,15 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 		this.onCancel();
 	}
 
+	onDateChange = (date: Date) => {
+		this.setState({
+			transaction: {
+				...this.state.transaction,
+				date: moment(date).format("DD/MM/YYYY")
+			}
+		})
+	}
+
 	renderEditing() {
 		const { transaction } = this.state;
 		return (
@@ -154,10 +164,13 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 						options={this.props.accounts.map(acc => acc.accountName)} />
 				</div>
 				<div className="transaction-date">
-					<Input // TODO: date picker
+					<DatePicker
 						name="date"
+						dateFormat="DD/MM/YYYY"
+						selected={new Date(moment(this.state.transaction.date,"DD/MM/YYYY").format())}
+						className="input"
 						value={transaction.date}
-						onChange={this.handleChange.bind(this)} />
+						onChange={this.onDateChange} />
 				</div>
 				<div className="transaction-payee">
 					<Dropdown
