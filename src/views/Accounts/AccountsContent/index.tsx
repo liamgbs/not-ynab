@@ -7,14 +7,9 @@ import { Dispatch } from 'redux';
 import { triggerNewTransactionAction, deleteTransactionAction } from '../../../actions/transactions';
 import { connect } from 'react-redux';
 
-interface Props {
+interface Props {}
 
-}
-
-interface Actions {
-	triggerNewTransaction: () => void,
-	deleteTransaction: () => void
-}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 const AccountsContent: React.FC<Props & Actions> = (props) => {
 	return (
@@ -35,8 +30,6 @@ const AccountsContent: React.FC<Props & Actions> = (props) => {
 		</div>
 	)
 }
-
-
 
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {

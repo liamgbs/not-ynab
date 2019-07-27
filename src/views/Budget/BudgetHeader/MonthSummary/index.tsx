@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../../../../reducers';
 import ValueIndicator from '../../../../components/ValueIndicator';
 
-interface Props {
-	toBeBudgeted: number
-}
+interface Props extends ReturnType<typeof mapStateToProps> {}
 
 const MonthSummary: React.FC<Props> = ({toBeBudgeted, ...props}) => {
 	return (

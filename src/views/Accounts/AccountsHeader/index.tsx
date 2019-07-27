@@ -2,14 +2,9 @@ import './accounts-header.scss';
 import React from 'react'
 import { connect } from 'react-redux';
 import { RootState } from '../../../reducers';
-import { Account } from '../../../types/accounts';
 import { getAllAccounts } from '../../../utils/helpers';
 
-interface Props {
-	account: Account,
-}
-
-const AccountsHeader: React.FC<Props> = (props) => {
+const AccountsHeader: React.FC<ReturnType<typeof mapStateToProps>> = (props) => {
 	return (
 		<div className="accounts-header">
 			<div className="accounts-header-name">

@@ -1,24 +1,15 @@
 import './account-picker.scss';
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { RootState } from '../../../reducers';
-import { Account } from '../../../types/accounts';
 import { Dispatch } from 'redux';
 import { setActiveAccountAction } from '../../../actions/accounts';
 import { AppView } from '../../../types/app';
 import { changeViewAction } from '../../../actions/app';
 import classNames from 'classnames';
 
-interface Props {
-	accounts: Account[],
-	activeAccount: number,
-	view: AppView
-}
-
-interface Actions {
-	setActiveAccount: (accountIndex: number) => void,
-	setAppView: (view: AppView) => void,
-}
+interface Props extends ReturnType<typeof mapStateToProps> {}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 const AccountPicker: React.FC<Props & Actions> = ({accounts, activeAccount, view, ...props}) => {
 	const setAccount = (accountIndex: number) => {

@@ -1,22 +1,11 @@
 import './budget-categories.scss';
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { RootState } from '../../../../reducers';
-import { CategoryGroup, Category } from '../../../../types/categories';
 import BudgetCategoryGroupRow from './BudgetCategoryGroupRow';
 import BudgetCategoryRow from './BudgetCategoryRow';
-import { getMonth } from '../../../../utils/helpers';
-import { Transaction } from '../../../../types/transactions';
 
-interface Props {
-	categories: Category[],
-	groups: CategoryGroup[],
-}
-
-interface Actions {
-}
-
-const BudgetCategories: React.FC<Props & Actions> = ({categories, groups, ...props}) => {
+const BudgetCategories: React.FC<ReturnType<typeof mapStateToProps>> = ({categories, groups, ...props}) => {
 
 	return (
 		<div className="budget-categories">

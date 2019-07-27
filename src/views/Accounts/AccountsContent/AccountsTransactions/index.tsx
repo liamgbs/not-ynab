@@ -2,19 +2,12 @@ import './accounts-transactions.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../../../reducers';
-import { Transaction } from '../../../../types/transactions';
 import AccountTransaction from './AccountTransaction';
-import { Account } from '../../../../types/accounts';
 
 import moment from 'moment';
 import { getAllAccounts } from '../../../../utils/helpers';
 
-interface Props {
-	activeAccount: Account,
-	newTransaction: boolean,
-	transactions: Transaction[],
-	selectedTransactions: string[]
-}
+interface Props extends ReturnType<typeof mapStateToProps> {}
 
 const AccountsTransactions: React.FC<Props> = (props) => {
 	const { activeAccount, transactions, newTransaction, selectedTransactions } = props;

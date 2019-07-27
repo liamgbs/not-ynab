@@ -1,20 +1,12 @@
 import './month-control.scss';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../../../reducers';
 import { Dispatch } from 'redux';
-import { Month } from '../../../../types/categories';
 import { nextMonthAction, prevMonthAction } from '../../../../actions/budget';
 
-interface Props {
-	activeMonth: Month,
-	activeMonthIndex: number
-}
-
-interface Actions {
-	nextMonth: () => void,
-	previousMonth: () => void
-}
+interface Props extends ReturnType<typeof mapStateToProps> {}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 const MonthControl: React.FC<Props & Actions> = ({activeMonth, activeMonthIndex, ...props}) => {
 	const formatMonth = (month: string) => {

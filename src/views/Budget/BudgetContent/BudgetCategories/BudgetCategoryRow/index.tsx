@@ -12,9 +12,7 @@ interface Props {
 	category: Category
 }
 
-interface Actions {
-	setCategoryBudgeted: (categoryName: string, value: number) => void
-}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 const BudgetCategoryRow: React.FC<Props & Actions> = (props) => {
 	const [budgeted, setBudgeted] = useState<string>(props.category.budgeted.toFixed(2))

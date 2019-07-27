@@ -12,29 +12,19 @@ import Dropdown from '../../../../../components/Dropdown';
 import Button from '../../../../../components/Button';
 import { cancelNewTransactionAction, addTransactionAction, saveEditedTransactionAction, selectTransactionAction, unselectTransactionAction } from '../../../../../actions/transactions';
 import { RootState } from '../../../../../reducers';
-import { Account, Payee } from '../../../../../types/accounts';
-import { Category } from '../../../../../types/categories';
 import '../../../../../../node_modules/react-datepicker/src/stylesheets/datepicker.scss'
 import moment from 'moment'
-interface Props {
+
+interface Props extends ReturnType<typeof mapStateToProps> {
 	transaction: Transaction
-	new?: boolean,
-	accounts: Account[],
-	categories: Category[],
-	payees: Payee[],
+	new?: boolean
 	selected?: boolean
 }
 
-interface Actions {
-	saveEditedTransaction: (transaction: Transaction) => void,
-	addNewTransaction: (transaction: Transaction) => void,
-	cancelNewTransaction: () => void,
-	selectTransaction: (transactionID: string) => void,
-	unselectTransaction: (transactionID: string) => void,
-}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 class AccountsTransaction extends PureComponent<Props & Actions> {
-	wrapperRef: HTMLDivElement | undefined
+	wrapperRef: HTMLDivElement | null = null;
 	state = {
 		editing: !!this.props.new,
 		selected: this.props.new || !!this.props.selected,
@@ -92,10 +82,6 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 		document.removeEventListener('mousedown', this.handleClickOutside.bind(this));
 	}
 
-	setWrapperRef(node: HTMLDivElement) {
-		this.wrapperRef = node;
-	}
-
 	onDoubleClick() {
 		if (!this.state.editing) {
 			this.setState({
@@ -105,7 +91,7 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 	}
 
 	onClick() {
-		if(this.state.selected) {
+		if (this.state.selected) {
 			this.props.unselectTransaction(this.state.transaction.id)
 		} else {
 			this.props.selectTransaction(this.state.transaction.id)
@@ -155,7 +141,7 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 	renderEditing() {
 		const { transaction } = this.state;
 		return (
-			<div ref={this.setWrapperRef.bind(this)} className="accounts-transaction">
+			<div ref={r => this.wrapperRef = r} className="accounts-transaction">
 				<div className="transaction-account">
 					<Dropdown
 						name="accountName"
@@ -167,7 +153,7 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 					<DatePicker
 						name="date"
 						dateFormat="DD/MM/YYYY"
-						selected={new Date(moment(this.state.transaction.date,"DD/MM/YYYY").format())}
+						selected={new Date(moment(this.state.transaction.date, "DD/MM/YYYY").format())}
 						className="input"
 						value={transaction.date}
 						onChange={this.onDateChange} />

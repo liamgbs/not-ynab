@@ -15,9 +15,7 @@ interface Props {
 	totalBalance: number
 }
 
-interface Actions {
-	addCategory: (groupName: string, categoryName: string) => void
-}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 	state={
@@ -67,9 +65,8 @@ class BudgetCategoryGroupRow extends PureComponent<Props & Actions> {
 
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {
-		addCategory: (groupName: string, categoryName: string) => {
-			dispatch(addCategoryAction(groupName, categoryName))
-		}
+		addCategory: (groupName: string, categoryName: string) => dispatch(addCategoryAction(groupName, categoryName))
+		
 	}
 
 }

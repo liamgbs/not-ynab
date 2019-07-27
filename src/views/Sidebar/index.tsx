@@ -13,14 +13,8 @@ import { setActiveAccountAction } from '../../actions/accounts';
 import TriggeredModal from '../../components/TriggeredModal';
 import NewAccountForm from '../../forms/NewAccountForm';
 
-interface Props {
-	view: AppView
-}
-
-interface Actions {
-	changeView: (view: AppView) => void
-	setActiveAccount: (accountIndex: number) => void
-}
+interface Props extends ReturnType<typeof mapStateToProps> {}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 const Sidebar: React.FC<Props & Actions> = ({view, ...props}) => {
 	return (

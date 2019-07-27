@@ -164,6 +164,8 @@ export default (state: BudgetState = defaultState, action: AnyAction) => {
 							if (cat.categoryName !== payload.categoryName) {
 								return { ...cat }
 							}
+							console.log("here");
+							
 							return {
 								...cat,
 								activity: cat.activity + payload.value,

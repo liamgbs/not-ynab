@@ -7,9 +7,7 @@ import { RootState } from '../../reducers';
 import { AppView } from '../../types/app';
 import Accounts from '../Accounts';
 
-interface Props {
-	view: AppView
-}
+interface Props extends ReturnType<typeof mapStateToProps> {}
 
 const Main: React.FC<Props> = (props) => {
 	return (

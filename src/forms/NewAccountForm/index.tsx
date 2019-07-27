@@ -11,12 +11,9 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addAccountAction } from '../../actions/accounts';
 
-interface Props {
+interface Props {}
 
-}
-
-interface Actions {
-	addAccount: (accountName: string, accountType: AccountType, startBalance: number) => void,
+interface Actions extends ReturnType<typeof mapDispatchToProps> {
 	closeModal?: () => void
 }
 

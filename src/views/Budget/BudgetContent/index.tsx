@@ -9,13 +9,9 @@ import Button from '../../../components/Button';
 import { addCategoryGroupAction } from '../../../actions/budget';
 import Input from '../../../components/Input';
 
-interface Props {
+interface Props {}
 
-}
-
-interface Actions {
-	addCategoryGroup: (groupName: string) => void
-}
+interface Actions extends ReturnType<typeof mapDispatchToProps> {}
 
 class BudgetContent extends PureComponent<Props & Actions> {
 	state={
