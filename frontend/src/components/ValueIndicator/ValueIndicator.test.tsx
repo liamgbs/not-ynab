@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme';
-import ValueIndicator from '.'
+import ValueIndicator from '../ValueIndicator'
 
 describe("ValueIndicator -- correct css classes for value", () => {
 	let component;

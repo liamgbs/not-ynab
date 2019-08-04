@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme';
-import TriggeredPopover from '.';
+import TriggeredPopover from '../TriggeredPopover';
 
 describe("TriggeredPopover -- popover triggers correctly", () => {
 	let trigger = <button className="test-trigger">Hello, world</button>
@@ -15,7 +15,7 @@ describe("TriggeredPopover -- popover triggers correctly", () => {
 		expect(component.find(".test-trigger").exists()).toBe(true)
 	})
 
-	it("Should render the trigger", () => {
+	it("Should render the pop up", () => {
 		expect(component.find(".popup-container").exists()).toBe(false);
 		expect(component.state("active")).toBe(false)
 

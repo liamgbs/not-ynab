@@ -1,7 +1,7 @@
 import '../../styles/global.scss';
 import React, { useState, ReactElement } from 'react';
 import { storiesOf } from '@storybook/react';
-import CalculatorInput from '.';
+import CalculatorInput from '../CalculatorInput';
 
 interface HelperProps {
 	hoverable?: boolean,

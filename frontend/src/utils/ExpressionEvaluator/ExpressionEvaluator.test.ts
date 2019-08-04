@@ -1,4 +1,4 @@
-import ExpressionEvaluator from '.'
+import ExpressionEvaluator from '../ExpressionEvaluator'
 
 describe("Expression Evaluator -- tokenise", () => {
 	const evaluator = new ExpressionEvaluator();

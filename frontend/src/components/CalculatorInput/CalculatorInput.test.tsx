@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme';
-import CalculatorInput from '.'
+import CalculatorInput from '../CalculatorInput'
 
 describe("CalculatorInput -- Calculations", () => {
 	let component: any;

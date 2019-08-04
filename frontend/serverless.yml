@@ -1,0 +1,135 @@
+# Configuration file for serverless.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+
+# Name of the service. Creates a CloudFormation stack under the same name.
+service: not-ynab
+plugins:
+  - serverless-s3-sync
+  - serverless-cloudfront-invalidate
+# Set service to use Amazon AWS Lambda.
+provider:
+    name: aws
+    runtime: nodejs8.10
+    profile: not-ynab
+    region: eu-west-2
+    stage: dev
+    environment:
+        NODE_ENV: ${opt:stage, self:provider.stage}
+custom:
+  siteName: not-ynab
+  bucketName: ${self:custom.siteName}-${opt:stage, self:provider.stage}
+  s3Sync:
+    - bucketName: ${self:custom.bucketName}
+      localDir: build
+  # cloudfrontInvalidate:
+  #   distributionIdKey: 'CDNDistributionId' #conditional, distributionId or distributionIdKey is required. 
+  #   items: # one or more paths required 
+  #     - '/*'
+  aliases:
+    dev: app.notynab.com
+    prod: dev-app.notynab.com
+
+# Configure the 'Optimize' plugin to not exclude anything. Fixes issue with it
+# not including 'aws-sdk' package by default with functions.
+# custom:
+#     optimize:
+#         exclude: []
+
+# Tell Serverless to package each Lambda individually. By default every file in
+# this repository gets packaged into one big zip and than that same zip is used
+# for deploying every lambda.
+#
+# This is required for the 'optimize' plugin which ensures that lambda's are
+# only deployed with the files that they only need.
+package:
+    exclude:
+        - api/node_modules/aws-sdk/**
+        - app/**
+    include:
+        - api/**
+resources:
+    Resources:
+      AppS3Bucket:
+        Type: AWS::S3::Bucket
+        Properties:
+          AccessControl: PublicRead
+          BucketName: ${self:custom.bucketName}
+          WebsiteConfiguration:
+            IndexDocument: index.html
+      AppS3BucketPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+          Bucket:
+            Ref: AppS3Bucket
+          PolicyDocument:
+            Statement:
+              - Sid: PublicReadGetObject
+                Effect: Allow
+                Principal: "*"
+                Action:
+                - s3:GetObject
+                Resource:
+                  Fn::Join: [
+                    "", [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "AppS3Bucket"
+                      },
+                      "/*"
+                    ]
+                  ]
+    #   CloudFrontDistribution:
+    #     Type: AWS::CloudFront::Distribution
+    #     Properties:
+    #       DistributionConfig:
+    #         Origins:
+    #           - DomainName: ${self:custom.bucketName}.s3.amazonaws.com
+    #             ## An identifier for the origin which must be unique within the distribution
+    #             Id: S3-not-ynab
+    #             CustomOriginConfig:
+    #               HTTPPort: 80
+    #               HTTPSPort: 443
+    #               OriginProtocolPolicy: https-only
+    #             ## In case you want to restrict the bucket access use S3OriginConfig and remove CustomOriginConfig
+    #             # S3OriginConfig:
+    #             #   OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
+    #         Enabled: 'true'
+    #         ## Uncomment the following section in case you are using a custom domain
+    #         # Aliases:
+    #         #   - ${self:custom.aliases.${opt:stage, self:provider.stage}}
+    #         DefaultRootObject: index.html
+    #         ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
+    #         ## The only exception are files that actually exist e.h. app.js, reset.css
+    #         CustomErrorResponses:
+    #           - ErrorCode: 404
+    #             ResponseCode: 200
+    #             ResponsePagePath: /index.html
+    #         DefaultCacheBehavior:
+    #           AllowedMethods:
+    #             - DELETE
+    #             - GET
+    #             - HEAD
+    #             - OPTIONS
+    #             - PATCH
+    #             - POST
+    #             - PUT
+    #           ## The origin id defined above
+    #           TargetOriginId: S3-not-ynab
+    #           ## Defining if and how the QueryString and Cookies are forwarded to the origin which in this case is S3
+    #           ForwardedValues:
+    #             QueryString: 'false'
+    #             Cookies:
+    #               Forward: none
+    #           ## The protocol that users can use to access the files in the origin. To allow HTTP use `allow-all`
+    #           ViewerProtocolPolicy: redirect-to-https
+    #         ## The certificate to use when viewers use HTTPS to request objects.
+    #         # ViewerCertificate:
+    #         #   AcmCertificateArn: 'arn:aws:acm:eu-west-2:814646796678:certificate/9c4feb47-3c0d-494d-be7a-556d148b692b'
+    #         #   SslSupportMethod: 'sni-only'
+    # Outputs:
+    #   CDNDistributionId:
+    #     Description: CDN distribution id.
+    #     Value:
+    #       Ref: CloudFrontDistribution

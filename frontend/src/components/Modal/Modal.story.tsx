@@ -1,7 +1,7 @@
 import '../../styles/global.scss';
 import React, { useState, ReactElement } from 'react';
 import { storiesOf } from '@storybook/react';
-import Modal from '.';
+import Modal from '../Modal';
 import TriggeredModal from '../TriggeredModal';
 import Button from '../Button';
 
