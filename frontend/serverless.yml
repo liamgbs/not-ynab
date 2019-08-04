@@ -4,10 +4,10 @@
 #    docs.serverless.com
 
 # Name of the service. Creates a CloudFormation stack under the same name.
-service: not-ynab
+service: not-ynab-frontend
 plugins:
   - serverless-s3-sync
-  - serverless-cloudfront-invalidate
+  # - serverless-cloudfront-invalidate
 # Set service to use Amazon AWS Lambda.
 provider:
     name: aws
@@ -80,6 +80,26 @@ resources:
                       "/*"
                     ]
                   ]
+      NotYnabUsersCognitoUserPool:
+        Type: AWS::Cognito::UserPool
+        Properties:
+          UserPoolName: NotYnabUsers-${self:provider.stage}
+      NotYnabUsersCognitoUserPoolClient:
+        Type: AWS::Cognito::UserPoolClient
+        Properties:
+          ClientName: NotYnabUsersWebApp
+          GenerateSecret: false
+          UserPoolId:
+            Ref: 'NotYnabUsersCognitoUserPool'
+    Outputs:
+      NotYnabUsersCognitoUserPoolId:
+        Description: 'Not Ynab Users Cognito User Pool ID'
+        Value:
+          Ref: 'NotYnabUsersCognitoUserPool'
+      NotYnabUsersCognitoUserPoolClientId:
+        Description: 'Not Ynab Users Cognito User Pool Client ID'
+        Value:
+          Ref: 'NotYnabUsersCognitoUserPoolClient'
     #   CloudFrontDistribution:
     #     Type: AWS::CloudFront::Distribution
     #     Properties:

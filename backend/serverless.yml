@@ -1,0 +1,14 @@
+service: not-ynab-backend
+provider:
+    name: aws
+    runtime: nodejs8.10
+    profile: not-ynab
+    region: eu-west-2
+    stage: dev
+    environment:
+        NODE_ENV: ${opt:stage, self:provider.stage}
+
+resources:
+  Resources:
+    
+  
