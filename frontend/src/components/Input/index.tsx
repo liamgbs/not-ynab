@@ -5,8 +5,9 @@ interface Props {
 	placeholder?: string,
 	value: string
 	name: string,
-	hoverable?: boolean
-	label?: string
+	hoverable?: boolean,
+	disabled?: boolean,
+	label?: string,
 }
 
 interface Actions {
@@ -14,17 +15,17 @@ interface Actions {
 	onBlur?: () => void
 }
 
-const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, ...props}) => {
+const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, disabled, ...actions}) => {
 	const [hovered, setHovered] = useState<boolean>(false);
 	const [focused, setFocused] = useState<boolean>(false);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		props.onChange(event);
+		actions.onChange(event);
 	}
 
 	const onBlur = () => {
 		setFocused(false);
-		if (props.onBlur) props.onBlur();
+		if (actions.onBlur) actions.onBlur();
 	}
 
 	return (
@@ -37,6 +38,7 @@ const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, 
 					<input
 						className="input"
 						placeholder={placeholder}
+						disabled={disabled}
 						name={name}
 						value={value}
 						onChange={handleChange}

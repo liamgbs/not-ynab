@@ -1,7 +1,7 @@
 @import '../../styles/constants.scss';
 
 .button {
-	background: inherit;
+	background: #fff;
 	cursor: pointer;
 	padding: 5px 10px;
 	border-radius: 5px;
@@ -17,5 +17,8 @@
 	}
 	&.round {
 		border-radius: 1000px;
+	}
+	&.disabled {
+		opacity: .8;
 	}
 }

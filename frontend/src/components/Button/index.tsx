@@ -6,22 +6,24 @@ interface Props {
 	small?: boolean,
 	filled?: boolean,
 	round?: boolean,
+	disabled?: boolean,
 }
 
 interface Actions {
 	onClick?: () => void
 }
 
-const Button: React.FC<Props & Actions> = (props) => {
+const Button: React.FC<Props & Actions> = ({filled, small, round, disabled, children, ...actions}) => {
 	const CSSClasses = classNames({
 		"button": true,
-		"filled": props.filled,
-		"small": props.small,
-		"round": props.round
+		"filled": filled,
+		"small": small,
+		"round": round,
+		"disabled": disabled
 	})
 	return (
-		<button className={CSSClasses} onClick={props.onClick}>
-			{props.children}
+		<button disabled={disabled} className={CSSClasses} onClick={actions.onClick}>
+			{children}
 		</button>
 	)
 }
