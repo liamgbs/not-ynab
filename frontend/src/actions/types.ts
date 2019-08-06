@@ -38,3 +38,8 @@ export enum TransactionActionTypes {
 export enum PayeesActionTypes {
 	ADD_PAYEE = "ADD_PAYEE",
 }
+
+export enum UserActionTypes {
+	SET_AUTHED = "SET_AUTHED",
+	SET_UNAUTHED = 'SET_UNAUTHED' 
+}

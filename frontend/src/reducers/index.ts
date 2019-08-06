@@ -4,20 +4,23 @@ import appReducer, { AppState } from './app';
 import accountsReducer, { AccountsState } from './accounts';
 import budgetReducer, { BudgetState } from './budget';
 import transactionsReducer, { TransactionsState } from './transactions';
-import payeesReducer, {PayeesState} from './payees';
+import payeesReducer, { PayeesState } from './payees';
+import userReducer, { UserState } from './user';
 
 export interface RootState {
-    app: AppState,
+	app: AppState,
 	accounts: AccountsState,
 	budget: BudgetState,
 	transactions: TransactionsState,
-	payees: PayeesState
+	payees: PayeesState,
+	user: UserState
 }
 
 export default combineReducers<RootState>({
-    app: appReducer as any,
-	accounts: accountsReducer as any,
-	budget: budgetReducer as any,
-	transactions: transactionsReducer as any,
-	payees: payeesReducer as any
+	app: appReducer,
+	accounts: accountsReducer,
+	budget: budgetReducer,
+	transactions: transactionsReducer,
+	payees: payeesReducer,
+	user: userReducer
 })
