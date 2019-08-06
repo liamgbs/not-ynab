@@ -9,11 +9,11 @@ import Accounts from '../Accounts';
 
 interface Props extends ReturnType<typeof mapStateToProps> {}
 
-const Main: React.FC<Props> = (props) => {
+const Main: React.FC<Props> = ({view}) => {
 	return (
 		<div className="main">
 			{(() => {
-				switch (props.view) {
+				switch (view) {
 					case AppView.Budget:
 						return <Budget />
 					case AppView.Accounts:
@@ -26,7 +26,7 @@ const Main: React.FC<Props> = (props) => {
 
 function mapStateToProps(state: RootState) {
 	return {
-		view: state.app.view
+		view: state.app.view,
 	}
 }
 

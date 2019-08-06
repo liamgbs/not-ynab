@@ -3,14 +3,29 @@ import React from 'react'
 import './index.scss';
 import Sidebar from '../Sidebar';
 import Main from '../Main';
+import { connect } from 'react-redux';
+import { RootState } from '../../reducers';
+import Login from '../Login';
 
-const Index: React.FC<{}> = () => {
+interface Props extends ReturnType<typeof mapStateToProps> {}
+
+const Index: React.FC<Props> = ({ authed }) => {
 	return (
 		<div id="index">
-		  <Sidebar />
-		  <Main />
+			{authed ? (
+				<>
+					<Sidebar />
+					<Main />
+				</>
+			) : <Login />}
 		</div>
-	  )
+	)
 }
 
-export default Index;
+function mapStateToProps(state: RootState) {
+	return {
+		authed: state.user.authed,
+	}
+}
+
+export default connect(mapStateToProps)(Index);
