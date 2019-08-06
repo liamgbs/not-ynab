@@ -11,17 +11,17 @@ interface Actions {
 	cancelAction?: () => void
 }
 
-const TriggeredModal: React.FC<Props & Actions> = ({trigger, ...props}) => {
+const TriggeredModal: React.FC<Props & Actions> = ({trigger, ...actions}) => {
 	const [active, setActive] = useState<boolean>(false);
 
 	const onClose = () => {
 		setActive(false);
-		if (props.cancelAction) props.cancelAction();
+		if (actions.cancelAction) actions.cancelAction();
 
 	}
 	const onOk = () => {
 		setActive(false);
-		if (props.okAction) props.okAction();
+		if (actions.okAction) actions.okAction();
 	}
 	return (
 		<>
@@ -32,7 +32,7 @@ const TriggeredModal: React.FC<Props & Actions> = ({trigger, ...props}) => {
 				<Modal
 					okAction={onOk}
 					onClose={onClose}>
-					{props.children}
+					{actions.children}
 				</Modal>
 				: null}
 		</>

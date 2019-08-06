@@ -12,7 +12,8 @@ interface Props {
 
 interface Actions {
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-	onBlur?: () => void
+	onBlur?: () => void,
+	onChangeValidate?(value: string): boolean
 }
 
 const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, disabled, ...actions}) => {
@@ -20,6 +21,10 @@ const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, 
 	const [focused, setFocused] = useState<boolean>(false);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (actions.onChangeValidate && actions.onChangeValidate(event.target.value) === false) {
+			return;
+		}
+
 		actions.onChange(event);
 	}
 
