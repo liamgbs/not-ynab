@@ -4,29 +4,27 @@ import './main.scss';
 import { connect } from 'react-redux';
 import Budget from '../Budget';
 import { RootState } from '../../reducers';
-import { AppView } from '../../types/app';
 import Accounts from '../Accounts';
+import Sidebar from '../Sidebar';
+import { Route, Redirect } from 'react-router-dom';
 
 interface Props extends ReturnType<typeof mapStateToProps> {}
 
-const Main: React.FC<Props> = ({view}) => {
+const Main: React.FC<Props> = () => {
 	return (
 		<div className="main">
-			{(() => {
-				switch (view) {
-					case AppView.Budget:
-						return <Budget />
-					case AppView.Accounts:
-						return <Accounts />
-				}
-			})()}
+			<Sidebar />
+			<Route exact path="/app/" component={() => <Redirect to='/app/budget'/>} />
+			
+			<Route path="/app/budget" component={Budget} />
+			<Route path="/app/accounts" component={Accounts} />
 		</div>
 	)
 }
 
 function mapStateToProps(state: RootState) {
 	return {
-		view: state.app.view,
+		
 	}
 }
 

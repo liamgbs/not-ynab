@@ -1,9 +1,5 @@
 #index {
-    display: grid;
     min-height: 100vh;
     min-width: 100vw;
-    grid-template: "sidebar main main"
-                   "sidebar main main"
-                   "sidebar main main"
-                    / minmax(6.5cm, 12.5fr) 80fr;
+
 }

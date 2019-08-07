@@ -1,4 +1,10 @@
 .main {
     grid-area: main;
     color: #fff;
+    display: grid;
+    height: 100vh;
+    grid-template: "sidebar main main"
+                   "sidebar main main"
+                   "sidebar main main"
+                    / minmax(6.5cm, 12.5fr) 80fr;
 }

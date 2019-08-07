@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import classNames from 'classnames';
 
 import './viewcontrol.scss';
 
 interface Props {
-	icon: string,
+	icon: ReactNode,
 	label: string,
 	active: boolean
 }
 
 interface Actions {
-	onClick: () => void;
+	onClick?: () => void;
 }
 
 const ViewControl: React.FC<Props & Actions> = ({icon, label, active, ...props}) => {

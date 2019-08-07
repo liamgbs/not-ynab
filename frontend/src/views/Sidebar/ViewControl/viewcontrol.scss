@@ -2,9 +2,9 @@
 @import '../../../styles/mixins.scss';
 
 .view-control {
-    display: grid;
 	@include active-select();
-
+    display: flex;
+    padding: 10px 0;
     .icon, .label {
         padding-left: 0.5em;
     }

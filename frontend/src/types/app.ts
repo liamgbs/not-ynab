@@ -1,5 +1,1 @@
-export enum AppView {
-    Budget,
-    Reports,
-    Accounts
-}
+export default 1;

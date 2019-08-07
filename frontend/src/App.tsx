@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { configureStore } from './store';
 import Index from './views/Index';
+import { BrowserRouter as Router, Route} from "react-router-dom";
 
 import Amplify from 'aws-amplify';
 
@@ -19,7 +20,9 @@ class App extends Component {
     return (
       <div>
         <Provider store={configureStore()}>
-          <Index />
+          <Router>
+            <Index />
+          </Router>
         </Provider>
       </div>
     );

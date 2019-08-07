@@ -1,20 +1,20 @@
-@import '../../styles/constants.scss';
+@import "../../styles/constants.scss";
 
 .sidebar {
-    grid-area: sidebar;
-    display: grid;
-    grid-template-rows: auto 2.5fr auto 9fr;
-    background-color: $primary-colour;
-    color: #fff;
-    .name {
+	grid-area: sidebar;
+	display: grid;
+	grid-template-rows: auto 2.5fr auto 9fr;
+	background-color: $primary-colour;
+	color: #fff;
+	.name {
 		padding: 1em 0;
-    }
-    .view-controls {
-        display: grid;
 	}
-	
+	.view-controls {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.add-account-button {
 		padding: 1em;
 	}
-
 }
