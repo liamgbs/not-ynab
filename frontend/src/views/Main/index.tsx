@@ -6,19 +6,21 @@ import Budget from '../Budget';
 import { RootState } from '../../reducers';
 import Accounts from '../Accounts';
 import Sidebar from '../Sidebar';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, match } from 'react-router-dom';
 
-interface Props extends ReturnType<typeof mapStateToProps> {}
+interface Props extends ReturnType<typeof mapStateToProps> {
+	match: match<any>
+}
 
-const Main: React.FC<Props> = ({authed}) => {
+const Main: React.FC<Props> = ({authed, match}) => {
 	return (
 		<div className="main">
-			{!authed ? <Redirect to="/login"/> : (
+			{ /*!authed*/ false ? <Redirect to="/login"/> : (
 				<>
 					<Sidebar />
-					<Route exact path="/app/" component={() => <Redirect to='/app/budget'/>} />
-					<Route path="/app/budget" component={Budget} />
-					<Route path="/app/accounts" component={Accounts} />
+					<Route exact path={match.path} component={() => <Redirect to={`${match.path}/budget`}/>} />
+					<Route path={`${match}/budget`} component={Budget} />
+					<Route path={`${match}/accounts`} component={Accounts} />
 				</>
 			)}
 		</div>

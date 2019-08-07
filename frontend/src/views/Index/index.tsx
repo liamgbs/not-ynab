@@ -16,7 +16,7 @@ const Index: React.FC<Props> = ({ authed }) => {
 	return (
 		<div id="index">
 			<Route exact path="/" component={() => <div>This is the site wooo</div>} />
-			<Route path="/app" component={() => <Main />} />
+			<Route path="/app" component={Main} />
 			<Route path="/login" component={Login} />
 			<Route path="/signup" component={() => <div>I dont exist yet :(</div>} />
 		</div>
