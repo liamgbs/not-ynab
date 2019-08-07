@@ -1,4 +1,5 @@
 export interface Account {
+	id: string,
 	accountName: string,
 	type: AccountType,
 	onBudget: boolean,

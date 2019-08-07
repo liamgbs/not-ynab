@@ -29,10 +29,12 @@ export function newMonthHelper(lastMonth: Month | undefined) : Month {
 }
 
 export function newAccountHelper(
+	id: string,
 	accountName: string,
 	type: AccountType,
 	balance: number) : Account {
 	return {
+		id,
 		accountName,
 		type,
 		onBudget: true,

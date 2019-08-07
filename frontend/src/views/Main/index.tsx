@@ -10,21 +10,24 @@ import { Route, Redirect } from 'react-router-dom';
 
 interface Props extends ReturnType<typeof mapStateToProps> {}
 
-const Main: React.FC<Props> = () => {
+const Main: React.FC<Props> = ({authed}) => {
 	return (
 		<div className="main">
-			<Sidebar />
-			<Route exact path="/app/" component={() => <Redirect to='/app/budget'/>} />
-			
-			<Route path="/app/budget" component={Budget} />
-			<Route path="/app/accounts" component={Accounts} />
+			{!authed ? <Redirect to="/login"/> : (
+				<>
+					<Sidebar />
+					<Route exact path="/app/" component={() => <Redirect to='/app/budget'/>} />
+					<Route path="/app/budget" component={Budget} />
+					<Route path="/app/accounts" component={Accounts} />
+				</>
+			)}
 		</div>
 	)
 }
 
 function mapStateToProps(state: RootState) {
 	return {
-		
+		authed: state.user.authed
 	}
 }
 

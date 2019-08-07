@@ -1,19 +1,21 @@
 import { TransactionActionTypes } from "./types";
 import { Transaction } from "../types/transactions";
 
-export function addTransactionAction(transaction : Transaction) {
+export function addTransactionAction(transaction : Transaction, accountID: string) {
 	return {
 		type: TransactionActionTypes.ADD_TRANSACTION,
 		payload: {
+			accountID,
 			...transaction
 		}
 	}
 }
 
-export function saveEditedTransactionAction(transaction: Transaction) {
+export function saveEditedTransactionAction(transaction: Transaction, accountID: string) {
 	return {
 		type: TransactionActionTypes.EDIT_TRANSACTION,
 		payload: {
+			accountID,
 			...transaction
 		}
 	}

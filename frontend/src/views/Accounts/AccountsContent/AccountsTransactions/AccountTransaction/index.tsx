@@ -120,10 +120,11 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 	}
 
 	onSave() {
+		const accountID = this.props.accounts.find(a => a.accountName === this.state.transaction.accountName)!.id
 		if (this.props.new) {
-			this.props.addNewTransaction(this.state.transaction)
+			this.props.addNewTransaction(this.state.transaction, accountID)
 		} else {
-			this.props.saveEditedTransaction(this.state.transaction)
+			this.props.saveEditedTransaction(this.state.transaction, accountID)
 		}
 
 		this.onCancel();
@@ -200,8 +201,8 @@ class AccountsTransaction extends PureComponent<Props & Actions> {
 
 function mapDispatchToProps(dispatch: Dispatch) {
 	return {
-		addNewTransaction: (transaction: Transaction) => dispatch(addTransactionAction(transaction)),
-		saveEditedTransaction: (transaction: Transaction) => dispatch(saveEditedTransactionAction(transaction)),
+		addNewTransaction: (transaction: Transaction, accountID: string) => dispatch(addTransactionAction(transaction, accountID)),
+		saveEditedTransaction: (transaction: Transaction, accountID: string) => dispatch(saveEditedTransactionAction(transaction, accountID)),
 		cancelNewTransaction: () => dispatch(cancelNewTransactionAction()),
 		selectTransaction: (transactionID: string) => dispatch(selectTransactionAction(transactionID)),
 		unselectTransaction: (transactionID: string) => dispatch(unselectTransactionAction(transactionID)),

@@ -22,7 +22,7 @@ const AccountPicker: React.FC<Props & Actions> = ({ accounts, activeAccount, ...
 			</div>
 			<div className="account-picker-accounts">
 				{accounts.filter(account => account.onBudget).map((account, i) => (
-					<Link to={`/app/accounts/${account.accountName}`}>
+					<Link to={`/app/accounts/${account.id}`}>
 						<div
 							onClick={() => setAccount(i)}
 							key={account.accountName}

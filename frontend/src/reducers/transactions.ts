@@ -57,7 +57,7 @@ export default (state: TransactionsState = defaultState, action: AnyAction) => {
 				transactions: [
 					...state.transactions,
 					{
-						id: Math.random().toString(), // TODO: make this use an actual uuid generator
+						id: Math.random().toString(), // TODO: This will come from the backend
 						accountName: payload.accountName,
 						payeeName: payload.payeeName,
 						categoryName: payload.categoryName,

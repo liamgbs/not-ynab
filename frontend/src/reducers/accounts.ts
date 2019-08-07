@@ -11,7 +11,7 @@ export interface AccountsState {
 
 export const defaultState = {
 	accounts: [
-		{
+		{	id: "0",
 			accountName: "Test Account",
 			type: AccountType.Current,
 			onBudget: true,
@@ -20,6 +20,7 @@ export const defaultState = {
 			deleted: false,
 		},
 		{
+			id: "1",
 			accountName: "Test Account 2",
 			type: AccountType.Current,
 			onBudget: true,
@@ -44,7 +45,11 @@ export default function (state: AccountsState = defaultState, action: AnyAction)
 				...state,
 				accounts: [
 					...state.accounts,
-					newAccountHelper(payload.accountName, payload.accountType, payload.startingBalance)
+					newAccountHelper(
+						"thiswillcomefromthebackend" + String(Math.random),
+						payload.accountName,
+						payload.accountType,
+						payload.startingBalance)
 				]
 			}
 		case AccountActionTypes.ADD_TO_BALANCE:
@@ -52,7 +57,7 @@ export default function (state: AccountsState = defaultState, action: AnyAction)
 				...state,
 				accounts: [
 					...state.accounts.map(account => {
-						if (payload.accountName === account.accountName) {
+						if (payload.id === account.id) {
 							return {
 								...account,
 								balance: account.balance + payload.amount

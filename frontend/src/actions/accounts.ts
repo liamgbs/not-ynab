@@ -24,11 +24,11 @@ export function setActiveAccountAction(accountIndex: number) {
 	}
 }
 
-export function addToBalanceAction(accountName: string, amount: number) {
+export function addToBalanceAction(id: string, amount: number) {
 	return {
 		type: AccountActionTypes.ADD_TO_BALANCE,
 		payload: {
-			accountName,
+			id,
 			amount
 		}
 	}
