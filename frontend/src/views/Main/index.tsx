@@ -19,8 +19,8 @@ const Main: React.FC<Props> = ({authed, match}) => {
 				<>
 					<Sidebar />
 					<Route exact path={match.path} component={() => <Redirect to={`${match.path}/budget`}/>} />
-					<Route path={`${match}/budget`} component={Budget} />
-					<Route path={`${match}/accounts`} component={Accounts} />
+					<Route path={`${match.path}/budget`} component={Budget} />
+					<Route path={`${match.path}/accounts`} component={Accounts} />
 				</>
 			)}
 		</div>
