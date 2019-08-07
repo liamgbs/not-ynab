@@ -1,12 +1,11 @@
 import React from 'react'
 
 import './index.scss';
-import Sidebar from '../Sidebar';
 import Main from '../Main';
 import { connect } from 'react-redux';
 import { RootState } from '../../reducers';
 import Login from '../Login';
-import { Route} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 
 interface Props extends ReturnType<typeof mapStateToProps> {
 
@@ -15,10 +14,13 @@ interface Props extends ReturnType<typeof mapStateToProps> {
 const Index: React.FC<Props> = ({ authed }) => {
 	return (
 		<div id="index">
-			<Route exact path="/" component={() => <div>This is the site wooo</div>} />
-			<Route path="/app" component={Main} />
-			<Route path="/login" component={Login} />
-			<Route path="/signup" component={() => <div>I dont exist yet :(</div>} />
+			<Switch>
+				<Route exact path="/" component={() => <div>This is the site wooo</div>} />
+				<Route path="/app" component={Main} />
+				<Route path="/login" component={Login} />
+				<Route path="/signup" component={() => <div>I dont exist yet :(</div>} />
+				<Route component={() => <div>This is a dodgy path m8</div>} />
+			</Switch>
 		</div>
 	)
 }
