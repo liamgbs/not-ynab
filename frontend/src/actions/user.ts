@@ -15,6 +15,29 @@ export function login(username: string, password: string) {
     };
 }
 
+export function signUp(username: string, password: string) {
+    return async (dispatch: Dispatch) => {
+        await Auth.signUp({
+            username,
+            password,
+        }).then()
+    }
+}
+
+export function logout() {
+    return async (dispatch: Dispatch) => {
+        Auth.signOut()
+        .then(data => {
+            console.log(data);
+            dispatch(
+                setUnauthed()
+            )
+        }).catch(() => {
+            console.log("failed to logout")
+        })
+    }
+}
+
 export function setAuthed(username: string) {
     return {
         type: UserActionTypes.SET_AUTHED,

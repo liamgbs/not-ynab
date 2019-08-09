@@ -1,24 +1,24 @@
+import './sidebar.scss';
 import React from 'react';
 import ViewControl from './ViewControl';
 
-import './sidebar.scss';
 import { connect } from 'react-redux';
 import { RootState } from '../../reducers';
-import { Dispatch } from 'redux';
 import AccountPicker from './AccountPicker';
 import Button from '../../components/Button';
-import { setActiveAccountAction } from '../../actions/accounts';
 import TriggeredModal from '../../components/TriggeredModal';
 import NewAccountForm from '../../forms/NewAccountForm';
 import { Link } from 'react-router-dom';
+import { logout } from '../../actions/user';
 
-interface Props {}
-interface Actions extends ReturnType<typeof mapDispatchToProps> { }
+interface Props extends ReturnType<typeof mapStateToProps> {
+	logout(): void
+}
 
-const Sidebar: React.FC<Props & Actions> = () => {
+const Sidebar: React.FC<Props> = ({user, ...actions}) => {
 	return (
 		<div className="sidebar">
-			<div className="name">Liam</div>
+			<div className="name">{user} <span onClick={actions.logout}>Logout</span></div>
 			<div className="view-controls">
 				<Link to="/app/budget">
 					<ViewControl
@@ -50,10 +50,12 @@ const Sidebar: React.FC<Props & Actions> = () => {
 	)
 }
 
-function mapDispatchToProps(dispatch: Dispatch) {
+
+
+function mapStateToProps(state: RootState) {
 	return {
-		setActiveAccount: (accountIndex: number) => dispatch(setActiveAccountAction(accountIndex))
+		user: state.user.user
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Sidebar);
+export default connect(mapStateToProps, {logout})(Sidebar);

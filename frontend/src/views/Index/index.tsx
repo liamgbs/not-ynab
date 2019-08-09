@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../../reducers';
 import Login from '../Login';
 import { Route, Switch} from "react-router-dom";
+import SignUp from '../SignUp';
 
 interface Props extends ReturnType<typeof mapStateToProps> {
 
@@ -18,7 +19,7 @@ const Index: React.FC<Props> = ({ authed }) => {
 				<Route exact path="/" component={() => <div>This is the site wooo</div>} />
 				<Route path="/app" component={Main} />
 				<Route path="/login" component={Login} />
-				<Route path="/signup" component={() => <div>I dont exist yet :(</div>} />
+				<Route path="/signup" component={SignUp} />
 				<Route component={() => <div>This is a dodgy path m8</div>} />
 			</Switch>
 		</div>

@@ -1,5 +1,5 @@
 import './input.scss';
-import React, { useState } from 'react'
+import React, { useState, DetailedHTMLProps, InputHTMLAttributes } from 'react'
 
 interface Props {
 	placeholder?: string,
@@ -8,6 +8,7 @@ interface Props {
 	hoverable?: boolean,
 	disabled?: boolean,
 	label?: string,
+	type?: string
 }
 
 interface Actions {
@@ -16,7 +17,7 @@ interface Actions {
 	onChangeValidate?(value: string): boolean
 }
 
-const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, disabled, ...actions}) => {
+const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, label, disabled, type, ...actions}) => {
 	const [hovered, setHovered] = useState<boolean>(false);
 	const [focused, setFocused] = useState<boolean>(false);
 
@@ -46,6 +47,7 @@ const Input: React.FC<Props & Actions> = ({placeholder, value, name, hoverable, 
 						disabled={disabled}
 						name={name}
 						value={value}
+						type={type || "text"}
 						onChange={handleChange}
 						onBlur={onBlur}
 						onFocus={() => setFocused(true)}
